@@ -1,0 +1,71 @@
+.shop-app-header{
+  
+}
+.nav{
+  background-color: var(--nav-background-color);
+  display: flex;
+  align-items: center;
+}
+.nav-home{
+  margin: 0 1rem;
+}
+.nav-home-link{
+  display: block;
+  display: flex;
+  align-items: center;
+}
+.nav-home-link__logo{
+  font-size: 5rem;
+  color: white;
+}
+.nav-home-link__name{
+  color: white;
+  font-size: 3rem;
+} 
+.nav-category{
+  margin: 0 1rem;
+}
+.nav-category-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-category-btn-logo{
+  font-size: 3rem;
+  color: white;
+  padding: 0 0.7rem;
+}
+.nav-category-btn-wrap{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-weight: 700;
+  padding: 0 0.7rem;
+}
+.nav-category-btn-expand{
+  font-size: 3rem;
+  color: white;
+}
+.nav-category-content{
+  background-color: white;
+  top: 50px;
+  width: 250px;
+}
+.nav-category-content-list{
+  display: block;
+}
+.nav-category-content-item{
+  
+}
+.nav-category-content-item:hover{
+  background-color: #1a8cff;
+}
+.nav-category-content-item:hover a{
+  color: white;
+}
+.nav-catefory-content-item-link{
+  display: block;
+  font-size: 1.6rem;
+  color: var(--text-color);
+  padding: 5px 5px;
+}

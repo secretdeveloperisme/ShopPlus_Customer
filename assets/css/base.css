@@ -1,0 +1,121 @@
+:root{
+  --text-color:#333;
+  --nav-background-color: rgb(1, 127, 255);
+  --app-background-color: #efefef;
+}
+html{
+  font-size: 62.5%;
+  box-sizing: border-box;
+  font-family: 'Roboto' sans-serif;
+}
+*{
+  box-sizing: inherit;
+}
+body{
+  margin : 0;
+  padding: 0;
+}
+ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+a{
+  text-decoration: none;
+}
+input[type="text"],button{
+  border: none;
+  outline: none;
+}
+.gird{
+  width: 1200px;
+  max-width: 100%;
+}
+.grid-row{
+  width: 100%;
+  display: flex;
+}
+.dropdown{
+  position: relative;
+}
+.dropdown-btn{
+  background-color: transparent;
+}
+.dropdown-content{
+  position: absolute;
+}
+/* >=1200 px */
+@media only screen and (min-width:1200px) {
+  col-xl-1 {width: 8.33%;}
+  col-xl-2 {width: 16.66%;}
+  col-xl-3 {width: 25%;}
+  col-xl-4 {width: 33.33%;}
+  col-xl-5 {width: 41.66%;}
+  col-xl-6 {width: 50%;}
+  col-xl-7 {width: 58.33%;}
+  col-xl-8 {width: 66.66%;}
+  col-xl-9 {width: 75%;}
+  col-xl-10 {width: 83.33%;}
+  col-xl-11 {width: 91.66%;}
+  col-xl-12 {width: 100%;}
+
+  col-xl-2-10{
+    width: 20%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* large screen >=992px*/
+@media only screen and (min-width : 992px){
+  .col-lg-1 {width: 8.33%;}
+  .col-lg-2 {width: 16.66%;}
+  .col-lg-3 {width: 25%;}
+  .col-lg-4 {width: 33.33%;}
+  .col-lg-5 {width: 41.66%;}
+  .col-lg-6 {width: 50%;}
+  .col-lg-7 {width: 58.33%;}
+  .col-lg-8 {width: 66.66%;}
+  .col-lg-9 {width: 75%;}
+  .col-lg-10 {width: 83.33%;}
+  .col-lg-11 {width: 91.66%;}
+  .col-lg-12 {width: 100%;}
+}
+
+/* medium screen >= 768px */
+@media only screen and (min-width : 768px){
+  .col-md-1 {width: 8.33%;}
+  .col-md-2 {width: 16.66%;}
+  .col-md-3 {width: 25%;}
+  .col-md-4 {width: 33.33%;}
+  .col-md-5 {width: 41.66%;}
+  .col-md-6 {width: 50%;}
+  .col-md-7 {width: 58.33%;}
+  .col-md-8 {width: 66.66%;}
+  .col-md-9 {width: 75%;}
+  .col-md-10 {width: 83.33%;}
+  .col-md-11 {width: 91.66%;}
+  .col-md-12 {width: 100%;}
+}
+
+
+/* <576px */
+@media only screen and (max-width : 576px){
+  .col-es-1 {width: 8.33%;}
+  .col-es-2 {width: 16.66%;}
+  .col-es-3 {width: 25%;}
+  .col-es-4 {width: 33.33%;}
+  .col-es-5 {width: 41.66%;}
+  .col-es-6 {width: 50%;}
+  .col-es-7 {width: 58.33%;}
+  .col-es-8 {width: 66.66%;}
+  .col-es-9 {width: 75%;}
+  .col-es-10 {width: 83.33%;}
+  .col-es-11 {width: 91.66%;}
+  .col-es-12 {width: 100%;}
+  .grid-col-2-10{
+    width: 50%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
