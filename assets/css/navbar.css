@@ -132,7 +132,7 @@
 }
 .nav-search-form-input{
   position: relative;
-  width: 600px;
+  width: 550px;
 }
 .nav-search-form-input__box{
   display: block;
@@ -289,26 +289,71 @@
   color: white;
 }
 .nav-cart{
+  margin-left: auto;
+  margin-right: 30px;
   
 }
 .nav-cart-dropdown-btn{
+  display: flex;
+  flex-direction: row;
   
 }
 .nav-cart-wrapper{
-  
+  position: relative;
+  display: flex;
 }
 .nav-cart-icon{
-  
+  font-size: 3rem;
+  color: white;
+  margin: auto;
 }
 
 .nav-cart-quantities{
-  
+  position: absolute;
+  top: -2px;
+  right: -7px;
+  font-size: 2rem;
+  height: 20px;
+  line-height: 20px;
+  font-weight: 500;
+  padding: 0 7px;
+  background-color: rgb(253, 216, 53);
+  border-radius: 50%;
 }
 .nav-cart-label{
-  
+}
+.nav-cart-label > h3{
+  font-size: 1.6rem;
+  color: white;
 }
 .nav-cart-dropdown-content{
-
+  background-color: white;
+  width: 400px;
+  right: 50%;
+  padding: 10px;
+  flex-direction: column;
+}
+.nav-cart-dropdown-content::before{
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 10px;
+  border-top: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+  border-left: 10px solid transparent;
+}
+.nav-cart-dropdown-content::after{
+  content: "";
+  position: absolute;
+  left: 80%;
+  bottom: 100%;
+  width: 150px;
+  background-color: transparent;
+  height: 25px;
+}
+.nav-cart:hover .nav-cart-dropdown-content{
+  display: flex;
 }
 .nav-cart-dropdown-content-label{
 
@@ -316,15 +361,47 @@
 .nav-cart-dropdown-content-list{
 
 }
-.nav-cart-dropdown-content-item{
-
+.nav-cart-dropdown-content-item:hover{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.nav-cart-dropdown-content-item > a{
+  padding: 5px;
+  display: block;
+  display: flex;
 }
 .nav-cart-dropdown-content-item__img{
-
+  width: 50px;
+  height: 50px;
+  padding: 3px;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid gray;
+  margin-right: 5px;
 }
 .nav-cart-dropdown-content-item__name{
-
+  font-size: 1.3rem;
+  flex-basis: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-color);
+  margin-right: 5px;
 }
 .nav-cart-dropdown-content-item__price{
-
+  flex-basis: 20%;
+  font-size: 1.4rem;
+  color: var(--nav-background-color);
+}
+.nav-cart-dropdown-content-btn{
+  margin-top: 10px;
+  display: inline-block;
+  padding: 5px 10px;
+  width: 100px;
+  text-align: center;
+  color: white;
+  font-size: 1.3rem;
+  background-color: var(--nav-background-color);
+  align-self: flex-end;
 }
