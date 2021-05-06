@@ -54,6 +54,8 @@
   background-color: var(--dropdown-content-color);
   top: 55px;
   width: 250px;
+  animation: appear .5s ease;
+  transform-origin: 65px 0;
 }
 .nav-category:hover .nav-category-btn-expand{
   transform: rotate(180deg);
@@ -106,7 +108,8 @@
   top: 0;
   left: 100%;
   background-color: rgb(134, 192, 250);
-  
+  animation: appear .5s ease;
+  transform-origin: 0 0;
 }
 .nav-category-content-item-dropdown-content > h2{
   text-align: center;
@@ -151,6 +154,8 @@
   width: 100%;
   background-color: var(--dropdown-content-color);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  animation: appear .5s ease;
+  transform-origin: 50% 0;
 }
 .nav-search-form-input-autocomplete-list{
 
@@ -252,6 +257,8 @@
   width: 150%;
   background-color: var(--dropdown-content-color);
   top: 60px;
+  animation: appear .5s ease;
+  transform-origin: 30% 0;
 }
 .nav-user-dropdown-content::before{
   content: "";
@@ -332,6 +339,8 @@
   right: 50%;
   padding: 10px;
   flex-direction: column;
+  animation: appear .5s ease;
+  transform-origin: 90% 0;
 }
 .nav-cart-dropdown-content::before{
   content: "";
@@ -404,4 +413,18 @@
   font-size: 1.3rem;
   background-color: var(--nav-background-color);
   align-self: flex-end;
+}
+.nav-cart-dropdown-content-btn:hover{
+  opacity: 0.8;
+  cursor: pointer;
+}
+@keyframes appear {
+  from{
+    opacity : 0;
+    transform: scale(0);
+  }
+  to{
+    opacity: 1;
+    transform: scale(1);
+  }
 }
