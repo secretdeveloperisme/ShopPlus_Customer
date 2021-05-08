@@ -83,7 +83,7 @@
 }
 /* display product */
 .container-shop-app-display-product{
-
+  
 }
 .shop-app-product-header{
   width: 100%;
@@ -97,24 +97,31 @@
 }
 .shop-app-product-header__label > span{
   font-weight: 700;
-  color: var(--nav-background-color);
+  color: var(--primary-color);
 }
 .shop-app-product-header__label > i{
-  color: #333;
+  color: red;
 }
 .shop-app-product-display{
   margin-top: 10px;
+  flex-wrap: wrap;
 }
 .shop-app-product-display-item{
   padding: 0 12px;
 }
 .product-display-item-container{  
-  padding-bottom: 0.625rem;
+  padding-bottom: 24px;
+  position: relative;
 }
 .product-display-container-box-shadow{
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
   overflow: hidden;
+  border-radius: 2px;
+}
+.product-display-container-box-shadow:hover{
+  transform: translate(0,-5px);
+  border: 1px solid var(--primary-color);
+  overflow: visible;
 }
 .shop-app-product-display-item > a{
  display: block;
@@ -122,11 +129,30 @@
 .product-display-item__img{
   padding-top: 100%;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: contain ;
   background-position: center;
+  background-color: var(--primary-color);
 }
 .product-display-item__favorite{
-
+  font-size : 1.3rem;
+  top:25px;
+  left: -5px;
+  line-height: 1.3rem;
+  padding: 2px 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: white;
+  position:absolute;
+  background-color: var(--primary-color);
+}
+.product-display-item__favorite::before{
+  content: "";
+  top: 100%;
+  left: 0;
+  border-top: 5px solid rgba(0, 0, 0, 0.8);
+  border-left: 5px solid transparent;
+  position: absolute;
+  
 }
 .product-display-item-description{
   background-color: white;
@@ -143,5 +169,42 @@
   -webkit-line-clamp: 2;
 }
 .product-display-item-description-price{
-  color: var(--nav-background-color);
+  color: var(--primary-color);
+  text-align: end;
+}
+.shop-app-footer{
+  padding: 20px 30px;
+  width: 100%;
+}
+.footer-information{
+  display: flex;
+  justify-content: space-between;
+}
+.footer-information-item{
+  
+}
+.footer-information-item__label{
+  
+}
+.footer-information-item-list{
+  
+}
+.footer-information-item-list--wrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+.footer-information-item-item{
+  font-size: 1.6rem;
+}
+.footer-information-item-item > a{
+  display: block;
+  display: flex;
+  align-items: center;
+}
+.footer-information-item-item span{
+  color: var(--text-color);
+  margin-left: 5px;
+}
+.footer-information-item-list--wrap .footer-information-item-item{
+  padding: 5px 10px;
 }
