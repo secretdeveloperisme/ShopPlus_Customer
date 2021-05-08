@@ -1,7 +1,7 @@
 :root{
   --text-color:#333;
   --nav-background-gradient-hydro: linear-gradient(to right,#667db6,#0082c8,#0082c8,#667db6);
-  --nav-background-color: rgb(1, 127, 255);
+  --primary-color: rgb(1, 127, 255);
   --app-background-color: #efefef;
   --pale-gray: hsl(0, 0%, 55%); 
   --pale-black-transparent:rgba(0,0,0,0.5);
