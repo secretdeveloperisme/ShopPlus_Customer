@@ -56,6 +56,7 @@
   width: 250px;
   animation: appear .5s ease;
   transform-origin: 65px 0;
+  z-index: 99;
 }
 .nav-category:hover .nav-category-btn-expand{
   transform: rotate(180deg);
@@ -110,6 +111,7 @@
   background-color: rgb(134, 192, 250);
   animation: appear .5s ease;
   transform-origin: 0 0;
+  z-index: 99;
 }
 .nav-category-content-item-dropdown-content > h2{
   text-align: center;
@@ -156,6 +158,7 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   animation: appear .5s ease;
   transform-origin: 50% 0;
+  z-index: 99;
 }
 .nav-search-form-input-autocomplete-list{
 
@@ -259,6 +262,7 @@
   top: 60px;
   animation: appear .5s ease;
   transform-origin: 30% 0;
+  z-index: 99;
 }
 .nav-user-dropdown-content::before{
   content: "";
@@ -341,6 +345,7 @@
   flex-direction: column;
   animation: appear .5s ease;
   transform-origin: 90% 0;
+  z-index: 99;
 }
 .nav-cart-dropdown-content::before{
   content: "";
