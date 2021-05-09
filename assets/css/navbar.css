@@ -130,10 +130,12 @@
 .nav-search{
   display: flex;
   flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 }
 .nav-search-form{
   display: flex;
-  align-items: stretch;
+  height: 40px;
 }
 .nav-search-form-input{
   position: relative;
@@ -187,13 +189,14 @@
   padding: 7px;
   border-radius: 0 5px 5px 0;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+  width: 130px;
 }
 .nav-search-form-btn__logo{
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: white;
 }
 .nav-search-form-btn__name{
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: white;
 }
 .nav-search-form-btn:hover{
@@ -218,7 +221,7 @@
   color: white;
 }
 .nav-user{
-  margin-left: 10px;
+  margin-left: auto;
 }
 .nav-user-btn{
   display: flex;
@@ -300,7 +303,7 @@
   color: white;
 }
 .nav-cart{
-  margin-left: auto;
+  margin-left: 20px;
   margin-right: 30px;
   
 }

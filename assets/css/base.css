@@ -31,6 +31,14 @@ input[type="text"],button{
   border: none;
   outline: none;
 }
+.btn{
+  font-size: 2rem;
+  padding: 5px 20px;
+  border-radius: .85rem;
+  display: block;
+  background-color: var(--primary-color);
+  color: white;
+}
 .gird{
   width: 1200px;
   max-width: 100%;
