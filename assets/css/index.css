@@ -276,7 +276,6 @@
   justify-content: space-between;
 }
 .footer-information-item{
-  
 }
 .footer-information-item__label{
   
@@ -290,7 +289,7 @@
 }
 .footer-information-item-item{
   font-size: 1.6rem;
-  padding: 0 25px;
+  padding: 5px;
 }
 .footer-information-item-item > a{
   display: block;
@@ -305,14 +304,18 @@
   padding: 5px 10px;
 }
 .shop-app-footer-address{
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .shop-app-footer-address__label{
   font-size: 1.6rem;
+  text-align: start;
 }
 .shop-app-footer-address__description{
  font-size: 1.6rem;
 }
 .shop-app-footer-copyright__label{
   margin: 0;
+  text-align: center;
 }
