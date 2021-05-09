@@ -87,6 +87,7 @@
 }
 .container-shop-app-wrap-product-and-filter{
   display: flex;
+  padding: 0 20px;
 }
 .container-shop-app-filter{
   display: flex;
@@ -131,12 +132,12 @@
   align-items: center;
 }
 .container-shop-app-filter-search-price-range__from{
-  width: 12rem;
+  width: 10rem;
   font-size: 2rem;
   padding: 10px;
 }
 .container-shop-app-filter-search-price-range__to{
-  width: 12rem;
+  width: 10rem;
   padding: 10px;   
   font-size: 2rem;
 }
@@ -155,6 +156,29 @@
 }
 .container-shop-app-filter-search-price-range__btn:hover{
   filter: brightness(150%);
+}
+
+.container-shop-app-filter-search-favorite{
+
+}
+.container-shop-app-filter-search-favorite__label{
+  color: var(--text-color);
+}
+.container-shop-app-filter-search-favorite-input{
+  display: flex;
+  align-items: center;
+}
+.container-shop-app-filter-search-favorite-input input{
+  width: 16px;
+  height: 16px;
+}
+.container-shop-app-filter-search-favorite-input span{
+  font-size: 1.6rem;
+}
+.container-shop-app-filter-search-favorite__btn {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .shop-app-product-header{
   width: 100%;
