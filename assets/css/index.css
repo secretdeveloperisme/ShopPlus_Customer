@@ -195,6 +195,7 @@
 }
 .footer-information-item-item{
   font-size: 1.6rem;
+  padding: 0 25px;
 }
 .footer-information-item-item > a{
   display: block;
