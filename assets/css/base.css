@@ -7,6 +7,20 @@
   --pale-black-transparent:rgba(0,0,0,0.5);
   --dropdown-content-color: #ccf6ff;
 }
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-thumb{
+  background-color: var(--primary-color);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track{
+  border-radius: 5px;
+  overflow: hidden;
+}
+::-webkit-scrollbar-track{
+  border-radius: 5px;
+}
 html{
   font-size: 62.5%;
   box-sizing: border-box;
