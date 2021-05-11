@@ -37,3 +37,96 @@
   padding: 5px 10px;
   color: var(--text-color);
 }
+.shop-app-product{
+  padding: 20px 50px;
+  display: flex;
+}
+.shop-app-product-detail-image-wrap{
+  width: 450px;
+  height: 450px;
+}
+.shop-app-product-detail-image-wrap-img{
+  padding-top: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.shop-app-product-sell{
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+.shop-app-product-sell__name{
+  font-size: 3rem;
+  color: var(--text-color);
+}
+.shop-app-product-sell-sold{
+  display: flex;
+  align-items: center;
+}
+.shop-app-product-sell-sold__favorite{
+  font-size: 1.6rem;
+  background-color: rgb(208, 1, 27);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+.shop-app-product-sell-sold__number{
+  font-size: 2rem;
+}
+.shop-app-product-sell-sold__number span{
+  text-decoration: underline;
+}
+.shop-app-product-sell-price{
+  font-size: 5rem;
+  color: red;
+  padding: 5px 10px;
+  background-color: var(--app-background-color);
+  text-align: center;
+}
+.shop-app-product-sell-price__money{
+
+}
+.shop-app-product-sell-number{
+  display: flex;
+  font-size: 2rem;
+  padding: 5px 10px;
+}
+.shop-app-product-sell-number__label{
+  padding: 5px 20px;
+}
+.shop-app-product-sell-number-input{
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  display: flex;
+  align-items: stretch;
+}
+.shop-app-product-sell-number__minus{
+  border-radius: 5px 0 0 5px;
+}
+[name ="numberOfPurchase"]{
+  width: 50px;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+}
+.shop-app-product-sell-number__plus{
+  border-radius: 0 5px 5px 0;
+}
+.shop-app-product-sell-number-ready{
+  margin: auto;
+  margin-left: 10px
+}
+.shop-app-product-sell-number-ready span{
+  text-decoration: underline;
+}
+.shop-app-product-sell-buttons{
+  display: flex;
+  margin-top: 20px;
+}
+.shop-app-product-sell-buttons-cart{
+  margin-right: 10px;
+}
+.shop-app-product-sell-buttons-buy{
+
+}

@@ -51,6 +51,10 @@ input[type="text"],button{
   background-color: var(--primary-color);
   color: white;
 }
+.btn:hover{
+  cursor: pointer;
+  filter: opacity(0.8);
+}
 .gird{
   width: 1200px;
   max-width: 100%;

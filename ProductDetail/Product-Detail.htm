@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="../assets/css/Product-Detail.css">
   <link rel="stylesheet" href="../assets/css/footer.css">
   <script src="js/navbar.js"></script>
-  <script src="js/index.js"></script>
+  <script src="../js/ProductDetail.js"></script>
 </head>
 <body>
   <div class="shop-app">
@@ -252,10 +252,48 @@
       </div>
     </div>
     <div class="shop-app-product">
-      <div class="shop-app-product-detail-img">
-        <img src="/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif" alt="">
+      <div class="shop-app-product-detail-image-wrap">
+        <div class="shop-app-product-detail-image-wrap-img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);">
+        </div>
       </div>
-      div.shop-app-
+      <div class="shop-app-product-sell">
+        <h1 class="shop-app-product-sell__name">
+          Sapien Lược Sử Loài Người 
+        </h1>
+        <div class="shop-app-product-sell-sold">
+          <h2 class="shop-app-product-sell-sold__favorite">Yêu Thích</h2>
+          <h2 class="shop-app-product-sell-sold__number">Đã Bán : <span>1</span></h2>
+        </div>
+        <div class="shop-app-product-sell-price">
+          <span class="shop-app-product-sell-price__money">99.000</span> đ
+        </div>
+        <div class="shop-app-product-sell-number">
+          <div class="shop-app-product-sell-number__label">
+            Số Lượng
+          </div>
+          <div class="shop-app-product-sell-number-input">
+            <button class="shop-app-product-sell-number__minus btn" id="minusNumber">
+              <i class="fas fa-minus"></i>
+            </button>
+            <input type="text" name="numberOfPurchase" maxlength="3" value="1" id="numberOfPurchase" placeholder="0">
+            <button class="shop-app-product-sell-number__plus btn" id="plusNumber">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          <div class="shop-app-product-sell-number-ready">
+            <span>10</span> Sản Phẩm Có Sẵn
+          </div>
+        </div>
+        <div class="shop-app-product-sell-buttons">
+          <button class="shop-app-product-sell-buttons-cart btn">
+            <i class="fas fa-cart-plus"></i>
+            <span>Thêm Vào Giỏ Hàng</span>
+          </button>
+          <button class="shop-app-product-sell-buttons-buy btn">
+            <span>Mua Ngay</span>
+          </button>
+        </div>
+      </div>
     </div>
     <div class="shop-app-footer gird">
       <div class="footer-information grid-row">
@@ -281,11 +319,11 @@
         <div class="footer-information-item col-xl-3">
           <h1 class="footer-information-item__label">Phương Thức Thanh Toán</h1>
           <ul class="footer-information-item-list footer-information-item-list--wrap">
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/visa.svg" alt=""></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/cash.svg" alt=""></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/internet-banking.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/visa.svg" alt=""></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/cash.svg" alt=""></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/internet-banking.svg"
                   alt=""></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/installment.svg" alt=""></a>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/installment.svg" alt=""></a>
             </li>
           </ul>
         </div>
