@@ -1,0 +1,103 @@
+.shop-app-cart{
+  padding: 20px 50px;
+  background-color: var(--app-background-color);
+}
+.shop-app-cart-header{
+  display: flex;
+}
+.shop-app-cart-header__label{
+ font-size: 3rem;
+ display: flex;
+}
+.shop-app-cart-header__amount{
+  font-size: 3rem;
+}
+.shop-app-cart-product{
+  display: flex;
+  justify-content: space-between;
+}
+.shop-app-cart-product-list{
+  background-color: white;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+}
+.shop-app-cart-product-item{
+  display: flex;
+  justify-content: space-between;
+}
+.shop-app-cart-product-item-image{
+  height: 20rem;
+  width: 20rem;
+}
+.shop-app-cart-product-item-image >a {
+  display: block;
+}
+.shop-app-cart-product-item__image{
+  padding-top: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.shop-app-cart-product-item-content{
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+.cart-item-content-desc{
+  padding: 10px 30px;
+}
+.cart-item-content-desc__name{
+  font-size: 3rem;
+}
+.cart-item-content-desc__price{
+  font-size: 3rem;
+  color: red;
+}
+.cart-item-content-desc-action{
+  
+}
+.cart-item-content-amount{
+  margin: auto;
+}
+.cart-item-content-input{
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  display: flex;
+  align-items: stretch;
+}
+.cart-item-content__input{
+  width: 50px;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+}
+.cart-item-content__minus{
+  border-radius: 5px 0 0 5px;
+}
+.cart-item-content__plus{
+  border-radius: 0 5px 5px 0;
+}
+.shop-app-cart-product-total{
+  padding: 0 5px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.shop-app-cart-product-total-container{
+  position: sticky;
+  top: 10px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+.shop-app-cart-product-total-price{
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.shop-app-cart-product-total-price-money{
+  color: red;
+}
+.shop-app-cart-product-total-price__submit{
+  width: 100%;
+}
