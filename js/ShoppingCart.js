@@ -27,7 +27,6 @@ $(function(){
         $numberOfPurchase.val(parseInt($numberOfPurchase.val())+1);
         calculateTotal();
       }
-        
     });
   });
   function calculateTotal(){
