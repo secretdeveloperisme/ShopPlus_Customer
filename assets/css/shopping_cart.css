@@ -45,9 +45,14 @@
 }
 .cart-item-content-desc{
   padding: 10px 30px;
+  overflow: hidden;
+  flex-grow: 1;
 }
 .cart-item-content-desc__name{
-  font-size: 3rem;
+  text-overflow: ellipsis;
+  font-size: 1.6rem;
+  white-space: nowrap;
+  
 }
 .cart-item-content-desc__price{
   font-size: 3rem;
