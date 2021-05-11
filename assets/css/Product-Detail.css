@@ -1,0 +1,39 @@
+.shop-app-header-path{
+
+}
+.shop-app-header-path-list{
+  display: flex;
+  background-color: var(--app-background-color);
+}
+.shop-app-header-path-item{
+  position: relative;
+  padding: 5px 10px;
+}
+.shop-app-header-path-item::before{
+  content: "";
+  position: absolute;
+  width: 2px ;
+  height: 20px;
+  display: block;
+  background-color: var(--text-color);
+  right: 0;
+  transform: rotate(40deg);
+  bottom: 2px;
+}
+.shop-app-header-path-item::after{
+  content: "";
+  position: absolute;
+  width: 2px ;
+  height: 20px;
+  display: block;
+  background-color: var(--text-color);
+  right: 0;
+  transform: rotate(-40deg);
+  top: 2px;
+}
+.shop-app-header-path-item > a{
+  font-size: 1.6rem;
+  display: block;
+  padding: 5px 10px;
+  color: var(--text-color);
+}

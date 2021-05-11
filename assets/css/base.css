@@ -7,8 +7,9 @@
   --pale-black-transparent:rgba(0,0,0,0.5);
   --dropdown-content-color: #ccf6ff;
 }
-::-webkit-scrollbar{
+body::-webkit-scrollbar{
   width: 10px;
+  
 }
 ::-webkit-scrollbar-thumb{
   background-color: var(--primary-color);
@@ -16,10 +17,7 @@
 }
 ::-webkit-scrollbar-track{
   border-radius: 5px;
-  overflow: hidden;
-}
-::-webkit-scrollbar-track{
-  border-radius: 5px;
+  background-color: #ccc;
 }
 html{
   font-size: 62.5%;
