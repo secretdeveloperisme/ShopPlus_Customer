@@ -24,33 +24,33 @@
   <div class="shop-app">
     <div class="modal" id="modal">
       <div class="modal-content">
-        <div class="modal-content-btn-close">
+        <div class="modal-content-btn-close" id="btnCloseModal">
           <i class="fas fa-times"></i>
         </div>
         <div class="input-user-info">
           <h1 class="input-user-info__label">Nhập Thông Tin Cá Nhân Của Bạn</h1>
          <form action="" method="post" class="input-user-info-form">
           <div class="input-user-info-container">
-            <label> Tên Của Bạn: </label>
-            <input type="text" name="" id="" placeholder=" Tên Của Bạn">
+            <label for="nameCustomer"> Tên Của Bạn: </label>
+            <input type="text" name="" id="nameCustomer" placeholder="Tên Của Bạn" required>
           </div>
           <div class="input-user-info-container">
-            <label> Số Điện Thoai : </label>
-            <input type="text" name="" id="" placeholder=" Sô Điện Thoại">
+            <label for="phoneCustomer"> Số Điện Thoai : </label>
+            <input type="text" name="" id="phoneCustomer" placeholder="Sô Điện Thoại" required>
           </div>
           <div class="input-user-info-container">
-            <label> Email Của Bạn: </label>
-            <input type="text" name="" id="" placeholder=" Email Của Bạn">
+            <label for="emailCustomer"> Email Của Bạn: </label>
+            <input type="text" name="" id="emailCustomer" placeholder="Email Của Bạn" required>
           </div>
           <div class="input-user-info-container">
-            <label> Địa Chỉ Của Bạn :</label>
-            <input type="text" name="" id="" placeholder=" Địa Chỉ Của Bạn">
+            <label for="addressCustomer"> Địa Chỉ Của Bạn :</label>
+            <input type="text" name="" id="addressCustomer" placeholder="Địa Chỉ Của Bạn" required>
           </div>
           <div class="input-user-info-container">
-            <label> Công Ty Của Bạn (Nếu Có) :</label>
-            <input type="text" name="" id="" placeholder=" Công Ty Của Bạn">
+            <label for="companyCustomer"> Công Ty Của Bạn (Nếu Có) :</label>
+            <input type="text" name="" id="companyCustomer" placeholder="Công Ty Của Bạn">
           </div>
-          <button class="input-user-info__btn-submit btn">Đồng Ý</button>
+          <input type="button" class="input-user-info__btn-submit btn" value="Đồng Ý">
          </form>
         </div>
       </div>
@@ -219,7 +219,7 @@
             </div>
             <div class="nav-user-info">
               <h3 class="nav-user-info__account">Tài khoản</h3>
-              <h3 class="nav-user-info__username">Hoàng Linh</h3>
+              <h3 class="nav-user-info__username"></h3>
             </div>
             <div class="nav-user-dropdown-icon">
               <i class="fas fa-caret-down"></i>
@@ -231,48 +231,6 @@
               <li class="nav-user-dropdown-content-item"><a href="#">Thông Tin Của tôi</a></li>
               <li class="nav-user-dropdown-content-item"><a href="#">Xóa Thông Tin Của Tôi</a></li>
             </ul>
-          </div>
-        </div>
-        <div class="nav-cart dropdown">
-          <div class="nav-cart-dropdown-btn dropdown-btn">
-            <div class="nav-cart-wrapper">
-              <div class="nav-cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-              <div class="nav-cart-quantities">
-                0
-              </div>
-            </div>
-            <div class="nav-cart-label">
-              <h3>Giỏ Hàng</h3>
-            </div>
-          </div>
-          <div class="nav-cart-dropdown-content dropdown-content">
-            <h2 class="nav-cart-dropdown-content-label">Sản Phẩm mới thêm</h2>
-            <ul class="nav-cart-dropdown-content-list">
-              <li class="nav-cart-dropdown-content-item">
-                <a href="#">
-                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                  <div class="nav-cart-dropdown-content-item__name">Sách - 30 Chủ Đề Từ Vựng Tiếng Anh (Bộ 2 quyển, lẻ tùy chọn)</div>
-                  <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
-                </a>
-              </li>
-              <li class="nav-cart-dropdown-content-item">
-                <a href="#">
-                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(assets/images/products/1f934d3ae7dba14ba9a0636b878b5a88_tn.jfif);"></div>
-                  <div class="nav-cart-dropdown-content-item__name">USB 256/512GB 3.0 tốc độ truyền dữ liệu cực nhanh kiểu dáng sang trọng</div>
-                  <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
-                </a>
-              </li>
-              <li class="nav-cart-dropdown-content-item">
-                <a href="#">
-                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(assets/images/products/8881955f7ad0ffc82cb7ac90dd871bd6.jfif);"></div>
-                  <div class="nav-cart-dropdown-content-item__name">[Mã LIFE5510K giảm 10K đơn 20K] Sách - Không Phải Chưa Đủ Năng Lực, Mà Là Chưa Đủ Kiên Định</div>
-                  <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
-                </a>
-              </li>
-            </ul>
-            <a href="#" class="nav-cart-dropdown-content-btn">Xem Giỏ Hàng</a>
           </div>
         </div>
       </div>
@@ -295,7 +253,7 @@
               <span>Thành Tiền</span> 
               <span class="shop-app-cart-product-total-price-money"><span id="totalPrice">99.900</span> <span>đ</span></span>
             </div>
-            <button class="shop-app-cart-product-total-price__submit btn">
+            <button class="shop-app-cart-product-total-price__submit btn" id="btnOrder">
               Tiến Hành Đặt Hàng
             </button>
           </div>

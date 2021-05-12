@@ -1,4 +1,16 @@
 $(function(){
+  // render info customer nav bar
+  let $navUserName = $(".nav-user-info__username");
+  let customer = JSON.parse(localStorage.getItem("customer"));
+  function updateNavUserName(){
+    if(customer == null){
+      $navUserName.text("Guest")
+    }
+    else{
+      $navUserName.text(customer.name);
+    }
+  }
+  updateNavUserName();
   let $listProducts = $(".shop-app-cart-product-item");
   let products =[
     {
@@ -133,4 +145,68 @@ $(function(){
     $numberOfPProduct.text($listProducts.length);
   }
   render();
+  // add event for modal 
+  let $btnCloseModal = $("#btnCloseModal");
+  let $modal = $("#modal");
+  $btnCloseModal.on("click",function(){
+    $modal.fadeOut();
+  })
+  // add event order Button
+  let storage = window.localStorage;
+  let $btnOrder = $("#btnOrder");
+  $btnOrder.click(function(event){
+    if(storage.getItem("customer")!= null){
+      let form = $('<form action="" method="POST">' + 
+        '<input type="hidden" name="products" value="' + JSON.stringify(products) + '">' +
+        '<input type="hidden" name="customer" value="' + JSON.stringify(storage.getItem("customer")) + '">' +
+        '</form>').appendTo("body");
+      form.submit();
+      console.log("sdjs");
+    }
+    else{
+      $modal.fadeIn().css("display","flex");
+    }
+  })
+  //add event input customer information
+  let $btnSubmitInfo = $(".input-user-info__btn-submit");
+  let $nameCustomer =$("#nameCustomer");
+  let $companyCustomer =$("#companyCustomer");
+  let $emailCustomer = $("#emailCustomer");
+  let $phoneCustomer= $("#phoneCustomer");
+  let $addressCustomer= $("#addressCustomer");
+  let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  let regexPhone =  /^0\d{9,10}$/;
+  $btnSubmitInfo.click(()=>{
+    if($nameCustomer.val() == ""){
+      alert("Tên Không Được Để trống")
+      return false;
+    }
+    if($emailCustomer.val() == ""){
+      alert("Email Không Được Để trống")
+      return false;
+    }
+    if(!regexEmail.test($emailCustomer.val())){
+      alert("Email Không Hợp lệ")
+      return false;
+    }
+    if($phoneCustomer.val() == ""){
+      alert("Số Điện Không Được Để trống")
+      return false;
+    }
+    if(!regexPhone.test($phoneCustomer.val())){
+      alert("Số Điện Không Không Hợp lệ");
+      return false;
+    }
+    if($addressCustomer.val() == ""){
+      alert("Địa Chỉ Không Được Để trống")
+    }
+    let customer = {
+      name : $nameCustomer.val(),
+      phone : $phoneCustomer.val(),
+      email : $emailCustomer.val(),
+      address : $addressCustomer.val(),
+      company : $companyCustomer.val(),
+    }
+    storage.setItem("customer",JSON.stringify(customer));
+  });
 })
