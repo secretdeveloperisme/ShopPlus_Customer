@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopPlus</title>
+  <link rel="shortcut icon" href="/assets/images/icons/shopplus.svg" type="image/x-icon">
+  <meta name="author" content="hoang linh plus">
+  <meta name="keywords" content="shopplus, cửa hàng plus, hoang linh plus">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="description" content="Chuyên cung cấp các sản phẩm vượt cả mong đợi của quý khách!">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/navbar.css">
+  <link rel="stylesheet" href="../../assets/css/payment.css">
+  <link rel="stylesheet" href="../../assets/css/footer.css">
+  <script src="../../js/navbar.js"></script>
+  <script src="../../js/payment.js"></script>
+</head>
+<body>
+  <div class="shop-app">
+    <div class="shop-app-header">
+      <div class="shop-app-header-title">
+        <h1> <i class="fab fa-shopify"></i><a href="#">ShopPlus</a></h1>
+      </div>
+      <h1 class="shop-app-header-payment">Thanh Toán</h1>
+    </div>
+    </div>
+    <div class="shop-app-payment">
+      <div class="shop-app-payment-header">
+        <div class="shop-app-payment-header__label">
+         Thanh Toán
+        </div>
+        <div class="shop-app-payment-header__amount">
+          (<span id="numberOfProduct">2</span> Sản Phẩm)
+        </div>
+      </div>
+      <div class="shop-app-payment-product">
+        <ul class="shop-app-payment-product-list col-xl-8">
+        </ul>
+        <div class="shop-app-payment-product-total col-xl-4">
+          <div class="shop-app-payment-product-total-container">
+            <div class="shop-app-payment-product-user-info">
+              <div class="payment-user-edit">
+                <button class="btn">Sửa</button>
+              </div>
+              <div class="payment-user-info__name" id="userName">
+                Nguyễn Hoàng Linh
+              </div>
+              <div class="payment-user-info__address" id="userAddress">
+                Kí Túc Xá Khu B Đại Học Cần Thơ ,Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, Cần Thơ Việt Nam
+              </div>
+              <div class="payment-user-info__phone">
+                Số Điện Thoại : <span id="userPhoneNumber">0354882574</span>
+              </div>
+            </div>
+            <div class="shop-app-payment-product-total-price">
+              <span>Thành Tiền</span> 
+              <span class="shop-app-payment-product-total-price-money"><span id="totalPrice">99.900</span> <span>đ</span></span>
+            </div>
+            <button class="shop-app-payment-product-total-price__submit btn">
+              Đặt Mua
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="shop-app-footer gird">
+      <div class="footer-information grid-row">
+        <div class="footer-information-item col-xl-3">
+          <h1 class="footer-information-item__label">Hổ Trợ Khách Hàng</h1>
+          <ul class="footer-information-item-list">
+            <li class="footer-information-item-item"><strong>Hotline chăm sóc khách hàng:</strong> 1900-xxxx
+              (1000đ/phút , 8-21h kể cả T7, CN)</li>
+            <li class="footer-information-item-item">Các câu hỏi thường gặp</li>
+            <li class="footer-information-item-item">Hướng dẫn đặt hàng</li>
+            <li class="footer-information-item-item">Hỗ trợ khách hàng: hotro@shopplus.vn</li>
+            <li class="footer-information-item-item">Báo lỗi bảo mật: security@tiki.vn</li>
+          </ul>
+        </div>
+        <div class="footer-information-item col-xl-3">
+          <h1 class="footer-information-item__label">Về Shop Plus</h1>
+          <ul class="footer-information-item-list">
+            <li class="footer-information-item-item">Giới thiệu về shop</li>
+            <li class="footer-information-item-item"><strong>Chủ Trang web : </strong>Hoàng Linh</li>
+            <li class="footer-information-item-item"><strong>Ngày Thành Lập : </strong>dd/MM/YYYY</li>
+          </ul>
+        </div>
+        <div class="footer-information-item col-xl-3">
+          <h1 class="footer-information-item__label">Phương Thức Thanh Toán</h1>
+          <ul class="footer-information-item-list footer-information-item-list--wrap">
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/visa.svg" alt=""></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/cash.svg" alt=""></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/internet-banking.svg"
+                  alt=""></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/installment.svg" alt=""></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-information-item col-xl-3">
+          <h1 class="footer-information-item__label">Kết Nối với chúng tôi</h1>
+          <ul class="footer-information-item-list footer-information-item-list--wrap">
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/fb.svg"
+                  alt=""><span>Facebook</span></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/zalo-seeklogo.com.svg"
+                  width="32" height="32" alt=""><span>Zalo</span></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/youtube.svg"
+                  alt=""><span>Youtube</span></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/github-1.svg"
+                  alt=""><span>Github</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="shop-app-footer-address">
+        <h1 class="shop-app-footer-address__label">Mọi chi tiết xin liên hệ : </h1>
+        <p class="shop-app-footer-address__description">
+          Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, Thành Phố Cần Thơ.
+        </p>
+      </div>
+      <div class="shop-app-footer-copyright">
+        <h1 class="shop-app-footer-copyright__label">&copy; Bản quyền thuộc Hoang Linh Plus</h1>
+      </div>
+    </div>
+  </div>
+</body>

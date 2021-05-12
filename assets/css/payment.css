@@ -1,0 +1,160 @@
+.shop-app-header{
+  display: flex;
+}
+.shop-app-header-title{
+  padding: 10px 20px;
+}
+.shop-app-header-title > h1{
+  display: flex;
+}
+.shop-app-header-title i{
+  font-size: 5rem;
+  color: var(--primary-color);
+}
+.shop-app-header-title  a{
+  display: block;
+  font-size: 5rem;
+  color: var(--primary-color);
+}
+.shop-app-header-payment{
+  font-size: 5rem;
+  text-align: center;
+  flex-grow: 1;
+  color: var(--primary-color);
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.8);
+}
+.shop-app-payment{
+  padding: 20px 50px;
+  background-color: var(--app-background-color);
+}
+.shop-app-payment-header{
+  display: flex;
+}
+.shop-app-payment-header__label{
+ font-size: 3rem;
+ display: flex;
+}
+.shop-app-payment-header__amount{
+  font-size: 3rem;
+}
+.shop-app-payment-product{
+  display: flex;
+  justify-content: space-between;
+}
+.shop-app-payment-product-list{
+  background-color: white;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+}
+.shop-app-payment-product-item{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+.shop-app-payment-product-item-image{
+  height: 20rem;
+  width: 20rem;
+}
+.shop-app-payment-product-item-image >a {
+  display: block;
+}
+.shop-app-payment-product-item__image{
+  padding-top: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.shop-app-payment-product-item-content{
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+.payment-item-content-desc{
+  padding: 10px 30px;
+  overflow: hidden;
+  flex-grow: 1;
+}
+.payment-item-content-desc__name{
+  text-overflow: ellipsis;
+  font-size: 1.6rem;
+  white-space: nowrap;
+  
+}
+.payment-item-content-desc__price{
+  font-size: 3rem;
+  color: red;
+}
+.payment-item-content-amount{
+  margin: auto;
+  background-color: var(--primary-color);
+  padding: 5px;
+  border-radius: 5px;
+  user-select: none;
+}
+.payment-item-content__label{
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+ 
+}
+.payment-item-content-input{
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  display: flex;
+  align-items: stretch;
+  border: none;
+}
+.payment-item-content__input{
+  width: 50px;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+  background-color: white;
+}
+.shop-app-payment-product-total{
+  padding: 0 5px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.shop-app-payment-product-user-info{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  padding-bottom: 5rem;
+}
+.payment-user-edit{
+  display: flex;
+  justify-content: flex-end;
+}
+.payment-user-info__name{
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 3rem;
+  
+}
+.payment-user-info__address{
+  margin-top: 5px;
+  font-size: 1.3rem;
+}
+.payment-user-info__phone{
+  margin-top: 5px;
+  font-size: 1.4rem;
+}
+.shop-app-payment-product-total-container{
+  position: sticky;
+  top: 10px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+.shop-app-payment-product-total-price{
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.shop-app-payment-product-total-price-money{
+  color: red;
+}
+.shop-app-payment-product-total-price__submit{
+  width: 100%;
+}
