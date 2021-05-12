@@ -1,7 +1,11 @@
 $(function(){
   // render info customer nav bar
   let $navUserName = $(".nav-user-info__username");
-  let customer = JSON.parse(localStorage.getItem("customer"));
+  let customer = null;
+  let updateLocalCustomer = () =>{
+    customer = JSON.parse(localStorage.getItem("customer"));
+  }
+  updateLocalCustomer();
   function updateNavUserName(){
     if(customer == null){
       $navUserName.text("Guest")
@@ -11,6 +15,7 @@ $(function(){
     }
   }
   updateNavUserName();
+  //render product items
   let $listProducts = $(".shop-app-cart-product-item");
   let products =[
     {
@@ -154,17 +159,16 @@ $(function(){
   // add event order Button
   let storage = window.localStorage;
   let $btnOrder = $("#btnOrder");
-  $btnOrder.click(function(event){
+  let $orderForm = $("#orderForm");
+  $orderForm.submit(function(event){
     if(storage.getItem("customer")!= null){
-      let form = $('<form action="" method="POST">' + 
-        '<input type="hidden" name="products" value="' + JSON.stringify(products) + '">' +
-        '<input type="hidden" name="customer" value="' + JSON.stringify(storage.getItem("customer")) + '">' +
-        '</form>').appendTo("body");
+      $("<input>").attr("type","hidden").
+      attr("customer",JSON.stringify(customer)).appendTo($orderForm);
       form.submit();
-      console.log("sdjs");
     }
     else{
       $modal.fadeIn().css("display","flex");
+      return false;
     }
   })
   //add event input customer information
@@ -198,7 +202,8 @@ $(function(){
       return false;
     }
     if($addressCustomer.val() == ""){
-      alert("Địa Chỉ Không Được Để trống")
+      alert("Địa Chỉ Không Được Để trống");
+      return false;
     }
     let customer = {
       name : $nameCustomer.val(),
@@ -208,5 +213,17 @@ $(function(){
       company : $companyCustomer.val(),
     }
     storage.setItem("customer",JSON.stringify(customer));
-  });
+    updateLocalCustomer();
+    updateNavUserName();
+    $modal.fadeOut();
+  }); 
+  function validToOrder(){
+    if(customer == null){
+      return false;
+    }
+    if(products.length == 0){
+      return false;
+    }
+    return products.every((element)=>element.number > 0)
+  }
 })

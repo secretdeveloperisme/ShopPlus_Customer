@@ -79,6 +79,12 @@
 .nav-user{
   margin-right:80px;
 }
+.nav-user-dropdown-content{
+  left: -50px;
+}
+.nav-user-dropdown-content::after{  
+  width: 100%;
+}
 .shop-app-cart{
   padding: 20px 50px;
   background-color: var(--app-background-color);
