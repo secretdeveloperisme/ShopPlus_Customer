@@ -1,3 +1,76 @@
+.modal{
+  position: fixed;
+  display: flex;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+.modal-content{
+  margin: auto;
+  position: relative;  
+}
+.modal-content-btn-close{
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  font-size: 5rem;
+  color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.modal-content-btn-close:hover{
+  
+}
+.input-user-info{
+  background-color: var(--primary-color);
+  width: 500px;
+  height: 500px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+
+}
+.input-user-info__label{
+  font-size: 3rem;
+}
+.input-user-info-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.input-user-info-container + .input-user-info-container{
+  margin-top: 20px;
+}
+.input-user-info-container label{
+  display: block;
+  font-size: 1.6rem;
+  min-width: 100px;
+  margin-bottom: 10px;
+  padding: 1px 2px;
+}
+.input-user-info-container input{
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 700;
+  flex-grow: 1;
+  font-size: 1.6rem; 
+  border-bottom: 2px solid var(--primary-color);
+}
+.input-user-info__btn-submit{
+  margin: auto;
+  margin-top: 10px;
+}
 .shop-app-cart{
   padding: 20px 50px;
   background-color: var(--app-background-color);
