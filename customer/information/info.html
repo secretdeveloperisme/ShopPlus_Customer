@@ -15,48 +15,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/base.css">
   <link rel="stylesheet" href="../../assets/css/navbar.css">
-  <link rel="stylesheet" href="../../assets/css/shopping_cart.css">
+  <link rel="stylesheet" href="../../assets/css/Product-Detail.css">
+  <link rel="stylesheet" href="infor.css">
   <link rel="stylesheet" href="../../assets/css/footer.css">
-  <script src="../../js/navbar.js"></script>
-  <script src="../../js/ShoppingCart.js"></script>
-  <script src="../../js/base.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="infor.js"></script>
 </head>
 <body>
-  <div id="toast"></div>
   <div class="shop-app">
-    <div class="modal" id="modal">
-      <div class="modal-content">
-        <div class="modal-content-btn-close" id="btnCloseModal">
-          <i class="fas fa-times"></i>
-        </div>
-        <div class="input-user-info">
-          <h1 class="input-user-info__label">Nhập Thông Tin Cá Nhân Của Bạn</h1>
-         <form action="" method="post" class="input-user-info-form">
-          <div class="input-user-info-container">
-            <label for="nameCustomer"> Tên Của Bạn: </label>
-            <input type="text" name="" id="nameCustomer" placeholder="Tên Của Bạn" required>
-          </div>
-          <div class="input-user-info-container">
-            <label for="phoneCustomer"> Số Điện Thoai : </label>
-            <input type="text" name="" id="phoneCustomer" placeholder="Sô Điện Thoại" required>
-          </div>
-          <div class="input-user-info-container">
-            <label for="emailCustomer"> Email Của Bạn: </label>
-            <input type="text" name="" id="emailCustomer" placeholder="Email Của Bạn" required>
-          </div>
-          <div class="input-user-info-container">
-            <label for="addressCustomer"> Địa Chỉ Của Bạn :</label>
-            <input type="text" name="" id="addressCustomer" placeholder="Địa Chỉ Của Bạn" required>
-          </div>
-          <div class="input-user-info-container">
-            <label for="companyCustomer"> Công Ty Của Bạn (Nếu Có) :</label>
-            <input type="text" name="" id="companyCustomer" placeholder="Công Ty Của Bạn">
-          </div>
-          <input type="button" class="input-user-info__btn-submit btn" value="Đồng Ý">
-         </form>
-        </div>
-      </div>
-    </div>
     <div class="shop-app-header">
       <div class="nav">
         <div class="nav-home">
@@ -214,55 +180,106 @@
             </ul>
           </div>
         </div>
-        <div class="nav-user dropdown">
-          <div class="nav-user-btn">
-            <div class="nav-user-icon">
-              <i class="far fa-user"></i>
+        <div class="nav-cart dropdown">
+          <div class="nav-cart-dropdown-btn dropdown-btn">
+            <div class="nav-cart-wrapper">
+              <div class="nav-cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <div class="nav-cart-quantities">
+                0
+              </div>
             </div>
-            <div class="nav-user-info">
-              <h3 class="nav-user-info__account">Tài khoản</h3>
-              <h3 class="nav-user-info__username"></h3>
-            </div>
-            <div class="nav-user-dropdown-icon">
-              <i class="fas fa-caret-down"></i>
+            <div class="nav-cart-label">
+              <h3>Giỏ Hàng</h3>
             </div>
           </div>
-          <div class="nav-user-dropdown-content dropdown-content">
-            <ul class="nav-user-dropdown-content-list">
-              <li class="nav-user-dropdown-content-item"><a href="#">Đơn hàng của tôi</a></li>
-              <li class="nav-user-dropdown-content-item"><a href="#">Thông Tin Của tôi</a></li>
-              <li class="nav-user-dropdown-content-item"><a href="#">Xóa Thông Tin Của Tôi</a></li>
+          <div class="nav-cart-dropdown-content dropdown-content">
+            <h2 class="nav-cart-dropdown-content-label">Sản Phẩm mới thêm</h2>
+            <ul class="nav-cart-dropdown-content-list">
+              <li class="nav-cart-dropdown-content-item">
+                <a href="#">
+                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                  <div class="nav-cart-dropdown-content-item__name">Sách - 30 Chủ Đề Từ Vựng Tiếng Anh (Bộ 2 quyển, lẻ tùy chọn)</div>
+                  <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
+                </a>
+              </li>
+              <li class="nav-cart-dropdown-content-item">
+                <a href="#">
+                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(assets/images/products/1f934d3ae7dba14ba9a0636b878b5a88_tn.jfif);"></div>
+                  <div class="nav-cart-dropdown-content-item__name">USB 256/512GB 3.0 tốc độ truyền dữ liệu cực nhanh kiểu dáng sang trọng</div>
+                  <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
+                </a>
+              </li>
+              <li class="nav-cart-dropdown-content-item">
+                <a href="#">
+                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(assets/images/products/8881955f7ad0ffc82cb7ac90dd871bd6.jfif);"></div>
+                  <div class="nav-cart-dropdown-content-item__name">[Mã LIFE5510K giảm 10K đơn 20K] Sách - Không Phải Chưa Đủ Năng Lực, Mà Là Chưa Đủ Kiên Định</div>
+                  <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
+                </a>
+              </li>
             </ul>
+            <a href="#" class="nav-cart-dropdown-content-btn">Xem Giỏ Hàng</a>
           </div>
         </div>
+      </div>
+      <div class="shop-app-header-path">
+        <ul class="shop-app-header-path-list">
+          <li class="shop-app-header-path-item"><a href="">Trang chủ</a></li>
+          <li class="shop-app-header-path-item"><a href="">Thông Tin</a></li>
+        </ul>
       </div>
     </div>
-    <div class="shop-app-cart">
-      <div class="shop-app-cart-header">
-        <div class="shop-app-cart-header__label">
-          Giỏ Hàng
-        </div>
-        <div class="shop-app-cart-header__amount">
-          (<span id="numberOfProduct">2</span> Sản Phẩm)
-        </div>
-      </div>
-      <div class="shop-app-cart-product">
-        <ul class="shop-app-cart-product-list col-xl-8">
+    <div class="shop-app-account">
+      
+      <aside class="sidebar account-sidebar">
+        <h1 class="sidebar__label account-sidebar_label">
+          <div class="sidebar-label-user-name">Hoàng Linh</div>
+        </h1>
+        <ul class="sidebar-list">
+          <li class="sidebar-item">
+            <a href="">
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+              <span>Thông tin tài khoản</span>
+            </a>
+          </li>
+          <li class="side-bar-item">
+            <a href="#">
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M13 12h7v1.5h-7zm0-2.5h7V11h-7zm0 5h7V16h-7zM21 4H3c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 15h-9V6h9v13z"></path></svg>
+              <span>Quản Lý Đơn Hàng</span>
+            </a>
+          </li>
+          <li class="side-bar-item">
+            <a href="#">
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>
+              <span>Thêm Địa Chỉ</span>
+            </a>
+          </li>
         </ul>
-        <div class="shop-app-cart-product-total col-xl-4">
-          <div class="shop-app-cart-product-total-container">
-            <div class="shop-app-cart-product-total-price">
-              <span>Thành Tiền</span> 
-              <span class="shop-app-cart-product-total-price-money"><span id="totalPrice">99.900</span> <span>đ</span></span>
-            </div>
-            <form action="" method="post" id="orderForm">
-              <button class="shop-app-cart-product-total-price__submit btn" id="btnOrder">
-              Tiến Hành Đặt Hàng
-              </button>
-            </form>
-            
-          </div>
+      </aside>
+      <div class="shop-app-account-content">
+        <div class="account-content-label">
+          Thông Tin Tài Khoản
         </div>
+        <form class="account-content-form">
+          <div class="account-content-info-control">
+            <label for="">Họ tên :</label>
+            <input type="text" name="" id="nameCustomer">
+          </div>
+          <div class="account-content-info-control">
+            <label for="">Số điện thoại : </label>
+            <input type="text" name="" id="phoneCustomer">
+          </div>
+          <div class="account-content-info-control">
+            <label for="">Email : </label>
+            <input type="text" name="" id="emailCustomer">
+          </div>
+          <div class="account-content-info-control">
+            <label for="">Tên Công Ty</label>
+            <input type="text" id="companyCustomer">
+          </div>
+        </form>
+        <input type="submit" class="btn"value="Cập Nhật">
       </div>
     </div>
     <div class="shop-app-footer gird">

@@ -190,27 +190,57 @@ $(function(){
   let regexPhone =  /^0\d{9,10}$/;
   $btnSubmitInfo.click(()=>{
     if($nameCustomer.val() == ""){
-      showToast("Tên Không Được Để trống")
+      toast({
+        title : "Cảnh báo",
+        message :"Tên Không Được Để trống",
+        type: "warning",
+        duration : 5000
+      })
       return false;
     }
     if($emailCustomer.val() == ""){
-      showToast("Email Không Được Để trống")
+      toast({
+        title : "Cảnh báo",
+        message :"Email Không Được Để trống",
+        type: "warning",
+        duration : 5000
+      })
       return false;
     }
     if(!regexEmail.test($emailCustomer.val())){
-      showToast("Email Không Hợp lệ")
+      toast({
+        title : "Cảnh báo",
+        message :"Email Không Hợp lệ",
+        type: "warning",
+        duration : 5000
+      })
       return false;
     }
     if($phoneCustomer.val() == ""){
-      showToast("Số Điện Không Được Để trống")
+      toast({
+        title : "Cảnh báo",
+        message :"Số Điện Không Được Để trống",
+        type: "warning",
+        duration : 5000
+      })
       return false;
     }
     if(!regexPhone.test($phoneCustomer.val())){
-      showToast("Số Điện Không Không Hợp lệ");
+      toast({
+        title : "Cảnh báo",
+        message :"Số Điện Không Không Hợp lệ",
+        type: "warning",
+        duration : 5000
+      });
       return false;
     }
     if($addressCustomer.val() == ""){
-      showToast("Địa Chỉ Không Được Để trống");
+      toast({
+        title : "Cảnh báo",
+        message :"Địa Chỉ Không Được Để trống",
+        type: "warning",
+        duration : 5000
+      });
       return false;
     }
     let customer = {
@@ -224,5 +254,11 @@ $(function(){
     updateLocalCustomer();
     updateNavUserName();
     $modal.fadeOut();
+    toast({
+      title : "Thành Công",
+      message : "Bạn đã điền thông tin thành công",
+      type : "success",
+      duration : 5000
+    })
   }); 
 })
