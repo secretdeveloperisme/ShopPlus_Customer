@@ -1,9 +1,13 @@
 $(function(){
   // render info customer nav bar
   let $navUserName = $(".nav-user-info__username");
+  //customer handle
   let customer = null;
   let updateLocalCustomer = () =>{
     customer = JSON.parse(localStorage.getItem("customer"));
+  }
+  function hasCustomer(){
+    return customer != null;
   }
   updateLocalCustomer();
   function updateNavUserName(){
@@ -17,7 +21,7 @@ $(function(){
   updateNavUserName();
   //render product items
   let $listProducts = $(".shop-app-cart-product-item");
-  let products =[
+  products =[
     {
       id : 1,
       name : "Lược Sử Loài Người",
@@ -39,7 +43,20 @@ $(function(){
       price : 3,
       number : 3
     }
-  ]
+  ];
+  // valid product to submit payment
+   isValidProduct = ()=>{
+    if(products.length < 1){
+      return false;
+    }
+    return products.some(e=>e.number > 0);
+  }
+  function deleteProduct(index){
+    products.splice(index,1);
+  }
+  function updateNumberOfProduct(){
+    $numberOfPProduct.text($listProducts.length);
+  };
   let $listProductContainer = $(".shop-app-cart-product-list");
   const $totalView =  $("#totalPrice");
   let $numberOfPProduct = $("#numberOfProduct");
@@ -104,7 +121,7 @@ $(function(){
       let regexNumber = /^(\d|(Backspace))$/;
       $numberOfPurchase.on("input",function(){
         calculateTotal();
-        products[index].number = $(this).val();
+        products[index].number =Number.parseInt($(this).val());
       })
       $numberOfPurchase.keydown(function (event) { 
         if(!regexNumber.test(event.key)){
@@ -128,10 +145,6 @@ $(function(){
       });
     });
   }
-  function deleteProduct(index){
-    products.splice(index,1);
-    console.log(products);
-  }
   function calculateTotal(){
     let totalPrice = 0;
     $listProducts.each(function(index,element){
@@ -146,31 +159,26 @@ $(function(){
       $totalView.text(0)
     }
   }
-  function updateNumberOfProduct(){
-    $numberOfPProduct.text($listProducts.length);
-  }
   render();
   // add event for modal 
   let $btnCloseModal = $("#btnCloseModal");
   let $modal = $("#modal");
   $btnCloseModal.on("click",function(){
     $modal.fadeOut();
-  })
+  });
   // add event order Button
   let storage = window.localStorage;
-  let $btnOrder = $("#btnOrder");
   let $orderForm = $("#orderForm");
   $orderForm.submit(function(event){
-    if(storage.getItem("customer")!= null){
-      $("<input>").attr("type","hidden").
-      attr("customer",JSON.stringify(customer)).appendTo($orderForm);
-      form.submit();
-    }
-    else{
+    if(!hasCustomer()){
       $modal.fadeIn().css("display","flex");
       return false;
     }
-  })
+    if(!isValidProduct()){
+      showToast("Phải có ít nhất 1 sản phẩm  và số lượng là 1");
+      return false;
+    }
+  });
   //add event input customer information
   let $btnSubmitInfo = $(".input-user-info__btn-submit");
   let $nameCustomer =$("#nameCustomer");
@@ -182,27 +190,27 @@ $(function(){
   let regexPhone =  /^0\d{9,10}$/;
   $btnSubmitInfo.click(()=>{
     if($nameCustomer.val() == ""){
-      alert("Tên Không Được Để trống")
+      showToast("Tên Không Được Để trống")
       return false;
     }
     if($emailCustomer.val() == ""){
-      alert("Email Không Được Để trống")
+      showToast("Email Không Được Để trống")
       return false;
     }
     if(!regexEmail.test($emailCustomer.val())){
-      alert("Email Không Hợp lệ")
+      showToast("Email Không Hợp lệ")
       return false;
     }
     if($phoneCustomer.val() == ""){
-      alert("Số Điện Không Được Để trống")
+      showToast("Số Điện Không Được Để trống")
       return false;
     }
     if(!regexPhone.test($phoneCustomer.val())){
-      alert("Số Điện Không Không Hợp lệ");
+      showToast("Số Điện Không Không Hợp lệ");
       return false;
     }
     if($addressCustomer.val() == ""){
-      alert("Địa Chỉ Không Được Để trống");
+      showToast("Địa Chỉ Không Được Để trống");
       return false;
     }
     let customer = {
@@ -217,13 +225,4 @@ $(function(){
     updateNavUserName();
     $modal.fadeOut();
   }); 
-  function validToOrder(){
-    if(customer == null){
-      return false;
-    }
-    if(products.length == 0){
-      return false;
-    }
-    return products.every((element)=>element.number > 0)
-  }
 })

@@ -77,6 +77,28 @@ input[type="text"],button{
 .dropdown:hover > .dropdown-content{
   display: block;
 }
+#toast{
+  visibility: hidden;
+  position: fixed;
+  left: 50%;
+  z-index: 102;
+  padding: 16px;
+  font-size: 2rem;
+  min-width: 300px;
+  background-color: #333;
+  color: #fff;
+  transform: translate(-50%);
+  top: 50px;
+  border-radius: 10px;
+}
+#toast.active{
+  visibility: visible;
+  animation: fadein 0.5s forwards;
+}
+@keyframes fadein {
+  from {top: -50px; opacity: 0;}
+  to {top : 50px; opacity: 1;}
+}
 /* >=1200 px */
 @media only screen and (min-width : 1200px) {
   .col-xl-1 {width: 8.33%;}
