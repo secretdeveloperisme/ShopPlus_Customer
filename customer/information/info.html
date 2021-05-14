@@ -231,55 +231,101 @@
       </div>
     </div>
     <div class="shop-app-account">
-      
       <aside class="sidebar account-sidebar">
         <h1 class="sidebar__label account-sidebar_label">
           <div class="sidebar-label-user-name">Hoàng Linh</div>
         </h1>
         <ul class="sidebar-list">
-          <li class="sidebar-item">
-            <a href="">
-              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
-              <span>Thông tin tài khoản</span>
-            </a>
+          <li class="sidebar-item sidebar-item--active">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+            <span>Thông tin tài khoản</span>
           </li>
-          <li class="side-bar-item">
-            <a href="#">
+          <li class="sidebar-item">
               <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M13 12h7v1.5h-7zm0-2.5h7V11h-7zm0 5h7V16h-7zM21 4H3c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 15h-9V6h9v13z"></path></svg>
               <span>Quản Lý Đơn Hàng</span>
-            </a>
           </li>
-          <li class="side-bar-item">
-            <a href="#">
+          <li class="sidebar-item">
               <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>
               <span>Thêm Địa Chỉ</span>
-            </a>
           </li>
         </ul>
       </aside>
       <div class="shop-app-account-content">
-        <div class="account-content-label">
-          Thông Tin Tài Khoản
+        <div class="shop-app-account-content-item">
+          <div class="account-content-label">
+            Thông Tin Tài Khoản 0
+          </div>
+          <!-- information content -->
+          <form class="account-content-form">
+            <div class="account-content-info-control">
+              <label for="">Họ tên :</label>
+              <input type="text" name="" id="nameCustomer">
+            </div>
+            <div class="account-content-info-control">
+              <label for="">Số điện thoại : </label>
+              <input type="text" name="" id="phoneCustomer">
+            </div>
+            <div class="account-content-info-control">
+              <label for="">Email : </label>
+              <input type="text" name="" id="emailCustomer">
+            </div>
+            <div class="account-content-info-control">
+              <label for="">Tên Công Ty</label>
+              <input type="text" id="companyCustomer">
+            </div>
+            <input type="submit" class="info-btn btn"value="Cập Nhật">
+          </form>
         </div>
-        <form class="account-content-form">
-          <div class="account-content-info-control">
-            <label for="">Họ tên :</label>
-            <input type="text" name="" id="nameCustomer">
+        <div class="shop-app-account-content-item">
+          <div class="account-content-label">
+            Thông Tin Tài Khoản 1
           </div>
-          <div class="account-content-info-control">
-            <label for="">Số điện thoại : </label>
-            <input type="text" name="" id="phoneCustomer">
+          <!-- information content -->
+          <form class="account-content-form">
+            <div class="account-content-info-control">
+              <label for="">Họ tên :</label>
+              <input type="text" name="" id="nameCustomer">
+            </div>
+            <div class="account-content-info-control">
+              <label for="">Số điện thoại : </label>
+              <input type="text" name="" id="phoneCustomer">
+            </div>
+            <div class="account-content-info-control">
+              <label for="">Email : </label>
+              <input type="text" name="" id="emailCustomer">
+            </div>
+            <div class="account-content-info-control">
+              <label for="">Tên Công Ty</label>
+              <input type="text" id="companyCustomer">
+            </div>
+            <input type="submit" class="info-btn btn"value="Cập Nhật">
+          </form>
+        </div>
+        <div class="shop-app-account-content-item">
+          <div class="account-content-label">
+            Thông Tin Tài Khoản 2
           </div>
-          <div class="account-content-info-control">
-            <label for="">Email : </label>
-            <input type="text" name="" id="emailCustomer">
-          </div>
-          <div class="account-content-info-control">
-            <label for="">Tên Công Ty</label>
-            <input type="text" id="companyCustomer">
-          </div>
-        </form>
-        <input type="submit" class="btn"value="Cập Nhật">
+          <!-- information content -->
+          <form class="account-content-form">
+            <div class="account-content-info-control">
+              <label for="">Họ tên :</label>
+              <input type="text" name="" id="nameCustomer">
+            </div>
+            <div class="account-content-info-control">
+              <label for="">Số điện thoại : </label>
+              <input type="text" name="" id="phoneCustomer">
+            </div>
+            <div class="account-content-info-control">
+              <label for="">Email : </label>
+              <input type="text" name="" id="emailCustomer">
+            </div>
+            <div class="account-content-info-control">
+              <label for="">Tên Công Ty</label>
+              <input type="text" id="companyCustomer">
+            </div>
+            <input type="submit" class="info-btn btn"value="Cập Nhật">
+          </form>
+        </div>
       </div>
     </div>
     <div class="shop-app-footer gird">
