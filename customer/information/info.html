@@ -26,7 +26,7 @@
     <div class="shop-app-header">
       <div class="nav">
         <div class="nav-home">
-          <a href="#" class="nav-home-link">
+          <a href="/index.html" class="nav-home-link">
             <span class="nav-home-link__logo">
               <i class="fab fa-shopify"></i>
             </span>
@@ -253,7 +253,7 @@
       <div class="shop-app-account-content">
         <div class="shop-app-account-content-item">
           <div class="account-content-label">
-            Thông Tin Tài Khoản 0
+            Thông Tin Tài Khoản
           </div>
           <!-- information content -->
           <form class="account-content-form">
@@ -278,53 +278,63 @@
         </div>
         <div class="shop-app-account-content-item">
           <div class="account-content-label">
-            Thông Tin Tài Khoản 1
+            Quản lý đơn hàng 
           </div>
-          <!-- information content -->
-          <form class="account-content-form">
-            <div class="account-content-info-control">
-              <label for="">Họ tên :</label>
-              <input type="text" name="" id="nameCustomer">
-            </div>
-            <div class="account-content-info-control">
-              <label for="">Số điện thoại : </label>
-              <input type="text" name="" id="phoneCustomer">
-            </div>
-            <div class="account-content-info-control">
-              <label for="">Email : </label>
-              <input type="text" name="" id="emailCustomer">
-            </div>
-            <div class="account-content-info-control">
-              <label for="">Tên Công Ty</label>
-              <input type="text" id="companyCustomer">
-            </div>
-            <input type="submit" class="info-btn btn"value="Cập Nhật">
-          </form>
+          <!-- order content -->
+          <table class="account-content-order-table">
+            <thead>
+              <tr>
+                <td>Mã đơn hàng</td>
+                <td>Ngày Mua</td>
+                <td>Sản Phẩm</td>
+                <td>Tổng Tiền</td>
+                <td>Trạng Thái Đơn Hàng</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>001</td>
+                <td>01/12/2021</td>
+                <td>Lược Sử Loài Người,Harry Potter1,Muôn Kiếp nhân Sinh</td>
+                <td>125000 đ</td>
+                <td>Đang xử lý</td>
+              </tr>
+              <tr>
+                <td>001</td>
+                <td>01/12/2021</td>
+                <td>Lược Sử Loài Người,Harry Potter1,Muôn Kiếp nhân Sinh</td>
+                <td>125000 đ</td>
+                <td>Đã xác Nhận</td>
+              </tr>
+              <tr>
+                <td>001</td>
+                <td>01/12/2021</td>
+                <td>Lược Sử Loài Người,Harry Potter1,Muôn Kiếp nhân Sinh </td>
+                <td>125000 đ</td>
+                <td>Thành Công</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="shop-app-account-content-item">
           <div class="account-content-label">
-            Thông Tin Tài Khoản 2
+            Địa Chỉ Của Tôi
           </div>
-          <!-- information content -->
-          <form class="account-content-form">
-            <div class="account-content-info-control">
-              <label for="">Họ tên :</label>
-              <input type="text" name="" id="nameCustomer">
-            </div>
-            <div class="account-content-info-control">
-              <label for="">Số điện thoại : </label>
-              <input type="text" name="" id="phoneCustomer">
-            </div>
-            <div class="account-content-info-control">
-              <label for="">Email : </label>
-              <input type="text" name="" id="emailCustomer">
-            </div>
-            <div class="account-content-info-control">
-              <label for="">Tên Công Ty</label>
-              <input type="text" id="companyCustomer">
-            </div>
-            <input type="submit" class="info-btn btn"value="Cập Nhật">
+          <!-- address content -->
+          <form class="account-content-form-address">
+            <input type="text" name="abc" id="addressCustomer" placeholder="Thêm Địa Chỉ">
+            <input type="submit" class="info-btn btn"value="Thêm">
           </form>
+          <ul class="content-address-list">
+            <li class="content-address-item">
+              <p class="address">Đường 3/2, Phường Xuân Khánh,Quận Ninh Kiều, Thành Phố Cần Thơ</p>
+              <button class="btn">sửa</button>
+            </li>
+            <li class="content-address-item">
+              <p class="address">Đường 3/2, Phường Xuân Khánh,Quận Ninh Kiều, Thành Phố Cần Thơ</p>
+              <button class="btn">sửa</button>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
