@@ -191,6 +191,7 @@ input[type=number] {
   color: white;
   display:inline-block;
   cursor: pointer;
+  transition: all .3s;
 }
 .btn:hover{
   opacity: 0.5;
@@ -207,6 +208,41 @@ input[type=number] {
 @keyframes fadein {
   from {top: -50px; opacity: 0;}
   to {top : 50px; opacity: 1;}
+}
+/* pagination */
+.pagination{
+  width: 100%;
+}
+.pagination-items{
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  width: fit-content;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.pagination-items > a{
+  text-align: center;
+  font-size: 3rem;
+  display: block;
+  line-height: 3rem;
+  padding: 5px;
+  width: 3rem;
+  color: var(--text-color);
+  font-weight: 700;
+  transition: all .5s ease;
+}
+.pagination-items > a:hover:not(.active){
+  background-color: var(--primary-color);
+  color: white;
+}
+.pagination-items > a:not(:last-of-type){
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+.pagination-items > .active{
+  background-color: var(--primary-color);
+  color: white;
 }
 /* >=1200 px */
 @media only screen and (min-width : 1200px) {

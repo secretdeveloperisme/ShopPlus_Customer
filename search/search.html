@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>ShopPlus</title>
-  <link rel="shortcut icon" href="assets/images/icons/shopplus.svg" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/images/icons/shopplus.svg" type="image/x-icon">
   <meta name="author" content="hoang linh plus">
   <meta name="keywords" content="shopplus, cửa hàng plus, hoang linh plus">
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -13,10 +13,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/navbar.css">
-  <link rel="stylesheet" href="assets/css/index.css">
-  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/navbar.css">
+  <link rel="stylesheet" href="../assets/css/index.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
   <script src="js/navbar.js"></script>
   <script src="js/index.js"></script>
 </head>
@@ -25,7 +25,7 @@
     <div class="shop-app-header">
       <div class="nav">
         <div class="nav-home">
-          <a href="#" class="nav-home-link">
+          <a href="../index.html" class="nav-home-link">
             <span class="nav-home-link__logo">
               <i class="fab fa-shopify"></i>
             </span>
@@ -219,21 +219,21 @@
             <ul class="nav-cart-dropdown-content-list">
               <li class="nav-cart-dropdown-content-item">
                 <a href="#">
-                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                   <div class="nav-cart-dropdown-content-item__name">Sách - 30 Chủ Đề Từ Vựng Tiếng Anh (Bộ 2 quyển, lẻ tùy chọn)</div>
                   <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
                 </a>
               </li>
               <li class="nav-cart-dropdown-content-item">
                 <a href="#">
-                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(assets/images/products/1f934d3ae7dba14ba9a0636b878b5a88_tn.jfif);"></div>
+                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(/assets/images/products/1f934d3ae7dba14ba9a0636b878b5a88_tn.jfif);"></div>
                   <div class="nav-cart-dropdown-content-item__name">USB 256/512GB 3.0 tốc độ truyền dữ liệu cực nhanh kiểu dáng sang trọng</div>
                   <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
                 </a>
               </li>
               <li class="nav-cart-dropdown-content-item">
                 <a href="#">
-                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(assets/images/products/8881955f7ad0ffc82cb7ac90dd871bd6.jfif);"></div>
+                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(/assets/images/products/8881955f7ad0ffc82cb7ac90dd871bd6.jfif);"></div>
                   <div class="nav-cart-dropdown-content-item__name">[Mã LIFE5510K giảm 10K đơn 20K] Sách - Không Phải Chưa Đủ Năng Lực, Mà Là Chưa Đủ Kiên Định</div>
                   <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
                 </a>
@@ -245,32 +245,55 @@
       </div>
     </div>
     <div class="shop-app-container gird">
-      <div class="container-shop-app-ad grid-row">
-        <div class="container-shop-app-ad__slideshow col-xl-8">
-          <div class="container-shop-app__slides">
-            <img src="assets/images/ad/slide1.jpg" alt="">
-            <img src="assets/images/ad/slide2.jpg" alt="">
-            <img src="assets/images/ad/slide3.jpg" alt="">
-            <img src="assets/images/ad/slide4.jpg" alt="">
-            <img src="assets/images/ad/slide5.jpg" alt="">
-          </div>  
-          <button class="slideshow-btn slideshow-btn--next "><i class="fas fa-chevron-right"></i></button>
-          <button class="slideshow-btn slideshow-btn--previous"><i class="fas fa-chevron-left"></i></button>
-          <div class="slideshow-pagination">
-            <span class="slideshow-pagination__item slideshow-pagination__item--active"><i
-                class="far fa-circle"></i></span>
-            <span class="slideshow-pagination__item"><i class="far fa-circle"></i></span>
-            <span class="slideshow-pagination__item"><i class="far fa-circle"></i></span>
-            <span class="slideshow-pagination__item"><i class="far fa-circle"></i></span>
-            <span class="slideshow-pagination__item"><i class="far fa-circle"></i></span>
+      <div class="container-shop-app-wrap-product-and-filter grid-row">
+        <div class="container-shop-app-filter col-xl-2-10">
+          <div class="container-shop-app-filter-category">
+            <h1 class="container-shop-app-filter-category__label">
+              <i class="fas fa-list"></i>
+              <span>Tất Cả Danh Mục</span>
+            </h1>
+            <ul class="container-shop-app-filter-category-list">
+              <li class="container-shop-app-filter-category-item active"><a href="#">Điện Thoại</a></li>
+              <li class="container-shop-app-filter-category-item"><a href="#">Thể Thao</a></li>
+              <li class="container-shop-app-filter-category-item"><a href="#">Laptop - Máy Tính</a></li>
+              <li class="container-shop-app-filter-category-item"><a href="#">Thời Trang</a></li>
+              <li class="container-shop-app-filter-category-item"><a href="#">Nhà Sách</a></li>
+            </ul>
+          </div>
+          <div class="container-shop-app-filter-search">
+            <h1 class="container-shop-app-filter-search__lablel">
+              <i class="fas fa-filter"></i>
+              <span>Bộ Lọc Tìm Kiếm</span>
+            </h1>
+            <div class="container-shop-app-filter-search-price">
+              <h2 class="container-shop-app-filter-search-price__label">
+                Khoảng Giá 
+              </h2>
+              <div class="container-shop-app-filter-search-price-range">
+                <input type="number" placeholder="đ Từ" class="container-shop-app-filter-search-price-range__from" maxlength="13" min="0" max="9999999">
+                <div class="container-shop-app-filter-search-price-range__line"></div>
+                <input type="number" placeholder="đ Đến" class="container-shop-app-filter-search-price-range__to" maxlength="13" min="0" max="9999999">
+              </div>
+              <button class="container-shop-app-filter-search-price-range__btn btn">
+                Áp Dụng
+              </button>
+            </div>
+            <div class="container-shop-app-filter-search-favorite">
+              <h2 class="container-shop-app-filter-search-favorite__label">
+                Yêu Thích 
+              </h2>
+              <div class="container-shop-app-filter-search-favorite-input">
+                <input type="checkbox" name="" id="">
+                <span>Yêu Thích</span>
+              </div>
+              <button class="container-shop-app-filter-search-favorite__btn btn">
+                Áp Dụng
+              </button>
+            </div>
+
           </div>
         </div>
-        <div class="container-shop-app-ad-topic col-xl-4">
-          <a href="#"><img src="assets/images/ad/shopplus-ad.png" alt=""></a>
-        </div>
-      </div>
-      <div class="container-shop-app-wrap-product-and-filter grid-row">
-        <div class="container-shop-app-display-product grid col-xl-12">
+        <div class="container-shop-app-display-product grid col-xl-10">
           <div class="shop-app-product-header grid-row">
             <div class="shop-app-product-header__label "><i class="fas fa-star"></i><span>Tất Cả Sản Phẩm</span></div>
             <div class="shop-app-product-header-sort">
@@ -286,11 +309,11 @@
             </div>
           </div>
           <div class="shop-app-product-display grid-row">
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
               <a href="#">
                 <div class="product-display-item-container">
                   <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                     <div class="product-display-item__favorite">
                       Yêu thích
                     </div>
@@ -307,11 +330,11 @@
                 </div>
               </a>
             </div>
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
               <a href="#">
                 <div class="product-display-item-container">
                   <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                     <div class="product-display-item__favorite">
                       Yêu thích
                     </div>
@@ -328,11 +351,11 @@
                 </div>
               </a>
             </div>
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
               <a href="#">
                 <div class="product-display-item-container">
                   <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                     <div class="product-display-item__favorite">
                       Yêu thích
                     </div>
@@ -349,11 +372,11 @@
                 </div>
               </a>
             </div>
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
               <a href="#">
                 <div class="product-display-item-container">
                   <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                     <div class="product-display-item__favorite">
                       Yêu thích
                     </div>
@@ -370,11 +393,11 @@
                 </div>
               </a>
             </div>
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
               <a href="#">
                 <div class="product-display-item-container">
                   <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                     <div class="product-display-item__favorite">
                       Yêu thích
                     </div>
@@ -391,11 +414,11 @@
                 </div>
               </a>
             </div>
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
               <a href="#">
                 <div class="product-display-item-container">
                   <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                     <div class="product-display-item__favorite">
                       Yêu thích
                     </div>
@@ -412,11 +435,11 @@
                 </div>
               </a>
             </div>
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
               <a href="#">
                 <div class="product-display-item-container">
                   <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                     <div class="product-display-item__favorite">
                       Yêu thích
                     </div>
@@ -433,11 +456,11 @@
                 </div>
               </a>
             </div>
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
               <a href="#">
                 <div class="product-display-item-container">
                   <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                     <div class="product-display-item__favorite">
                       Yêu thích
                     </div>
@@ -454,11 +477,11 @@
                 </div>
               </a>
             </div>
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
               <a href="#">
                 <div class="product-display-item-container">
                   <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                     <div class="product-display-item__favorite">
                       Yêu thích
                     </div>
@@ -475,11 +498,11 @@
                 </div>
               </a>
             </div>
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
               <a href="#">
                 <div class="product-display-item-container">
                   <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
+                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
                     <div class="product-display-item__favorite">
                       Yêu thích
                     </div>
@@ -497,6 +520,17 @@
               </a>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="pagination">
+        <div class="pagination-items">
+          <a href=""><i class="fas fa-chevron-left"></i></a>
+          <a href="" class="active">1</a>
+          <a href="">2</a>
+          <a href="">3</a>
+          <a href="">4</a>
+          <a href="">5</a>
+          <a href=""><i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
     </div>
@@ -524,24 +558,24 @@
         <div class="footer-information-item col-xl-3">
           <h1 class="footer-information-item__label">Phương Thức Thanh Toán</h1>
           <ul class="footer-information-item-list footer-information-item-list--wrap">
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/visa.svg" alt=""></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/cash.svg" alt=""></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/internet-banking.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/visa.svg" alt=""></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/cash.svg" alt=""></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/internet-banking.svg"
                   alt=""></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/installment.svg" alt=""></a>
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/installment.svg" alt=""></a>
             </li>
           </ul>
         </div>
         <div class="footer-information-item col-xl-3">
           <h1 class="footer-information-item__label">Kết Nối với chúng tôi</h1>
           <ul class="footer-information-item-list footer-information-item-list--wrap">
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/fb.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/fb.svg"
                   alt=""><span>Facebook</span></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/zalo-seeklogo.com.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/zalo-seeklogo.com.svg"
                   width="32" height="32" alt=""><span>Zalo</span></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/youtube.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/youtube.svg"
                   alt=""><span>Youtube</span></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/github-1.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/github-1.svg"
                   alt=""><span>Github</span></a></li>
           </ul>
         </div>
