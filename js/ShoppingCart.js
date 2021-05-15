@@ -9,6 +9,13 @@ $(function(){
   function hasCustomer(){
     return customer != null;
   }
+  let customerDB = null;
+  function getCustomerFromDB(email){
+    customerDB ={"name":"Nguyễn Hoàng Linh","phone":"0354882574","email":"linh072217@gmail.com","address":"Cần Thơ","company":""};
+  }
+  function hasCustomerFormDB(email){
+    return false;
+  }
   updateLocalCustomer();
   function updateNavUserName(){
     if(customer == null){
@@ -179,14 +186,36 @@ $(function(){
       return false;
     }
   });
+  //add event login or sign up account customer
+  let $inputUserEmail =  $(".input-user-email");
+  let $emailCustomer = $("#emailCustomer");
+  let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  let $btnEmailButton = $inputUserEmail.find(".input-user-email-btn");
+  $btnEmailButton.click(function(event){
+    if(!regexEmail.test($emailCustomer.val())){
+      toast({
+        title : "Cảnh báo",
+        message :"Email Không Hợp lệ",
+        type: "warning",
+        duration : 5000
+      })
+      return false;
+    }
+    if(!hasCustomerFormDB($emailCustomer.val())){
+      $inputUserEmail.css("display","none");
+      $inputUserEmail.next().css("display","flex")
+    }
+    else{
+      $modal.fadeOut();
+    }
+  })
+
   //add event input customer information
   let $btnSubmitInfo = $(".input-user-info__btn-submit");
   let $nameCustomer =$("#nameCustomer");
   let $companyCustomer =$("#companyCustomer");
-  let $emailCustomer = $("#emailCustomer");
   let $phoneCustomer= $("#phoneCustomer");
   let $addressCustomer= $("#addressCustomer");
-  let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   let regexPhone =  /^0\d{9,10}$/;
   $btnSubmitInfo.click(()=>{
     if($nameCustomer.val() == ""){
@@ -202,15 +231,6 @@ $(function(){
       toast({
         title : "Cảnh báo",
         message :"Email Không Được Để trống",
-        type: "warning",
-        duration : 5000
-      })
-      return false;
-    }
-    if(!regexEmail.test($emailCustomer.val())){
-      toast({
-        title : "Cảnh báo",
-        message :"Email Không Hợp lệ",
         type: "warning",
         duration : 5000
       })
@@ -259,6 +279,7 @@ $(function(){
       message : "Bạn đã điền thông tin thành công",
       type : "success",
       duration : 5000
-    })
+    });
+
   }); 
 })

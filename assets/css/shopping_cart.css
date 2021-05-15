@@ -32,6 +32,19 @@
   cursor: pointer;
   filter: brightness(90%);
 }
+.input-user-email{
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+}
+.input-user-email__label{
+  font-size: 2 rem;
+}
+.input-user-email .input-user-info-container {
+  margin-bottom: 50px;
+}
 .input-user-info{
   background-color: var(--primary-color);
   width: 500px;
@@ -42,6 +55,7 @@
   flex-direction: column;
   box-shadow: 0px 0px 5px white;
   border-radius: 10px;
+  display: none;
 }
 .input-user-info-form{
   display: flex;
