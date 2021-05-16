@@ -36,7 +36,7 @@ create table CHITIETDATHANG
 /*==============================================================*/
 create table DATHANG
 (
-   SODONDH              int not null,
+   SODONDH              int not null AUTO_INCREMENT,
    MSKH                 int not null,
    MSNV                 int,
    NGAYDH               date not null,
@@ -50,7 +50,7 @@ create table DATHANG
 /*==============================================================*/
 create table DIACHIKH
 (
-   MADC                 int not null,
+   MADC                 int not null AUTO_INCREMENT,
    DIACHI               varchar(150) not null,
    MSKH                 int not null,
    primary key (MADC)
@@ -61,13 +61,13 @@ create table DIACHIKH
 /*==============================================================*/
 create table HANGHOA
 (
-   MSHH                 int not null,
+   MSHH                 int not null AUTO_INCREMENT,
    TENHH                varchar(50) not null,
    LOCATION             varchar(200) not null,
    QUYCACH              varchar(50) not null,
    GIA                  int not null,
    SOLUONGHANG          int not null,
-   MALOAIHANG           char(3) not null,
+   MALOAIHANG           int not null,
    GHICHU               varchar(200),
    primary key (MSHH)
 );
@@ -77,7 +77,7 @@ create table HANGHOA
 /*==============================================================*/
 create table KHACHHANG
 (
-   MSKH                 int not null,
+   MSKH                 int not null AUTO_INCREMENT,
    HOTENKH              varchar(50) not null,
    TENCONGTY            varchar(50),
    SODIENTHOAI          varchar(11) not null,
@@ -90,7 +90,7 @@ create table KHACHHANG
 /*==============================================================*/
 create table LOAIHANGHOA
 (
-   MALOAIHANG           char(3) not null,
+   MALOAIHANG           int AUTO_INCREMENT,
    TENLOAIHANG          varchar(50) not null,
    primary key (MALOAIHANG)
 );
@@ -100,7 +100,7 @@ create table LOAIHANGHOA
 /*==============================================================*/
 create table NHANVIEN
 (
-   MSNV                 int not null,
+   MSNV                 int not null AUTO_INCREMENT,
    HOTENNV              varchar(50) not null,
    CHUCVU               varchar(30) not null,
    DIACHI               varchar(200) not null,
