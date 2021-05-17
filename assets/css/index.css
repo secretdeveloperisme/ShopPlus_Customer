@@ -245,12 +245,13 @@
 .shop-app-product-header-sort-price-item:hover{
   background-color: var(--primary-color);
 }
-.shop-app-product-header-sort-price-item > a{
+.shop-app-product-header-sort-price-item a{
   display: block;
-  font-size: 2rem;
+  font-size: 1.8rem;
   padding: 5px 15px ;
   color: var(--text-color);
   display: flex;
+  background-color: transparent;
   justify-content: space-between;
   width: 100%;
 }
@@ -312,12 +313,13 @@
 }
 .product-display-item-description__name{
   display: -webkit-box;
-  /* white-space: nowrap; */
   overflow: hidden;
   font-size: 1.6rem;
+  line-height: 1.6rem;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical; 
   -webkit-line-clamp: 2;
+  height: 3.2rem;
 }
 .product-display-item-description-sell{
   color: var(--primary-color);

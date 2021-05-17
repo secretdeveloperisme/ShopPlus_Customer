@@ -66,6 +66,15 @@
   {
       $this->note = $note;
   }
-
+  public function toArray(){
+    return array(
+      "id"=>$this->id,
+      "name"=>$this->name,
+      "location"=>$this->location,
+      "unit"=>$this->unit,
+      "price"=>$this->price,
+      "categoryId"=>$this->categoryId,
+      "note"=>$this->note);
+  }
   }
 ?>

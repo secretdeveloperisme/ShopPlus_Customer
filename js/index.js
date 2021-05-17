@@ -1,4 +1,8 @@
 $(function(){
+  // base function
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
   //render slideshow
   let $slideshow = $(".container-shop-app-ad__slideshow");
   let $slides = $(".container-shop-app__slides");
@@ -62,4 +66,52 @@ $(function(){
   setInterval(function(){
     nextSlide();
   },3000);
+  // render products
+  let $displayProductsContainer = $(".shop-app-product-display");
+  function updateProduct(){
+    let products = [];
+    $.ajax({
+      type: "GET",
+      async : false,
+      url: "php/Controller/HandleProduct.php?action=getAllProduct",
+      data: "",
+      dataType: "text",
+      success: function (response) {
+        products = JSON.parse(response);
+      }
+    });
+    if(products.length != 0){
+      products.forEach(function(value,index){
+        let productItem = `
+        <div class="shop-app-product-display-item col-xl-2 col-es-6">
+        <a href="#">
+          <div class="product-display-item-container">
+            <div class="product-display-container-box-shadow">
+              <div class="product-display-item__img" style="background-image: url('${value.location}');"></div>
+              <div class="product-display-item__favorite">
+                Yêu thích
+              </div>
+              <div class="product-display-item-description">
+                <div class="product-display-item-description__name">
+                  ${value.name}
+                </div>
+                <div class="product-display-item-description-sell">
+                  <h2 class="product-display-item-description-sell__price">${numberWithCommas(value.price)} đ</h2>
+                  <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+        `;
+        $displayProductsContainer.html(
+          function (index,currentContent){
+            return currentContent + productItem;
+          }
+        )
+      })
+    }
+  }
+  updateProduct();
 });
