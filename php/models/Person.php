@@ -18,5 +18,11 @@
     public function setPhone($phone){
       $this->phone = $phone;
     }
+    public function toArray(){
+      return array(
+        "id" => $this->getName(),
+        "phone" => $this->getPhone()
+      );
+    }
   }
 ?>

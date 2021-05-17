@@ -28,5 +28,14 @@
     public function setAddress($address){
       $this->address = $address;
     }
+    public function toArray(){
+      return array(
+        "id" => $this->getId(),
+        "name" => parent::getName(),
+        "position" => $this->getPosition(),
+        "address" => $this->getAddress(),
+        "phone" => parent::getPhone()
+      );
+    }
   }
 ?>

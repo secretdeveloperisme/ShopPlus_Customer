@@ -53,5 +53,14 @@
     {
       $this->discount = $discount;
     }
+    public function toArray(){
+      return array(
+        "orderId" =>$this->getOrderId(),
+        "idMerchandise" =>$this->getIdMerchandise(),
+        "amount" =>$this->getAmount(),
+        "oderPrice" =>$this->getOderPrice(),
+        "discount" =>$this->getDiscount()
+      );
+    }
   }
 ?>

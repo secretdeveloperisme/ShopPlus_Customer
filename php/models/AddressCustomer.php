@@ -36,5 +36,12 @@ class AddressCustomer
   {
     $this->customerId = $customerId;
   }
+  public function toArray(){
+    return array(
+      "addressId" => $this->getAddressId(),
+      "addressText" => $this->getAddressText(),
+      "customerId" => $this->getCustomerId()
+    );
+  }
 }
 ?>

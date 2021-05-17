@@ -63,5 +63,16 @@
     {
       $this->status = $status;
     }
+    public function toArray(){
+      return array(
+        "id" => $this->getId,
+        "idCustomer" => $this->getIdCustomer(),
+        "idStaff" => $this->getIdStaff(),
+        "orderDate" => $this->getOrderDate(),
+        "deliverDate" => $this->getDeliverDate(),
+        "status" => $this->getStatus()
+      );
+    }
   }
+
 ?>

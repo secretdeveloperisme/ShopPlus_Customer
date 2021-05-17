@@ -28,5 +28,14 @@
     public function setEmail($email){
       $this->email = $email;
     }
+    public function toArray(){
+      return array(
+        "id" => $this->getId(),
+        "name" => parent::getName(),
+        "phone" =>$this->getName(),
+        "phone" => $this->getPhone(),
+        "email" => $this->getEmail()
+      );
+    }
   }
 ?>

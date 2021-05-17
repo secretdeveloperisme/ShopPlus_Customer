@@ -1,3 +1,13 @@
+<?php
+  include("../php/Controller/HandleProduct.php");
+  if(isset($_GET["id"])&&!empty($_GET["id"])){
+    $idProduct = $_GET["id"];
+    if(IsExistProduct($idProduct)){
+      
+    }
+    
+  }
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>

@@ -73,11 +73,12 @@ $(function(){
     $.ajax({
       type: "GET",
       async : false,
-      url: "php/Controller/HandleProduct.php?action=getAllProduct",
+      url: "php/Controller/HandleProductAPI.php?action=getAllProduct",
       data: "",
       dataType: "text",
       success: function (response) {
         products = JSON.parse(response);
+       
       }
     });
     if(products.length != 0){

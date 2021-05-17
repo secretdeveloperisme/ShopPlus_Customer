@@ -26,5 +26,11 @@ class Category
   {
     $this->name = $name;
   }
+  public function toArray(){
+    return array(
+      "id" => $this->getId(),
+      "name" => $this->getName()
+    );
+  }
 }
 ?>
