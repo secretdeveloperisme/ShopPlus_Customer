@@ -247,6 +247,8 @@
   color: white;
   font-size: 1.6rem;
   margin: 0;
+  text-align: center;
+  text-wrap: none ;
 }
 .nav-user-dropdown-icon{
   font-size: 3rem;
@@ -324,7 +326,7 @@
 
 .nav-cart-quantities{
   position: absolute;
-  top: -2px;
+  top: calc(10%);
   right: -7px;
   font-size: 2rem;
   height: 20px;

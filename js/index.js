@@ -112,4 +112,6 @@ $(function(){
     
   }
   updateProduct();
+  ///handle cart user
+  updateNavUser();
 });
