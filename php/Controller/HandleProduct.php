@@ -33,10 +33,11 @@
                                     "SELECT MSHH,TENHH,
                                     LOCATION,QUYCACH,
                                     GIA,SOLUONGHANG,
-                                    MALOAIHANG,GHICHU FROM HANGHOA WHERE MSHH = $id");
-    if(($result->num_rows) > 0){
+                                    MALOAIHANG,GHICHU
+                                     FROM hanghoa WHERE MSHH= $id");
+    if($result->num_rows > 0){
       $row = $result->fetch_assoc();
-      new Merchandise(
+      return new Merchandise(
         $row["MSHH"],
         $row['TENHH'],$row["LOCATION"],
         $row["QUYCACH"],$row["GIA"],$row["SOLUONGHANG"],
@@ -46,5 +47,18 @@
     else 
       return null;
   }
-  
+  function getCategoryWithIdProduct($id)
+  {
+    $result = $GLOBALS["connect"]->query("
+        SELECT TENLOAIHANG FROM LOAIHANGHOA
+        INNER JOIN HANGHOA ON LOAIHANGHOA.MALOAIHANG = HANGHOA.MALOAIHANG
+        WHERE MSHH = $id
+    ");
+    if ($result->num_rows > 0) {
+      $row = $result->fetch_assoc();
+      return $row["TENLOAIHANG"];
+    }
+    else
+      return "Không có loại hàng";
+  }
 ?>

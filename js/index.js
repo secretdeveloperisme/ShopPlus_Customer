@@ -1,8 +1,4 @@
 $(function(){
-  // base function
-  function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
   //render slideshow
   let $slideshow = $(".container-shop-app-ad__slideshow");
   let $slides = $(".container-shop-app__slides");
@@ -80,7 +76,7 @@ $(function(){
           products.forEach(function(value,index){
             let productItem = `
             <div class="shop-app-product-display-item col-xl-2 col-es-6">
-            <a href="#">
+            <a href="ProductDetail/product_detail.php?id=${value.id}">
               <div class="product-display-item-container">
                 <div class="product-display-container-box-shadow">
                   <div class="product-display-item__img" style="background-image: url('${value.location}');"></div>
