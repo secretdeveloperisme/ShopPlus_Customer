@@ -3,54 +3,28 @@ $(function(){
   let $navUserName = $(".nav-user-info__username");
   //customer handle
   let customer = null;
-  let updateLocalCustomer = () =>{
-    customer = JSON.parse(localStorage.getItem("customer"));
-  }
-  function hasCustomer(){
-    return customer != null;
-  }
   let customerDB = null;
-  function getCustomerFromDB(email){
-    customerDB ={"name":"Nguyễn Hoàng Linh","phone":"0354882574","email":"linh072217@gmail.com","address":"Cần Thơ","company":""};
-  }
-  function hasCustomerFormDB(email){
-    return false;
-  }
-  updateLocalCustomer();
-  function updateNavUserName(){
-    if(customer == null){
-      $navUserName.text("Guest")
-    }
-    else{
-      $navUserName.text(customer.name);
-    }
-  }
-  updateNavUserName();
+  customer = getLocalCustomer();
+  updateNavUser(customer);
   //render product items
   let $listProducts = $(".shop-app-cart-product-item");
-  products =[
-    {
-      id : 1,
-      name : "Lược Sử Loài Người",
-      urlProduct : "/assets/images/products/1f934d3ae7dba14ba9a0636b878b5a88_tn.jfif",
-      price : 1,
-      number : 1
-    },
-    {
-      id : 2,
-      name : "USB Máy Tính",
-      urlProduct : "/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif",
-      price : 2,
-      number : 2
-    },
-    {
-      id : 3,
-      name : "Lược Sử Loài Người",
-      urlProduct : "/assets/images/products/f9523e45a1a8a80b76f2eec49eeffe3c_tn.jfif",
-      price : 3,
-      number : 3
-    }
-  ];
+  let productsJson = window.localStorage.getItem("listCartProduct");
+  let products = JSON.parse(productsJson);
+  products = products.map(function (value) {
+    let product;
+    $.ajax({
+      url : "/ShopPlus_Customer/php/Controller/API/HandleProductAPI.php?action=getProductViaId&id="+value.id,
+      type: "GET",
+      async : false,
+      dataType : "text",
+      success :function (response){
+       product = JSON.parse(response);
+       product.number = value.amount;
+      }
+    })
+    return product;
+  });
+  console.log(products);
   // valid product to submit payment
    isValidProduct = ()=>{
     if(products.length < 1){
@@ -75,7 +49,7 @@ $(function(){
       <li class="shop-app-cart-product-item" index="product${index}">
             <div class="shop-app-cart-product-item-image">
               <a href="#">
-                <div class="shop-app-cart-product-item__image" style="background-image: url(${value.urlProduct});">
+                <div class="shop-app-cart-product-item__image" style="background-image: url(${value.location});">
                 </div>
               </a>
             </div>
@@ -85,7 +59,7 @@ $(function(){
                   ${value.name}
                 </a>
                 <div class="cart-item-content-desc__price">
-                  <span>${value.price}</span> đ
+                  <span>${numberWithCommas(value.price)}</span> đ
                 </div>
                 <div class="cart-item-content-desc-action">
                   <button class="btn">Xóa</button>
@@ -138,29 +112,29 @@ $(function(){
       $minusNumber.click(function (e) { 
         if(!($numberOfPurchase.val() == 0)){
           $numberOfPurchase.val(parseInt($numberOfPurchase.val())-1);
-          calculateTotal();
           products[index].number = (products[index].number - 1)
+          calculateTotal();
         }
          
       });
       $plusNumber.click(function (e) { 
         if($numberOfPurchase.val() < 999){
           $numberOfPurchase.val(parseInt($numberOfPurchase.val())+1);
-          calculateTotal();
           products[index].number = (products[index].number + 1)
+          calculateTotal();
         }
       });
     });
   }
   function calculateTotal(){
     let totalPrice = 0;
-    $listProducts.each(function(index,element){
-      let price = $(element).find(".cart-item-content-desc__price > span").text();
-      let amount = $(element).find(".cart-item-content__input").val();
+    products.forEach(function(element,index){
+      let price = element.price;
+      let amount = element.number;
       if(amount == "")
         amount = 0;
       totalPrice += parseFloat(price)*parseInt(amount);
-      $totalView.text(totalPrice.toFixed(3));
+      $totalView.text(numberWithCommas(totalPrice));
     })
     if(products.length == 0){
       $totalView.text(0)
@@ -177,7 +151,7 @@ $(function(){
   let storage = window.localStorage;
   let $orderForm = $("#orderForm");
   $orderForm.submit(function(event){
-    if(!hasCustomer()){
+    if(!hasCustomer(customer)){
       $modal.fadeIn().css("display","flex");
       return false;
     }
@@ -280,6 +254,5 @@ $(function(){
       type : "success",
       duration : 5000
     });
-
-  }); 
+  });
 })
