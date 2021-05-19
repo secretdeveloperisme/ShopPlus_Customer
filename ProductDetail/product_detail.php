@@ -1,9 +1,12 @@
 <?php
   include("../php/Controller/HandleProduct.php");
   if(isset($_GET["id"])&&!empty($_GET["id"])){
+    $isValidProduct = 0;
     $idProduct = $_GET["id"];
     if(IsExistProduct($idProduct)){
-      
+      if($merchandise = getProductViaID($idProduct)){
+        $isValidProduct=1; 
+      }
     }
     
   }
@@ -31,6 +34,7 @@
   <script src="../js/ProductDetail.js"></script>
 </head>
 <body>
+  <div id="toast"></div>
   <div class="shop-app">
     <div class="shop-app-header">
       <div class="nav">
@@ -363,4 +367,4 @@
     </div>
   </div>
 </body>
-  
+</html>

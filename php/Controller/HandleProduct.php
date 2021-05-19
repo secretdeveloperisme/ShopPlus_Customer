@@ -1,7 +1,7 @@
 <?php
-  $path = $_SERVER['DOCUMENT_ROOT'];
-  $path .= "/ShopPlus_Customer/php/ConnectDB.php";
-  include($path);
+  $rootPath = $_SERVER['DOCUMENT_ROOT'];
+  include($rootPath."/ShopPlus_Customer/php/models/Merchandise.php");
+  include($rootPath."/ShopPlus_Customer/php/ConnectDB.php");
   global $connect ;
   $connect = connectDB();
   function getAllProductWithLimit($begin,$end){
@@ -29,7 +29,22 @@
       return false;
   }
   function getProductViaID($id){
-    
+    $result = $GLOBALS["connect"]->query(
+                                    "SELECT MSHH,TENHH,
+                                    LOCATION,QUYCACH,
+                                    GIA,SOLUONGHANG,
+                                    MALOAIHANG,GHICHU FROM HANGHOA WHERE MSHH = $id");
+    if(($result->num_rows) > 0){
+      $row = $result->fetch_assoc();
+      new Merchandise(
+        $row["MSHH"],
+        $row['TENHH'],$row["LOCATION"],
+        $row["QUYCACH"],$row["GIA"],$row["SOLUONGHANG"],
+        $row["MALOAIHANG"],$row["GHICHU"]
+      );
+    }  
+    else 
+      return null;
   }
   
 ?>

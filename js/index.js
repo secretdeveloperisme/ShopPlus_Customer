@@ -69,50 +69,51 @@ $(function(){
   // render products
   let $displayProductsContainer = $(".shop-app-product-display");
   function updateProduct(){
-    let products = [];
+     let products = [];
     $.ajax({
       type: "GET",
-      async : false,
-      url: "php/Controller/HandleProductAPI.php?action=getAllProduct",
-      data: "",
+      url: "php/Controller/API/HandleProductAPI.php?action=getAllProduct",
       dataType: "text",
       success: function (response) {
         products = JSON.parse(response);
-       
+        if(products.length != 0){
+          products.forEach(function(value,index){
+            let productItem = `
+            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <a href="#">
+              <div class="product-display-item-container">
+                <div class="product-display-container-box-shadow">
+                  <div class="product-display-item__img" style="background-image: url('${value.location}');"></div>
+                  <div class="product-display-item__favorite">
+                    Yêu thích
+                  </div>
+                  <div class="product-display-item-description">
+                    <div class="product-display-item-description__name">
+                      ${value.name}
+                    </div>
+                    <div class="product-display-item-description-sell">
+                      <h2 class="product-display-item-description-sell__price">${numberWithCommas(value.price)} đ</h2>
+                      <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+            `;
+            $displayProductsContainer.html(
+              function (index,currentContent){
+                return currentContent + productItem;
+              }
+            )
+          })
+        }
+      },
+      error : function(xhr,textStatus,errorThrow){
+        toast({title: "Error",message: "There are some wrong with SERVER",type:"error",duration: 5000})
       }
     });
-    if(products.length != 0){
-      products.forEach(function(value,index){
-        let productItem = `
-        <div class="shop-app-product-display-item col-xl-2 col-es-6">
-        <a href="#">
-          <div class="product-display-item-container">
-            <div class="product-display-container-box-shadow">
-              <div class="product-display-item__img" style="background-image: url('${value.location}');"></div>
-              <div class="product-display-item__favorite">
-                Yêu thích
-              </div>
-              <div class="product-display-item-description">
-                <div class="product-display-item-description__name">
-                  ${value.name}
-                </div>
-                <div class="product-display-item-description-sell">
-                  <h2 class="product-display-item-description-sell__price">${numberWithCommas(value.price)} đ</h2>
-                  <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-        `;
-        $displayProductsContainer.html(
-          function (index,currentContent){
-            return currentContent + productItem;
-          }
-        )
-      })
-    }
+    
   }
   updateProduct();
 });
