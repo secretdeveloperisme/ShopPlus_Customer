@@ -3,18 +3,20 @@
     private $id;
     private $name;
     private $location;
+    private $amount;
     private $unit;
     private $price;
     private $categoryId;
     private $note;
-    public function __construct($id,$name,$location,$unit,$price,$categoryId,$note){
+    public function __construct($id,$name,$location,$unit,$price,$amount,$categoryId,$note){
       $this->id = $id;
       $this->name = $name;
       $this-> location = $location;
       $this->unit = $unit;
       $this->price = $price;
       $this->categoryId = $categoryId;
-      $this->note = $note; 
+      $this->note = $note;
+      $this->amount = $amount;
     }
   public function getId(){
     return $this->id;
@@ -66,6 +68,21 @@
   {
       $this->note = $note;
   }
+
+    /**
+     * @return mixed
+     */
+    public function getAmount()
+    {
+      return $this->amount;
+    }
+    public function setAmount($amount): void
+    {
+      $this->amount = $amount;
+    }
+  public function getPriceWithComma(){
+      return preg_replace("/\B(?=(\d{3})+(?!\d))/",",",$this->getPrice());
+  }
   public function toArray(){
     return array(
       "id"=>$this->id,
@@ -73,6 +90,7 @@
       "location"=>$this->location,
       "unit"=>$this->unit,
       "price"=>$this->price,
+      "amount"=>$this->amount,
       "categoryId"=>$this->categoryId,
       "note"=>$this->note);
   }
