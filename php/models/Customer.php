@@ -2,12 +2,12 @@
   require("Person.php");
   class Customer extends Person{
     private $id;
-    private $nameCompany;
+    private $companyName;
     private $email;
-    function __construct($id,$name,$nameCompany,$phone,$email){
+    function __construct($id,$name,$companyName,$phone,$email){
       parent::__construct($name,$phone);
       $this->id = $id;
-      $this->nameCompany = $nameCompany;
+      $this->companyName = $companyName;
       $this->email = $email;
     }
     public function getId(){
@@ -16,11 +16,11 @@
     public function setId($id){
       $this->id = $id;
     }
-    public function getNameCompany(){
-      return $this->nameCompany;
+    public function getCompanyName(){
+      return $this->companyName;
     }
     public function setNameCompany($nameCompany){
-      $this->nameCompany = $nameCompany;
+      $this->companyName = $nameCompany;
     }
     public function getEmail(){
       return $this->email;
@@ -32,8 +32,8 @@
       return array(
         "id" => $this->getId(),
         "name" => parent::getName(),
-        "phone" =>$this->getName(),
-        "phone" => $this->getPhone(),
+        "companyName" => $this->getCompanyName(),
+        "phone" => parent::getPhone(),
         "email" => $this->getEmail()
       );
     }
