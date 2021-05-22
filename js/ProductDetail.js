@@ -1,4 +1,5 @@
 $(function(){
+  updateNavUser();
   const $minusNumber = $("#minusNumber");
   const $plusNumber = $("#plusNumber");
   const $numberOfPurchase = $("#numberOfPurchase");

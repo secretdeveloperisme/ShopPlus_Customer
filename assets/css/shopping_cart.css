@@ -206,6 +206,7 @@
 }
 .shop-app-cart-product-total-price-money{
   color: red;
+  font-weight: 700;
 }
 .shop-app-cart-product-total-price__submit{
   width: 100%;

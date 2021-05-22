@@ -26,7 +26,9 @@
           <link rel="stylesheet" href="../assets/css/navbar.css">
           <link rel="stylesheet" href="../assets/css/Product-Detail.css">
           <link rel="stylesheet" href="../assets/css/footer.css">
+          <script src="../js/base.js"></script>
           <script src="js/navbar.js"></script>
+          <script src="../js/Controller/handleCart.js" ></script>
           <script src="../js/ProductDetail.js"></script>
         </head>
         <body>
@@ -204,9 +206,9 @@
                   </div>
                   <div class="nav-user-dropdown-content dropdown-content">
                     <ul class="nav-user-dropdown-content-list">
-                      <li class="nav-user-dropdown-content-item"><a href="#">Đơn hàng của tôi</a></li>
-                      <li class="nav-user-dropdown-content-item"><a href="#">Thông Tin Của tôi</a></li>
-                      <li class="nav-user-dropdown-content-item"><a href="#">Xóa Thông Tin Của Tôi</a></li>
+                      <li class="nav-user-dropdown-content-item" id="myOrder"><a href="#">Đơn hàng của tôi</a></li>
+                      <li class="nav-user-dropdown-content-item" id="myInfo"><a href="#">Thông Tin Của tôi</a></li>
+                      <li class="nav-user-dropdown-content-item" id="deleteMyInfo"><a href="#">Xóa Thông Tin Của Tôi</a></li>
                     </ul>
                   </div>
                 </div>
@@ -227,29 +229,8 @@
                   <div class="nav-cart-dropdown-content dropdown-content">
                     <h2 class="nav-cart-dropdown-content-label">Sản Phẩm mới thêm</h2>
                     <ul class="nav-cart-dropdown-content-list">
-                      <li class="nav-cart-dropdown-content-item">
-                        <a href="#">
-                          <div class="nav-cart-dropdown-content-item__img" style="background-image: url();"></div>
-                          <div class="nav-cart-dropdown-content-item__name">Sách - 30 Chủ Đề Từ Vựng Tiếng Anh (Bộ 2 quyển, lẻ tùy chọn)</div>
-                          <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
-                        </a>
-                      </li>
-                      <li class="nav-cart-dropdown-content-item">
-                        <a href="#">
-                          <div class="nav-cart-dropdown-content-item__img" style="background-image: url();"></div>
-                          <div class="nav-cart-dropdown-content-item__name">USB 256/512GB 3.0 tốc độ truyền dữ liệu cực nhanh kiểu dáng sang trọng</div>
-                          <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
-                        </a>
-                      </li>
-                      <li class="nav-cart-dropdown-content-item">
-                        <a href="#">
-                          <div class="nav-cart-dropdown-content-item__img" style="background-image: url();"></div>
-                          <div class="nav-cart-dropdown-content-item__name">[Mã LIFE5510K giảm 10K đơn 20K] Sách - Không Phải Chưa Đủ Năng Lực, Mà Là Chưa Đủ Kiên Định</div>
-                          <div class="nav-cart-dropdown-content-item__price">99,000 đ</div>
-                        </a>
-                      </li>
                     </ul>
-                    <a href="#" class="nav-cart-dropdown-content-btn">Xem Giỏ Hàng</a>
+                    <a href="../checkout/shopping_cart/shopping_cart.html" class="nav-cart-dropdown-content-btn">Xem Giỏ Hàng</a>
                   </div>
                 </div>
               </div>

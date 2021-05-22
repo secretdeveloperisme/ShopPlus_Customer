@@ -7,6 +7,10 @@ $(function(){
   customer = getLocalCustomer();
   updateNavUser(customer);
   //render product items
+  function updateLocalProducts(products){
+    console.log(products)
+    window.localStorage.setItem("listCartProduct",JSON.stringify(products));
+  }
   let $listProducts = $(".shop-app-cart-product-item");
   let productsJson = window.localStorage.getItem("listCartProduct");
   let products = JSON.parse(productsJson);
@@ -19,12 +23,12 @@ $(function(){
       dataType : "text",
       success :function (response){
        product = JSON.parse(response);
-       product.number = value.amount;
+       product.number = value.number;
       }
     })
     return product;
   });
-  console.log(products);
+  console.log(products)
   // valid product to submit payment
    isValidProduct = ()=>{
     if(products.length < 1){
@@ -97,12 +101,23 @@ $(function(){
       let $deleteProduct = $(element).find(".cart-item-content-desc-action button")
       $deleteProduct.click(function(){
         deleteProduct(index);
+        updateLocalProducts(products);
         render();
       })
       let regexNumber = /^(\d|(Backspace))$/;
       $numberOfPurchase.on("input",function(){
-        calculateTotal();
-        products[index].number =Number.parseInt($(this).val());
+        if($(this).val()== ""){
+          products[index].number = 0;
+          console.log(products)
+          updateLocalProducts(products);
+        }
+        else{
+          products[index].number =Number.parseInt($(this).val());
+          updateLocalProducts(products);
+          console.log(products)
+          calculateTotal();
+        }
+        
       })
       $numberOfPurchase.keydown(function (event) { 
         if(!regexNumber.test(event.key)){
@@ -112,7 +127,8 @@ $(function(){
       $minusNumber.click(function (e) { 
         if(!($numberOfPurchase.val() == 0)){
           $numberOfPurchase.val(parseInt($numberOfPurchase.val())-1);
-          products[index].number = (products[index].number - 1)
+          products[index].number = (products[index].number - 1);
+          updateLocalProducts(products);
           calculateTotal();
         }
          
@@ -120,7 +136,8 @@ $(function(){
       $plusNumber.click(function (e) { 
         if($numberOfPurchase.val() < 999){
           $numberOfPurchase.val(parseInt($numberOfPurchase.val())+1);
-          products[index].number = (products[index].number + 1)
+          products[index].number = (products[index].number + 1);
+          updateLocalProducts(products);
           calculateTotal();
         }
       });
