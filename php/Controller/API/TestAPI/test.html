@@ -1,0 +1,12 @@
+<script>
+  let xmlHTTP = new XMLHttpRequest();
+  xmlHTTP.open("POST","../HandleCustomerAPI.php");
+  xmlHTTP.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+  xmlHTTP.onreadystatechange = function(){
+    if(this.readyState === 4 && this.status === 200) {
+      console.log(this.responseText);
+    }
+  }
+
+  xmlHTTP.send("action=updateCustomer&id=1&name=abc&phone=0125478955&companyName=hlp&email=abc123@gmail.com");
+</script>
