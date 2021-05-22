@@ -55,6 +55,7 @@ function getCustomerFromDB(email){
   return customerDB;
 }
 function hasCustomerFormDB(email){
+
   return false;
 }
 function updateNavUserName(customer){
@@ -76,8 +77,8 @@ function updateNavUser(){
   }
   else
   {
-    $("#myOrder > a").attr("href","/ShopPlus_Customer/customer/information/info.html")
-    $("#myInfo > a").attr("href","/ShopPlus_Customer/customer/information/info.html")
-    $("#deleteMyInfo > a").attr("href","/ShopPlus_Customer/customer/information/info.html")
+    $("#myOrder > a").attr("href","/ShopPlus_Customer/customer/info.html")
+    $("#myInfo > a").attr("href","/ShopPlus_Customer/customer/info.html")
+    $("#deleteMyInfo > a").attr("href","/ShopPlus_Customer/customer//info.html")
   }
 }
