@@ -244,10 +244,10 @@
             </div>
             <div class="shop-app-product">
               <div class="shop-app-product-detail-image-wrap">
-                <div class="shop-app-product-detail-image-wrap-img" style="background-image: url({$merchandise->getLocation()});">
+                <div class="shop-app-product-detail-image-wrap-img" style="background-image: url('{$merchandise->getLocation()}');">
                 </div>
               </div>
-              <div class="shop-app-product-sell">
+              <div class="shop-app-product-sell" id="productItem" productId="{$merchandise->getId()}">
                 <h1 class="shop-app-product-sell__name">
                   {$merchandise->getName()}
                 </h1>
@@ -276,11 +276,11 @@
                   </div>
                 </div>
                 <div class="shop-app-product-sell-buttons">
-                  <button class="shop-app-product-sell-buttons-cart btn">
+                  <button class="shop-app-product-sell-buttons-cart btn" id="btnAddCart">
                     <i class="fas fa-cart-plus"></i>
                     <span>Thêm Vào Giỏ Hàng</span>
                   </button>
-                  <button class="shop-app-product-sell-buttons-buy btn">
+                  <button class="shop-app-product-sell-buttons-buy btn" id="btnPurchase">
                     <span>Mua Ngay</span>
                   </button>
                 </div>
