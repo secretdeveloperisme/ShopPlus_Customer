@@ -3,12 +3,10 @@ $(function(){
   let $navUserName = $(".nav-user-info__username");
   //customer handle
   let customer = null;
-  let customerDB = null;
   customer = getLocalCustomer();
   updateNavUser(customer);
   //render product items
   function updateLocalProducts(products){
-    console.log(products)
     window.localStorage.setItem("listCartProduct",JSON.stringify(products));
   }
   let $listProducts = $(".shop-app-cart-product-item");
@@ -28,9 +26,8 @@ $(function(){
     })
     return product;
   });
-  console.log(products)
   // valid product to submit payment
-   isValidProduct = ()=>{
+  let isValidProduct = ()=>{
     if(products.length < 1){
       return false;
     }
@@ -41,7 +38,7 @@ $(function(){
   }
   function updateNumberOfProduct(){
     $numberOfPProduct.text($listProducts.length);
-  };
+  }
   let $listProductContainer = $(".shop-app-cart-product-list");
   const $totalView =  $("#totalPrice");
   let $numberOfPProduct = $("#numberOfProduct");
@@ -53,7 +50,7 @@ $(function(){
       <li class="shop-app-cart-product-item" index="product${index}">
             <div class="shop-app-cart-product-item-image">
               <a href="#">
-                <div class="shop-app-cart-product-item__image" style="background-image: url(${value.location});">
+                <div class="shop-app-cart-product-item__image" style="background-image: url('${value.location}');">
                 </div>
               </a>
             </div>
@@ -106,7 +103,7 @@ $(function(){
       })
       let regexNumber = /^(\d|(Backspace))$/;
       $numberOfPurchase.on("input",function(){
-        if($(this).val()== ""){
+        if($(this).val()=== ""){
           products[index].number = 0;
           console.log(products)
           updateLocalProducts(products);
@@ -197,10 +194,12 @@ $(function(){
       $inputUserEmail.next().css("display","flex")
     }
     else{
+     updateLocalCustomer(getCustomerFromDB($emailCustomer.val()));
+     customer = getLocalCustomer();
+     updateNavUser();
       $modal.fadeOut();
     }
   })
-
   //add event input customer information
   let $btnSubmitInfo = $(".input-user-info__btn-submit");
   let $nameCustomer =$("#nameCustomer");
@@ -259,17 +258,30 @@ $(function(){
       phone : $phoneCustomer.val(),
       email : $emailCustomer.val(),
       address : $addressCustomer.val(),
-      company : $companyCustomer.val(),
+      companyName : $companyCustomer.val(),
     }
-    storage.setItem("customer",JSON.stringify(customer));
-    updateLocalCustomer();
-    updateNavUserName();
-    $modal.fadeOut();
-    toast({
-      title : "Thành Công",
-      message : "Bạn đã điền thông tin thành công",
-      type : "success",
-      duration : 5000
-    });
+    let resultInsertObject =  insertCustomerIntoDB(customer);
+    console.log(resultInsertObject);
+    if(resultInsertObject.status == "success"){
+      toast({
+        title : "Thành công",
+        message : resultInsertObject.msg,
+        type : "success",
+        duration : 5000
+      });
+      updateLocalCustomer(getCustomerFromDB(customer.email));
+      customer = getLocalCustomer();
+      updateNavUserName();
+      $modal.fadeOut();
+    }
+    else{
+      toast({
+        title : "Thất Bại",
+        message : resultInsertObject.msg,
+        type : "error",
+        duration : 5000
+      });
+    }
+
   });
 })
