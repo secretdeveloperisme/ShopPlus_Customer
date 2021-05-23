@@ -3,7 +3,7 @@ $(()=>{
   updateCartList();
 })
 function updateCartList(){
-  $navCart = $(".nav-cart");
+  let $navCart = $(".nav-cart");
   let $cartList = $(".nav-cart-dropdown-content-list");
   $cartList.html("");
   let localCartProductsString = window.localStorage.getItem("listCartProduct");
@@ -20,7 +20,7 @@ function updateCartList(){
           let itemCartView =`
               <li class="nav-cart-dropdown-content-item">
                 <a href="/ShopPlus_Customer/ProductDetail/product_detail.php?id= ${product.id}">
-                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url(${product.location});"></div>
+                  <div class="nav-cart-dropdown-content-item__img" style="background-image: url('${product.location}');"></div>
                   <div class="nav-cart-dropdown-content-item__name">${product.name}</div>
                   <div class="nav-cart-dropdown-content-item__price">${numberWithCommas(product.price)} đ</div>
                 </a>
@@ -43,9 +43,8 @@ function isExistCartProduct(id,localCartProducts){
     if(product.id == id){
       return true;
     }
-    else
-      return false;
   }
+  return false;
 }
 function insertCartProduct(id,number){
   let localCartProductsString = window.localStorage.getItem("listCartProduct");
@@ -53,9 +52,9 @@ function insertCartProduct(id,number){
     let localCartProducts = JSON.parse(localCartProductsString);
     if(isExistCartProduct(id,localCartProducts)){
       let index = localCartProducts.findIndex(function (value) {
-        return (value.id === id);
+        return value.id == id;
       })
-      localCartProducts[index].number = localCartProducts[index].number+  number;
+      localCartProducts[index].number = localCartProducts[index].number+number;
       updateLocalCart(localCartProducts);
     }
     else{
