@@ -162,9 +162,8 @@ $(function(){
     $modal.fadeOut();
   });
   // add event order Button
-  let storage = window.localStorage;
-  let $orderForm = $("#orderForm");
-  $orderForm.submit(function(event){
+  let $btnOrder = $("#btnOrder");
+  $btnOrder.click(function(event){
     if(!hasCustomer(customer)){
       $modal.fadeIn().css("display","flex");
       return false;
@@ -173,6 +172,7 @@ $(function(){
       showToast("Phải có ít nhất 1 sản phẩm  và số lượng là 1");
       return false;
     }
+    window.location.href = "/ShopPlus_Customer/checkout/payment/payment.html";
   });
   //add event login or sign up account customer
   let $inputUserEmail =  $(".input-user-email");

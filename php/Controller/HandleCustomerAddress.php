@@ -20,6 +20,10 @@
       return false;
     }
   }
+  function updateCustomerAddress($id,$address){
+    $result = $GLOBALS["connect"]->query("UPDATE DIACHIKH SET DIACHI = '$address' WHERE MADC = $id");
+    return $result;
+  }
   function getCustomerAddresses($id){
     $addresses = array();
     $result = $GLOBALS["connect"]->query("SELECT MADC,DIACHI,MSKH FROM DIACHIKH WHERE MSKH = $id");
@@ -30,5 +34,18 @@
       }
     }
     echo json_encode($addresses);
+  }
+  function getPrimaryCustomerAddress($idCustomer){
+    $addresses = array();
+    $result = $GLOBALS["connect"]->query("SELECT MADC,DIACHI,MSKH FROM DIACHIKH WHERE MSKH = $idCustomer");
+    if($result->num_rows > 0){
+      while($row = $result->fetch_assoc()){
+        $address = new AddressCustomer("0",$row["DIACHI"],$row["MSKH"]);
+        array_push($addresses ,$address->toArray());
+      }
+      return $addresses[0];
+    }
+    else
+      return array("address"=>"Không Địa chỉ");
   }
 ?>

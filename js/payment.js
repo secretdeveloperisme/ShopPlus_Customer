@@ -95,7 +95,19 @@ $(function(){
     let customer = getLocalCustomer();
     $customerName.text(customer.name);
     $customerPhone.text(customer.phone);
-    $customerAddress.text(customer.address)
+    $.ajax({
+      type: "GET",
+      url: "/ShopPlus_Customer/php/Controller/API/HandleCustomerAddressAPI.php",
+      dataType: "text",
+      data: {
+        action : "getPrimaryCustomerAddress",
+        idCustomer : customer.id
+      },
+      success: function (response) {
+        let address = JSON.parse(response).addressText;
+        $customerAddress.text(address)
+      }
+    });
   }
   renderCustomerInFo();
   renderProductList();
