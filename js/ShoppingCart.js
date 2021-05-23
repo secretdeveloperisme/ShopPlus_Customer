@@ -145,12 +145,12 @@ $(function(){
     products.forEach(function(element,index){
       let price = element.price;
       let amount = element.number;
-      if(amount == "")
+      if(amount === "")
         amount = 0;
       totalPrice += parseFloat(price)*parseInt(amount);
       $totalView.text(numberWithCommas(totalPrice));
     })
-    if(products.length == 0){
+    if(products.length === 0){
       $totalView.text(0)
     }
   }

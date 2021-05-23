@@ -1,39 +1,35 @@
 $(function(){
   let $listProducts = $(".shop-app-payment-product-item");
-  let products =[
-    {
-      id : 1,
-      name : "Lược Sử Loài Người",
-      urlProduct : "/assets/images/products/1f934d3ae7dba14ba9a0636b878b5a88_tn.jfif",
-      price : 1,
-      number : 1
-    },
-    {
-      id : 2,
-      name : "USB Máy Tính",
-      urlProduct : "/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif",
-      price : 2,
-      number : 2
-    },
-    {
-      id : 3,
-      name : "Lược Sử Loài Người",
-      urlProduct : "/assets/images/products/f9523e45a1a8a80b76f2eec49eeffe3c_tn.jfif",
-      price : 3,
-      number : 3
-    },
-    {
-      id : 4,
-      name : "Lược Sử Loài Người",
-      urlProduct : "/assets/images/products/8881955f7ad0ffc82cb7ac90dd871bd6.jfif",
-      price : 15,
-      number : 9
-    },
-  ]
+  let $customerName = $("#customerName");
+  let $customerPhone = $("#customerPhoneNumber");
+  let $customerAddress = $("#customerAddress");
+  let productsJson = window.localStorage.getItem("listCartProduct");
+  let products = JSON.parse(productsJson);
+  products = products.map(function (value) {
+    let product;
+    $.ajax({
+      url : "/ShopPlus_Customer/php/Controller/API/HandleProductAPI.php?action=getProductViaId&id="+value.id,
+      type: "GET",
+      async : false,
+      dataType : "text",
+      success :function (response){
+        product = JSON.parse(response);
+        product.number = value.number;
+      }
+    })
+    return product;
+  });
+  // valid product to submit payment
+  let isValidProduct = ()=>{
+    if(products.length < 1){
+      return false;
+    }
+    return products.some(e=>e.number > 0);
+  }
   let $listProductContainer = $(".shop-app-payment-product-list");
   const $totalView =  $("#totalPrice");
   let $numberOfPProduct = $("#numberOfProduct");
-  function render() {
+  function renderProductList() {
     $listProductContainer.html("");
     products.forEach(function(value,index){
       let itemProductHTML = 
@@ -41,7 +37,7 @@ $(function(){
       <li class="shop-app-payment-product-item" index="product${index}">
             <div class="shop-app-payment-product-item-image">
               <a href="#">
-                <div class="shop-app-payment-product-item__image" style="background-image: url(${value.urlProduct});">
+                <div class="shop-app-payment-product-item__image" style="background-image: url('${value.location}');">
                 </div>
               </a>
             </div>
@@ -51,7 +47,7 @@ $(function(){
                   ${value.name}
                 </a>
                 <div class="payment-item-content-desc__price">
-                  <span>${value.price}</span> đ
+                  <span>${numberWithCommas(value.price)}</span> đ
                 </div>    
               </div>
               <div class="payment-item-content-amount">
@@ -63,9 +59,12 @@ $(function(){
             </div>
           </li>
       `;
-      $listProductContainer.html(function(i, originText){
-        return originText + itemProductHTML;
-      });
+      if(value.number != 0){
+        $listProductContainer.html(function(i, originText){
+          return originText + itemProductHTML;
+        });
+      }
+
     })
     $listProducts = $(".shop-app-payment-product-item");
     calculateTotal();
@@ -77,20 +76,27 @@ $(function(){
   }
   function calculateTotal(){
     let totalPrice = 0;
-    $listProducts.each(function(index,element){
-      let price = $(element).find(".payment-item-content-desc__price > span").text();
-      let amount = $(element).find(".payment-item-content__input").val();
-      if(amount == "")
+    products.forEach(function(value,index){
+      let price = value.price;
+      let amount = value.number;
+      if(amount === "")
         amount = 0;
-      totalPrice += parseFloat(price)*parseInt(amount);
-      $totalView.text(totalPrice.toFixed(3));
-    })
-    if(products.length == 0){
+      totalPrice += parseInt(price)*amount;
+      $totalView.text(numberWithCommas(totalPrice));
+    });
+    if(products.length === 0){
       $totalView.text(0)
     }
   }
   function updateNumberOfProduct(){
     $numberOfPProduct.text($listProducts.length);
   }
-  render();
-})
+  function renderCustomerInFo(){
+    let customer = getLocalCustomer();
+    $customerName.text(customer.name);
+    $customerPhone.text(customer.phone);
+    $customerAddress.text(customer.address)
+  }
+  renderCustomerInFo();
+  renderProductList();
+});

@@ -20,7 +20,7 @@
   }
   function isExistCustomer($email){
     $result = $GLOBALS["connect"]->query(
-      "SELECT MSKH FROM KHACHHANG WHERE EMAIL= '$email'"
+      "SELECT * FROM KHACHHANG WHERE EMAIL = '$email'"
     );
     if($result->num_rows > 0){
       return true;
@@ -67,6 +67,5 @@ function updateCustomer($customer){
     $GLOBALS["connect"]->close();
     return false;
   }
-
 }
 ?>

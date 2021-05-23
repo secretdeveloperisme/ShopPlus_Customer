@@ -24,6 +24,12 @@ $(function(){
   let $btnPurchase = $("#btnPurChase");
   $btnAddCart.click((event)=>{
     insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
+    toast({
+        title: "Thêm Thành Công",
+        message: "thêm sản phẩm vào giỏ hàng thành công, vui lòng check giỏ hàng ",
+        type: "success",
+        duration: 5000
+      });
     updateCartList();
   })
 })
