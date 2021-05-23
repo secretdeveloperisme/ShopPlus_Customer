@@ -18,4 +18,12 @@ $(function(){
     if($numberOfPurchase.val() < 999)
       $numberOfPurchase.val(parseInt($numberOfPurchase.val())+1)
   });
+  // add event for two button
+  let $productItem = $("#productItem");
+  let $btnAddCart = $("#btnAddCart");
+  let $btnPurchase = $("#btnPurChase");
+  $btnAddCart.click((event)=>{
+    insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
+    updateCartList();
+  })
 })
