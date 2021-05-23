@@ -43,20 +43,67 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 // handle Customer Information
-let getLocalCustomer = () =>{
-  customer = JSON.parse(localStorage.getItem("customer"));
-  return customer;
+function updateLocalCustomer(customer){
+  window.localStorage.setItem("customer",JSON.stringify(customer))
+}
+function getLocalCustomer(){
+  return JSON.parse(localStorage.getItem("customer"));
 }
 function hasCustomer(customer){
-  return customer != null;
+ return (customer != null)
 }
 function getCustomerFromDB(email){
-  customerDB ={"name":"Nguyễn Hoàng Linh","phone":"0354882574","email":"linh072217@gmail.com","address":"Cần Thơ","company":""};
-  return customerDB;
+  let resultObject = {};
+  $.ajax({
+    url : "/ShopPlus_Customer/php/Controller/API/HandleCustomerAPI.php",
+    data : {
+      action : "getCustomerViaEmail",
+      email : email,
+    },
+    async : false,
+    type : "GET",
+    success : (response)=>{
+      resultObject = JSON.parse(response);
+    }
+  });
+  return resultObject;
+}
+function insertCustomerIntoDB(customer){
+  let resultObject = {};
+  $.ajax({
+    url : "/ShopPlus_Customer/php/Controller/API/HandleCustomerAPI.php",
+    data : {
+      action : "insertCustomer",
+      name : customer.name,
+      companyName :customer.companyName,
+      phone : customer.phone,
+      email : customer.email
+    },
+    async : false,
+    type : "POST",
+    success : (response)=>{
+      resultObject = JSON.parse(response);
+    }
+  })
+  return resultObject;
 }
 function hasCustomerFormDB(email){
-
-  return false;
+  let isExist = false;
+  $.ajax(
+  {
+    url : "/ShopPlus_Customer/php/Controller/API/HandleCustomerAPI.php",
+    data : {
+      "action" : "isExistCustomer",
+      "email": email
+    },
+    async : false,
+    type : "GET",
+    success : (response)=>{
+      console.log(response)
+      isExist = JSON.parse(response);
+    }
+  })
+  return isExist;
 }
 function updateNavUserName(customer){
   let $navUserName = $(".nav-user-info__username");
