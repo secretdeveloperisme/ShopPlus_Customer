@@ -81,7 +81,7 @@ create table KHACHHANG
    HOTENKH              varchar(50) not null,
    TENCONGTY            varchar(50),
    SODIENTHOAI          varchar(11) not null,
-   EMAIL                varchar(70),
+   EMAIL                varchar(70) not null,
    primary key (MSKH)
 );
 
@@ -125,4 +125,4 @@ alter table DIACHIKH add constraint FK_DIACHIKH_KHACHHANG foreign key (MSKH)
 
 alter table HANGHOA add constraint FK_HOANGHOA_LOAIHANGHOA foreign key (MALOAIHANG)
       references LOAIHANGHOA (MALOAIHANG) on delete restrict on update restrict;
-
+alter table KHACHHANG add constraint U_KHACHHANG_EMAIL UNIQUE (EMAIL);
