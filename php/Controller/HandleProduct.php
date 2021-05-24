@@ -2,7 +2,7 @@
   $rootPath = $_SERVER['DOCUMENT_ROOT'];
   include($rootPath."/ShopPlus_Customer/php/models/Merchandise.php");
   include($rootPath."/ShopPlus_Customer/php/ConnectDB.php");
-  global $connect ;
+  global $connect;
   $connect = connectDB();
   function getAllProductWithLimit($begin,$end){
     $products = array();

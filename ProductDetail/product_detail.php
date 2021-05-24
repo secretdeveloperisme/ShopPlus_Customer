@@ -27,7 +27,6 @@
           <link rel="stylesheet" href="../assets/css/Product-Detail.css">
           <link rel="stylesheet" href="../assets/css/footer.css">
           <script src="../js/base.js"></script>
-          <script src="js/navbar.js"></script>
           <script src="../js/Controller/handleCart.js" ></script>
           <script src="../js/ProductDetail.js"></script>
         </head>

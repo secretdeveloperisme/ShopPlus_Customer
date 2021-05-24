@@ -2,7 +2,7 @@
   $rootPath = $_SERVER['DOCUMENT_ROOT'];
   include($rootPath."/ShopPlus_Customer/php/models/Customer.php");
   include($rootPath."/ShopPlus_Customer/php/ConnectDB.php");
-  global $connect ;
+  global $connect;
   $connect = connectDB();
   function getCustomerViaEmail($email){
     $result = $GLOBALS["connect"]->query(
@@ -45,7 +45,6 @@
       $GLOBALS["connect"]->close();
       return false;
     }
-
   }
 function updateCustomer($customer){
   $prepare = $GLOBALS["connect"]->prepare(
