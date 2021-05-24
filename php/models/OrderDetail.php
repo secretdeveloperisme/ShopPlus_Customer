@@ -3,14 +3,14 @@
     private $orderId;
     private $idMerchandise;
     private $amount;
-    private $oderPrice;
+    private $orderPrice;
     private $discount;
-    public function __construct($orderId, $idMerchandise, $amount, $oderPrice, $discount)
+    public function __construct($orderId, $idMerchandise, $amount, $orderPrice, $discount)
     {
       $this->orderId = $orderId;
       $this->idMerchandise = $idMerchandise;
       $this->amount = $amount;
-      $this->oderPrice = $oderPrice;
+      $this->orderPrice = $orderPrice;
       $this->discount = $discount;
     }
     public function getOrderId()
@@ -37,13 +37,13 @@
     {
       $this->amount = $amount;
     }
-    public function getOderPrice()
+    public function getOrderPrice()
     {
-      return $this->oderPrice;
+      return $this->orderPrice;
     }
-    public function setOderPrice($oderPrice)
+    public function setOrderPrice($oderPrice)
     {
-      $this->oderPrice = $oderPrice;
+      $this->orderPrice = $oderPrice;
     }
     public function getDiscount()
     {
