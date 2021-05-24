@@ -21,7 +21,7 @@ $(function(){
   // add event for two button
   let $productItem = $("#productItem");
   let $btnAddCart = $("#btnAddCart");
-  let $btnPurchase = $("#btnPurChase");
+  let $btnPurchase = $("#btnPurchase");
   $btnAddCart.click((event)=>{
     insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
     toast({
@@ -32,4 +32,8 @@ $(function(){
       });
     updateCartList();
   })
-})
+  $btnPurchase.click((event)=>{
+    insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
+    window.open("/ShopPlus_Customer/checkout/payment/payment.html","_parent");
+  })
+});
