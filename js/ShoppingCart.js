@@ -119,7 +119,12 @@ $(function(){
       $numberOfPurchase.keydown(function (event) { 
         if(!regexNumber.test(event.key)){
           event.preventDefault();
-        }     
+        }
+        if(event.key != "Backspace"){
+          let numberInput = $(this).val() + event.key;
+          if(parseInt(numberInput) > parseInt(products[index].amount))
+            event.preventDefault();
+        }
       });
       $minusNumber.click(function (e) { 
         if(!($numberOfPurchase.val() == 0)){
@@ -131,7 +136,7 @@ $(function(){
          
       });
       $plusNumber.click(function (e) { 
-        if($numberOfPurchase.val() < 999){
+        if($numberOfPurchase.val() < parseInt(products[index].amount)){
           $numberOfPurchase.val(parseInt($numberOfPurchase.val())+1);
           products[index].number = (products[index].number + 1);
           updateLocalProducts(products);

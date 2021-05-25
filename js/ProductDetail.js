@@ -4,18 +4,25 @@ $(function(){
   const $plusNumber = $("#plusNumber");
   const $numberOfPurchase = $("#numberOfPurchase");
   const regexNumber = /^(\d|(Backspace))$/;
-  $numberOfPurchase.keydown(function (event) { 
-    console.log(event);
+  const $amountOfProduct = $("#amountOfProduct");
+  const availableAmount = parseInt($amountOfProduct.text());
+  $numberOfPurchase.keydown(function (event) {
     if(!regexNumber.test(event.key)){
       event.preventDefault();
     }
+    if(event.key != "Backspace"){
+      let numberInput = $(this).val() + event.key;
+      if(parseInt(numberInput) > availableAmount)
+        event.preventDefault();
+    }
+
   });
-  $minusNumber.click(function (e) { 
+  $minusNumber.click(function (e) {
     if(!($numberOfPurchase.val() == 0))
       $numberOfPurchase.val(parseInt($numberOfPurchase.val())-1)
   });
   $plusNumber.click(function (e) { 
-    if($numberOfPurchase.val() < 999)
+    if($numberOfPurchase.val() < availableAmount)
       $numberOfPurchase.val(parseInt($numberOfPurchase.val())+1)
   });
   // add event for two button
@@ -23,14 +30,24 @@ $(function(){
   let $btnAddCart = $("#btnAddCart");
   let $btnPurchase = $("#btnPurchase");
   $btnAddCart.click((event)=>{
-    insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
-    toast({
+    if(parseInt($numberOfPurchase.val()) > 0)
+    {
+      insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
+      toast({
         title: "Thêm Thành Công",
         message: "thêm sản phẩm vào giỏ hàng thành công, vui lòng check giỏ hàng ",
         type: "success",
         duration: 5000
       });
-    updateCartList();
+      updateCartList();
+    }
+    else
+      toast({
+        title: "Thêm Thất Bại",
+        message: "Số lượng sản phẩm thêm vào giỏ hàng phải lớn hơn 0!",
+        type: "error",
+        duration: 5000
+      });
   })
   $btnPurchase.click((event)=>{
     insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
