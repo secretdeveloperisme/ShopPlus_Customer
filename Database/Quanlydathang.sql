@@ -126,3 +126,29 @@ alter table DIACHIKH add constraint FK_DIACHIKH_KHACHHANG foreign key (MSKH)
 alter table HANGHOA add constraint FK_HOANGHOA_LOAIHANGHOA foreign key (MALOAIHANG)
       references LOAIHANGHOA (MALOAIHANG) on delete restrict on update restrict;
 alter table KHACHHANG add constraint U_KHACHHANG_EMAIL UNIQUE (EMAIL);
+-- functions, procedure and trigger
+
+---- function check product order less than available amount product
+DELIMITER $$
+CREATE FUNCTION isValidAmountOfProduct(id int, amount int)
+returns tinyint(1)
+DETERMINISTIC
+begin
+	declare amountOfProduct INT;
+    set amountOfProduct := (SELECT SOLUONGHANG FROM HANGHOA WHERE MSHH = id);
+    if amount > amountOfProduct then
+        return 0;
+    else
+        return 1;
+    end if;
+end$$
+---- trigger when we purchase a product, that amount of product will be minus from available amount of product
+DELIMITER $$
+CREATE TRIGGER minusAmountProductWhenPurChase
+AFTER INSERT ON CHITIETDATHANG
+FOR EACH ROW
+BEGIN
+    DECLARE amount INT;
+    UPDATE HANGHOA SET SOLUONGHANG = (SOLUONGHANG - NEW.SOLUONG)
+        WHERE NEW.MSHH = MSHH;
+END$$
