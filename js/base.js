@@ -129,3 +129,9 @@ function updateNavUser(){
     $("#deleteMyInfo > a").attr("href","/ShopPlus_Customer/customer//info.html")
   }
 }
+function removeAllLocalProduct(){
+  window.localStorage.removeItem("listCartProduct");
+}
+function removeLocalCustomer(){
+  window.localStorage.removeItem("customer");
+}
