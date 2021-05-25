@@ -14,13 +14,9 @@
     $prepare->bind_param("sss",$idCustomer,$orderDate,$status);
     if($prepare->execute()){
       $insertId = $GLOBALS["connect"]->insert_id;
-      $prepare->close();
-      $GLOBALS["connect"]->close();
       return $insertId;
     }
     else{
-      $prepare->close();
-      $GLOBALS["connect"]->close();
       return $insertId;
     }
   }
@@ -31,29 +27,29 @@
     $product = getProductViaID($orderMerchandiseId);
     $amount = $orderDetail->getAmount();
     $discount = $orderDetail->getDiscount();
-    $orderPrice = $product->getPrice() - $product->getPrice() * $discount;
+    $orderPrice = ($product->getPrice() - $product->getPrice() * $discount);
     $prepare->bind_param("iiiid",$orderId,$orderMerchandiseId,$amount,$orderPrice,$discount);
     if($prepare->execute()){
-      $prepare->close();
-      $GLOBALS["connect"]->close();
       return true;
     }
     else{
-      $prepare->close();
-      $GLOBALS["connect"]->close();
       return false;
     }
   }
   function purchaseProducts($customer,$orderDetails){
     $order = new Order(0,$customer->getId(),0,date("Y-m-d"),"","processing");
-    $orderID = insertOrder($order);
-    if($orderID != 0){
-      foreach($orderDetails as $orderDetail){
-        $orderDetail = new OrderDetail($orderID,$orderDetail->getOrderId,$orderDetail->getAmount,0,0);
-        insertOrderDetail($orderDetail);
+    $isSuccess = true;
+    if($orderID = insertOrder($order)){
+      if($orderID != 0){
+        foreach($orderDetails as $orderDetail){
+          $orderDetail = new OrderDetail($orderID,$orderDetail->getIdMerchandise(),$orderDetail->getAmount(),0,0);
+          if(!insertOrderDetail($orderDetail)){
+            $isSuccess = false;
+          }
+        }
       }
-      return true;
     }
     else
-      return false;
+      $isSuccess = false;
+    return $isSuccess;
   }

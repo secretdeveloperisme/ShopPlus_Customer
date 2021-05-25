@@ -3,6 +3,8 @@ $(function(){
   let $customerName = $("#customerName");
   let $customerPhone = $("#customerPhoneNumber");
   let $customerAddress = $("#customerAddress");
+  let $btnPurchase = $("#btnPurchase");
+  let numberOfCustomerAddress = getNumberOfCustomerAddress();
   let productsJson = window.localStorage.getItem("listCartProduct");
   let products = JSON.parse(productsJson);
   products = products.map(function (value) {
@@ -24,7 +26,7 @@ $(function(){
     if(products.length < 1){
       return false;
     }
-    return products.some(e=>e.number > 0);
+    return products.some(e => (e.number > 0));
   }
   let $listProductContainer = $(".shop-app-payment-product-list");
   const $totalView =  $("#totalPrice");
@@ -70,10 +72,6 @@ $(function(){
     calculateTotal();
     updateNumberOfProduct();
   }
-  function deleteProduct(index){
-    products.splice(index,1);
-    console.log(products);
-  }
   function calculateTotal(){
     let totalPrice = 0;
     products.forEach(function(value,index){
@@ -109,6 +107,69 @@ $(function(){
       }
     });
   }
+  function getNumberOfCustomerAddress(){
+    let customer = getLocalCustomer();
+    let numberOfAddress = 0;
+    $.ajax({
+      type: "GET",
+      url: "/ShopPlus_Customer/php/Controller/API/HandleCustomerAddressAPI.php",
+      dataType: "text",
+      data: {
+        action : "getNumberOfAddress",
+        idCustomer : customer.id
+      },
+      async :false,
+      success: function (response) {
+        numberOfAddress = parseInt(response);
+      }
+    });
+    return numberOfAddress;
+  }
+  $btnPurchase.click(function(event){
+    if(numberOfCustomerAddress == 0){
+      toast({
+        title : "Thất Bại",
+        message : "Bạn Chưa Có Địa Chỉ",
+        type : "error",
+        duration : 4000
+      })
+      return false;
+    }
+    if(!isValidProduct()){
+      toast({
+        title : "Thất Bại",
+        message : "Bạn Chưa Có Sản Phẩm Nào",
+        type : "error",
+        duration : 4000
+      })
+      return false;
+    }
+    let customer = JSON.stringify(getLocalCustomer());
+    let  cartProducts  = JSON.stringify(products.filter(e=>e.number > 0));
+    $.ajax({
+      type: "POST",
+      url: "/ShopPlus_Customer/php/Controller/API/HandleOrderAPI.php",
+      dataType: "text",
+      data: {
+        action : "order",
+        "customer" : customer,
+        "products" : cartProducts
+      },
+      async :false,
+      success: function (response) {
+        let resultObject = JSON.parse(response);
+        toast({
+          title : resultObject.status,
+          message : resultObject.msg,
+          type : resultObject.status,
+          duration : 4000
+        });
+        setTimeout(function () {
+          window.open("/ShopPlus_Customer/","_parent");
+        },5000)
+      }
+    })
+  })
   renderCustomerInFo();
   renderProductList();
 });

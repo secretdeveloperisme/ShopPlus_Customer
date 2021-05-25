@@ -4,5 +4,8 @@
     if ($_GET["action"] == "getPrimaryCustomerAddress" && isset($_GET["idCustomer"]) && !empty($_GET["idCustomer"])){
       echo json_encode(getPrimaryCustomerAddress($_GET["idCustomer"]));
     }
+    if ($_GET["action"] == "getNumberOfAddress" && isset($_GET["idCustomer"]) && !empty($_GET["idCustomer"])){
+      echo json_encode(getNumberOfAddress($_GET["idCustomer"]));
+    }
   }
 ?>

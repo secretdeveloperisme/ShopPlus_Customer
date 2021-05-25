@@ -50,7 +50,11 @@ $(function(){
       });
   })
   $btnPurchase.click((event)=>{
-    insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
-    window.open("/ShopPlus_Customer/checkout/payment/payment.html","_parent");
+    if(getLocalCustomer() != null){
+      insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
+      window.open("/ShopPlus_Customer/checkout/payment/payment.html","_parent");
+    }
+    else
+      window.open("/ShopPlus_Customer/checkout/shopping_cart/shopping_cart.html","_parent")
   })
 });

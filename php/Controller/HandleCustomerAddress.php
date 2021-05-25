@@ -35,6 +35,17 @@
     }
     echo json_encode($addresses);
   }
+  function getNumberOfAddress($id){
+    $addresses = array();
+    $result = $GLOBALS["connect"]->query("SELECT MADC,DIACHI,MSKH FROM DIACHIKH WHERE MSKH = $id");
+    if($result->num_rows > 0){
+      while($row = $result->fetch_assoc()){
+        $address = new AddressCustomer("0",$row["DIACHI"],$row["MSKH"]);
+        array_push($addresses ,$address->toArray());
+      }
+    }
+    return count($addresses);
+  }
   function getPrimaryCustomerAddress($idCustomer){
     $addresses = array();
     $result = $GLOBALS["connect"]->query("SELECT MADC,DIACHI,MSKH FROM DIACHIKH WHERE MSKH = $idCustomer");
