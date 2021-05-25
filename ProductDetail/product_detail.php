@@ -271,7 +271,7 @@
                     </button>
                   </div>
                   <div class="shop-app-product-sell-number-ready">
-                    <span>{$merchandise->getAmount()}</span> Sản Phẩm Có Sẵn
+                    <span id="amountOfProduct">{$merchandise->getAmount()}</span> Sản Phẩm Có Sẵn
                   </div>
                 </div>
                 <div class="shop-app-product-sell-buttons">

@@ -36,12 +36,24 @@
     if($prepare->execute()){
       $prepare->close();
       $GLOBALS["connect"]->close();
-      return "true";
+      return true;
     }
     else{
       $prepare->close();
       $GLOBALS["connect"]->close();
-      return "false";
+      return false;
     }
   }
-  echo insertOrderDetail(new OrderDetail(1,42,7,250000,0.1));
+  function purchaseProducts($customer,$orderDetails){
+    $order = new Order(0,$customer->getId(),0,date("Y-m-d"),"","processing");
+    $orderID = insertOrder($order);
+    if($orderID != 0){
+      foreach($orderDetails as $orderDetail){
+        $orderDetail = new OrderDetail($orderID,$orderDetail->getOrderId,$orderDetail->getAmount,0,0);
+        insertOrderDetail($orderDetail);
+      }
+      return true;
+    }
+    else
+      return false;
+  }
