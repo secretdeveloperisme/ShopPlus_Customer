@@ -174,7 +174,12 @@ $(function(){
       return false;
     }
     if(!isValidProduct()){
-      showToast("Phải có ít nhất 1 sản phẩm  và số lượng là 1");
+      toast({
+        title : "Cánh Báo Tiến Hành Đặt Hàng",
+        message : "Phải có ít nhất 1 sản phẩm  và số lượng là 1",
+        type : "warning",
+        duration  : 4000
+      })
       return false;
     }
     window.location.href = "/ShopPlus_Customer/checkout/payment/payment.html";
