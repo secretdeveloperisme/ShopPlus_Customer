@@ -1,4 +1,14 @@
 $(function(){
+  //modal
+  let $modal = $("#modal");
+  let $btnCloseModal= $(".modal-btn-close");
+  let $modalOverlay = $(".modal-overlay");
+  $btnCloseModal.click((event)=>{
+    $modal.fadeOut()
+  })
+  $modalOverlay.click((event)=>{
+    $modal.fadeOut();
+  })
   let $listProducts = $(".shop-app-payment-product-item");
   let $customerName = $("#customerName");
   let $customerPhone = $("#customerPhoneNumber");
@@ -164,9 +174,8 @@ $(function(){
           type : resultObject.status,
           duration : 4000
         });
-        setTimeout(function () {
-          window.open("/ShopPlus_Customer/","_parent");
-        },5000)
+        removeAllLocalProduct();
+        $modal.fadeIn();
       }
     })
   })

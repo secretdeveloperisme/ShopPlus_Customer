@@ -6,6 +6,12 @@
     if(IsExistProduct($idProduct)){
       if($merchandise = getProductViaID($idProduct)){
         $categoryName = getCategoryWithIdProduct($merchandise->getId());
+        if($merchandise->getAmount() <=0){
+          $amountCanAdd = 0;
+        }
+        else {
+          $amountCanAdd = 1;
+        }
         echo <<<HTML
         <!DOCTYPE html>
         <html lang="vi">
@@ -265,7 +271,7 @@
                     <button class="shop-app-product-sell-number__minus btn" id="minusNumber">
                       <i class="fas fa-minus"></i>
                     </button>
-                    <input type="text" name="numberOfPurchase" maxlength="3" value="1" id="numberOfPurchase" placeholder="0">
+                    <input type="text" name="numberOfPurchase" maxlength="3" value="{$amountCanAdd}" id="numberOfPurchase" placeholder="0">
                     <button class="shop-app-product-sell-number__plus btn" id="plusNumber">
                       <i class="fas fa-plus"></i>
                     </button>
