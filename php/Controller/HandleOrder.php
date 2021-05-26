@@ -53,3 +53,20 @@
       $isSuccess = false;
     return $isSuccess;
   }
+  function getOrderViaCustomer($id){
+    $orders = array();
+    $prepare  = $GLOBALS["connect"]->prepare("CALL getOrderViaCustomer(?)");
+    $id_customer = $id;
+    $prepare->bind_param("i",$id_customer);
+    if($prepare->execute()){
+     $result = $prepare->get_result();
+     if($result->num_rows > 0){
+       while ($row = $result->fetch_assoc()){
+         $order = new Order($row["SODONDH"],$row["MSKH"],$row["MSNV"],$row["NGAYDH"],$row["NGAYGH"],$row["TRANGTHAI"]);
+         array_push($orders,$order->toArray());
+       }
+      }
+    }
+    return $orders;
+  }
+  echo json_encode(getOrderViaCustomer(4));
