@@ -124,9 +124,9 @@ function updateNavUser(){
   }
   else
   {
-    $("#myOrder > a").attr("href","/ShopPlus_Customer/customer/info.html")
-    $("#myInfo > a").attr("href","/ShopPlus_Customer/customer/info.html")
-    $("#deleteMyInfo > a").attr("href","/ShopPlus_Customer/customer//info.html")
+    $("#myOrder > a").attr("href","/ShopPlus_Customer/customer/info.php")
+    $("#myInfo > a").attr("href","/ShopPlus_Customer/customer/info.php")
+    $("#deleteMyInfo > a").attr("href","/ShopPlus_Customer/customer//info.php")
   }
 }
 function removeAllLocalProduct(){
