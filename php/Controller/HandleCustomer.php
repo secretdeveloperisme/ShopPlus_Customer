@@ -18,6 +18,20 @@
     else
       return false;
   }
+  function getCustomerViaID($id){
+    $result = $GLOBALS["connect"]->query(
+      "SELECT MSKH,HOTENKH,TENCONGTY,SODIENTHOAI,EMAIL FROM KHACHHANG WHERE MSKH = $id");
+    if($result->num_rows > 0){
+      $row = $result->fetch_assoc();
+      return new Customer(
+        $row["MSKH"],
+        $row['HOTENKH'],$row["TENCONGTY"],
+        $row["SODIENTHOAI"],$row["EMAIL"]
+      );
+    }
+    else
+      return false;
+  }
   function isExistCustomer($email){
     $result = $GLOBALS["connect"]->query(
       "SELECT * FROM KHACHHANG WHERE EMAIL = '$email'"
