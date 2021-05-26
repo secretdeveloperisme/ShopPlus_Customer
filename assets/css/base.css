@@ -88,24 +88,6 @@ input[type=number] {
 .dropdown:hover > .dropdown-content{
   display: block;
 }
-/* #toast{
-  visibility: hidden;
-  position: fixed;
-  left: 50%;
-  z-index: 102;
-  padding: 16px;
-  font-size: 2rem;
-  min-width: 300px;
-  background-color: #333;
-  color: #fff;
-  transform: translate(-50%);
-  top: 50px;
-  border-radius: 10px;
-}
-#toast.active{
-  visibility: visible;
-  animation: fadein 0.5s forwards;
-} */
 /* toast css */
 #toast{
   position: fixed;
@@ -243,6 +225,32 @@ input[type=number] {
 .pagination-items > .active{
   background-color: var(--primary-color);
   color: white;
+}
+#modal{
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.modal-overlay{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+}
+.modal-content{
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  top: 30%;
+  left: 50%;
+  height: 50%;
+  transform: translate(-50%,-50%);
 }
 /* >=1200 px */
 @media only screen and (min-width : 1200px) {
