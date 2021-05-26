@@ -65,7 +65,7 @@
     }
     public function toArray(){
       return array(
-        "id" => $this->getId,
+        "id" => $this->getId(),
         "idCustomer" => $this->getIdCustomer(),
         "idStaff" => $this->getIdStaff(),
         "orderDate" => $this->getOrderDate(),
