@@ -152,3 +152,18 @@ BEGIN
     UPDATE HANGHOA SET SOLUONGHANG = (SOLUONGHANG - NEW.SOLUONG)
         WHERE NEW.MSHH = MSHH;
 END$$
+--- procedure get all order via customer id
+DELIMITER $$
+CREATE PROCEDURE getOrderViaCustomer( IN id_customer int)
+BEGIN
+    SELECT SODONDH,MSKH,MSNV,NGAYDH,NGAYGH,TRANGTHAI FROM DATHANG
+    WHERE MSKH = id_customer;
+END $$
+---procedure get all order detail via order id
+DELIMITER $$
+CREATE PROCEDURE getAllOrderDetail( IN id_order int)
+BEGIN
+    SELECT SODONDH,MSHH,SOLUONG,GIADATHANG,GIAMGIA
+    FROM CHITIETDATHANG
+    WHERE SODONDH = id_order;
+END $$
