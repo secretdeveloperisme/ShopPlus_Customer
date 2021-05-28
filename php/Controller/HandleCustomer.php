@@ -42,6 +42,16 @@
     else
       return false;
   }
+  function isExistEmailAnotherAccount($email,$id){
+    $result = $GLOBALS["connect"]->query(
+      "SELECT * FROM KHACHHANG WHERE EMAIL = '$email' and MSKH != $id"
+    );
+    if($result->num_rows == 0){
+      return false;
+    }
+    else
+      return true;
+    }
   function insertCustomer($customer){
     $prepare = $GLOBALS["connect"]->prepare("INSERT INTO KHACHHANG(HOTENKH,TENCONGTY,SODIENTHOAI,EMAIL)VALUES(?,?,?,?)");
     $name = $customer->getName();
