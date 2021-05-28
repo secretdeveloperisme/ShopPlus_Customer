@@ -13,25 +13,30 @@
     include("../../Controller/HandleCustomer.php");
     if($_POST["action"] == "insertCustomer"){
       if(!empty($_POST["name"]) && !(empty($_POST["phone"]))&& !empty($_POST["email"]) && isset($_POST["companyName"])){
-        if(insertCustomer(
-          new Customer("0",$_POST["name"],$_POST["companyName"],$_POST["phone"],$_POST["email"])
-        )){
-          echo json_encode(array("status"=>"success","msg"=>"bạn đã thên tài khoản thành công"));
-        }
-        else
-          echo json_encode(array("status"=>"failed","msg"=>"thêm tài khoản thất bại"));
+
+          if(insertCustomer(
+            new Customer("0",$_POST["name"],$_POST["companyName"],$_POST["phone"],$_POST["email"])
+          )){
+            echo json_encode(array("status"=>"success","msg"=>"bạn đã thên tài khoản thành công"));
+          }
+          else
+            echo json_encode(array("status"=>"failed","msg"=>"thêm tài khoản thất bại"));
       }
     }
     if($_POST["action"]=="updateCustomer"){
-      if(isset($_POST["id"])&&!empty($_POST["id"]))
-        if(!(empty($_POST["name"])) && !(empty($_POST["phone"]))&&!(empty($_POST["email"]))&&!(empty($_POST["companyName"]))){
-          if(updateCustomer(
-            new Customer($_POST["id"],$_POST["name"],$_POST["companyName"],$_POST["phone"],$_POST["email"])
-          )){
-            echo json_encode(array("status"=>"success","msg"=>"bạn đã chỉnh sửa tài khoản thành công"));
+      if(isset($_POST["id"])&&!empty($_POST["id"])){
+        if(!(empty($_POST["name"])) && !(empty($_POST["phone"]))&&!(empty($_POST["email"]))&&!(empty($_POST["companyName"]))) {
+          if (!isExistEmailAnotherAccount($_POST["email"], $_POST["id"])) {
+            if (updateCustomer(
+              new Customer($_POST["id"], $_POST["name"], $_POST["companyName"], $_POST["phone"], $_POST["email"])
+            )) {
+              echo json_encode(array("status" => "success", "msg" => "bạn đã chỉnh sửa tài khoản thành công"));
+            } else
+              echo json_encode(array("status" => "failed", "msg" => "chỉnh sửa tài khoản thất bại"));
           }
           else
-            echo json_encode(array("status"=>"failed","msg"=>"chỉnh sửa tài khoản thất bại"));
+            echo json_encode(array("status"=> "failed","msg"=>"email đã tồn tại"));
+         }
         }
     }
   }

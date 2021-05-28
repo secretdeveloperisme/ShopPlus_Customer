@@ -167,6 +167,7 @@ $(function(){
       },
       async :false,
       success: function (response) {
+        console.log(response);
         let resultObject = JSON.parse(response);
         toast({
           title : resultObject.status,

@@ -43,6 +43,7 @@
                   <script src="infor.js"></script>
                 </head>
                 <body>
+                  <div id="toast"></div>
                   <div class="shop-app">
                     <div class="shop-app-header">
                       <div class="nav">
@@ -256,7 +257,7 @@
                             Thông Tin Tài Khoản
                           </div>
                           <!-- information content -->
-                          <form class="account-content-form">
+                          <form class="account-content-form" id="infoForm" onsubmit="return false;">
                             <div class="account-content-info-control">
                               <label for="">Họ tên :</label>
                               <input type="text" name="" id="nameCustomer" value="{$customer->getName()}">
@@ -273,7 +274,7 @@
                               <label for="">Tên Công Ty</label>
                               <input type="text" id="companyCustomer" value="{$customer->getCompanyName()}">
                             </div>
-                            <input type="submit" class="info-btn btn"value="Cập Nhật">
+                            <input type="submit" class="info-btn btn" id="btnUpdateInfo" value="Cập Nhật">
                           </form>
                         </div>
                         <div class="shop-app-account-content-item">

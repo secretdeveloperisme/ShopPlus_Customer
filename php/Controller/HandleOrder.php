@@ -69,4 +69,3 @@
     }
     return $orders;
   }
-  echo json_encode(getOrderViaCustomer(4));
