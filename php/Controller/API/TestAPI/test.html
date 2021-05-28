@@ -1,11 +1,43 @@
-<script>
-  let xmlHTTP = new XMLHttpRequest();
-  xmlHTTP.open("GET","../HandleCustomerAPI.php?action=isExistCustomer&email=linhdev777@gmail.com");
-  xmlHTTP.setRequestHeader("Content-type","application/x-www-form-urlencoded")
-  xmlHTTP.onreadystatechange = function(){
-    if(this.readyState === 4 && this.status === 200) {
-      console.log(this.responseText);
-    }
-  }
-  xmlHTTP.send();
-</script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <script>
+          // let xmlHTTP = new XMLHttpRequest();
+          // xmlHTTP.open("GET","../HandleCustomerAPI.php?action=isExistCustomer&email=linhdev777@gmail.com");
+          // xmlHTTP.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+          // xmlHTTP.onreadystatechange = function(){
+          //   if(this.readyState === 4 && this.status === 200) {
+          //     console.log(this.responseText);
+          //   }
+          // }
+          // xmlHTTP.send();
+          // let xmlHTTP = new (XMLHttpRequest);
+          // xmlHTTP.open("POST","../HandleCustomerAPI.php");
+          // xmlHTTP.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+          // xmlHTTP.onreadystatechange = function(){
+          //   if(this.readyState === 4 && this.status === 200) {
+          //     document.write(this.responseText);
+          //   }
+          // }
+          // xmlHTTP.send('action=updateCustomer&name=hoanglinh&id=4&email=dev777@gmail.com&phone=01245897456&companyName=hlplus');
+            $.ajax({
+              url : "../HandleCustomerAPI.php",
+              type : "POST",
+              data : {
+                action : "updateCustomer",
+                name  : "hoang linh",
+                email : "linhdev072217@gmail.com",
+                phone : "02589745612",
+                companyName : "hoang linh plus",
+                id  : 4
+              },
+              success : (response)=>{
+                document.write(response);
+              }
+            })
+        </script>
+    </body>
+</html>
