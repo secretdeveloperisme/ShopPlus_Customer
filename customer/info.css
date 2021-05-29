@@ -1,0 +1,160 @@
+.shop-app-account{
+  display:flex;
+  background-color: var(--app-background-color);
+  padding: 20px 50px;
+}
+.sidebar{
+  padding: 5px 10px;
+  width: 280px;
+}
+.account-sidebar{
+
+}
+.sidebar__label {
+  font-size: 3rem;
+}
+.account-sidebar_label{
+  margin: 0 0 12px;
+}
+.sidebar-label-user-name{
+
+}
+.sidebar-list{
+
+}
+.sidebar-item{
+  
+}
+.sidebar-item:hover:not(.sidebar-item--active){
+  background-color: var(--primary-color);
+  color: white;
+}
+.sidebar-item{
+  font-size: 2rem;
+  padding: 5px 10px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+.sidebar-item--active{
+  background-color: var(--primary-color);
+  color: white;
+}
+.shop-app-account-content{
+  flex-grow: 1;
+  padding: 5px 10px;
+}
+.shop-app-account-content-item{
+  display: none;
+}
+.account-content-label{
+  font-size: 2.5rem;
+  margin: 0 0 12px;
+}
+.account-content-form{
+  background-color: white;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+.account-content-info-control{
+  font-size: 2rem;
+  display: flex;
+}
+.account-content-info-control label{
+  display: inline-block;
+  min-width: 200px
+}
+.account-content-info-control + .account-content-info-control{
+  margin-top: 10px;
+}
+.account-content-info-control > input{
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 5px 10px;
+  font-size: 2rem;
+  flex: 1;
+}
+.account-content-info-control > input:focus{
+  border-color: var(--primary-color);
+}
+.info-btn {
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+.account-content-order-table{
+  width: 100%;
+  background-color: white;
+  border-collapse: collapse;
+}
+.account-content-order-table thead{
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+} 
+.account-content-order-table tbody{
+  font-size: 1.5rem;
+} 
+.account-content-order-table td{
+  cursor: pointer;
+} 
+.account-content-order-table td{
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-collapse: collapse;
+  padding: 5px 10px;
+} 
+.account-content-order-table td{
+  border-collapse: collapse;
+  padding: 5px 10px;
+} 
+.account-content-order-table tbody tr td:nth-of-type(1){
+  width: 8.33%;
+}
+.account-content-order-table tbody tr td:nth-of-type(2){
+  width: 8.33%;
+}
+.account-content-order-table tbody tr td:nth-of-type(3){
+  width: 59.33%;
+}
+.account-content-order-table tbody tr td:nth-of-type(4){
+  width: 8.33%;
+}
+.account-content-order-table tbody tr td:nth-of-type(5){
+  width: 16.66%;
+}
+.account-content-order-table tbody tr:hover{
+  background-color: var(--primary-color);
+  color: white;
+}
+.account-content-form-address {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.account-content-form-address input[type='text']{
+  flex-grow: 1;
+  font-size: 2rem;
+  padding: 5px 10px;
+}
+.account-content-form-address input[type='submit']{
+  margin: 0;
+}
+.content-address-list{
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.content-address-item{
+  display: flex;
+  background-color: white ;
+  padding: 5px 10px;
+}
+.content-address-item + .content-address-item{
+  margin-top: 10px;
+}
+.content-address-item .address{
+  font-size: 2rem;
+  flex-grow: 1;
+}
+.content-address-item button{
+}
