@@ -7,10 +7,12 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 3;
+  justify-content: center;
+  align-content: center;
+;
 }
 .modal-content{
-  margin: auto;
-  position: relative;  
+  position: absolute;
   animation: appearModal .5s ease;
 }
 .modal-content-btn-close{
