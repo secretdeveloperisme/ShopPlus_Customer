@@ -7,6 +7,12 @@
   --pale-black-transparent:rgba(0,0,0,0.5);
   --dropdown-content-color: #ccf6ff;
 }
+.primary-color{
+   color : var(--primary-color)
+}
+.red-color{
+  color : red;
+}
 body::-webkit-scrollbar{
   width: 10px;
   
@@ -174,6 +180,9 @@ input[type=number] {
   display:inline-block;
   cursor: pointer;
   transition: all .3s;
+}
+.btn.btn--red{
+  background-color: red;
 }
 .btn:hover{
   opacity: 0.5;
