@@ -19,3 +19,17 @@
       }
     }
   }
+  if(isset($_GET["action"]) && !empty($_GET["action"])){
+    include "../../models/Customer.php";
+    include("../../Controller/HandleOrder.php");
+    if ($_GET["action"] == "getOrdersViaCustomer"){
+      if(isset($_GET["customerID"]) && !empty($_GET["customerID"])) {
+        echo json_encode(getOrderViaCustomer($_GET["customerID"]));
+      }
+    }
+    if ($_GET["action"] == "getDetailOrdersViaOrderID"){
+      if(isset($_GET["orderID"]) && !empty($_GET["orderID"])) {
+        echo json_encode(getDetailOrdersViaOrderID($_GET["orderID"]));
+      }
+    }
+  }

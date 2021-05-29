@@ -27,7 +27,7 @@
     $product = getProductViaID($orderMerchandiseId);
     $amount = $orderDetail->getAmount();
     $discount = $orderDetail->getDiscount();
-    $orderPrice = ($product->getPrice() - $product->getPrice() * $discount);
+    $orderPrice = ($product->getPrice()* $orderDetail->getAmount() - $product->getPrice() * $discount);
     $prepare->bind_param("iiiid",$orderId,$orderMerchandiseId,$amount,$orderPrice,$discount);
     if($prepare->execute()){
       return true;
@@ -68,4 +68,20 @@
       }
     }
     return $orders;
+  }
+  function getDetailOrdersViaOrderID($id){
+    $orderDetails = array();
+    $prepare  = $GLOBALS["connect"]->prepare("CALL getAllOrderDetail(?)");
+    $orderID = $id;
+    $prepare->bind_param("i",$orderID);
+    if($prepare->execute()){
+      $result = $prepare->get_result();
+      if($result->num_rows > 0){
+        while ($row = $result->fetch_assoc()){
+          $orderDetail = new OrderDetail($row["SODONDH"],$row["MSHH"],$row["SOLUONG"],$row["GIADATHANG"],$row["GIAMGIA"]);
+          array_push($orderDetails,$orderDetail->toArray());
+        }
+      }
+    }
+    return $orderDetails;
   }

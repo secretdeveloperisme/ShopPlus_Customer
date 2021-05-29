@@ -36,11 +36,11 @@
                   <link rel="stylesheet" href="/ShopPlus_Customer/assets/css/base.css">
                   <link rel="stylesheet" href="/ShopPlus_Customer/assets/css/navbar.css">
                   <link rel="stylesheet" href="/ShopPlus_Customer/assets/css/Product-Detail.css">
-                  <link rel="stylesheet" href="infor.css">
+                  <link rel="stylesheet" href="info.css">
                   <link rel="stylesheet" href="../assets/css/footer.css">
                   <script src="/ShopPlus_Customer/js/base.js"></script>
                   <script src="/ShopPlus_Customer/js/Controller/handleCart.js"></script>
-                  <script src="infor.js"></script>
+                  <script src="info.js"></script>
                 </head>
                 <body>
                   <div id="toast"></div>
@@ -232,9 +232,9 @@
                       </div>
                     </div>
                     <div class="shop-app-account">
-                      <aside class="sidebar account-sidebar">
+                      <aside class="sidebar account-sidebar col-xl-3">
                         <h1 class="sidebar__label account-sidebar_label">
-                          <div class="sidebar-label-user-name">Hoàng Linh</div>
+                          <div class="sidebar-label-user-name">{$customer->getName()}</div>
                         </h1>
                         <ul class="sidebar-list">
                           <li class="sidebar-item sidebar-item--active">
@@ -251,7 +251,7 @@
                           </li>
                         </ul>
                       </aside>
-                      <div class="shop-app-account-content">
+                      <div class="shop-app-account-content col-xl-9">
                         <div class="shop-app-account-content-item">
                           <div class="account-content-label">
                             Thông Tin Tài Khoản
@@ -293,27 +293,6 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>001</td>
-                                <td>01/12/2021</td>
-                                <td>Lược Sử Loài Người,Harry Potter1,Muôn Kiếp nhân Sinh</td>
-                                <td>125000 đ</td>
-                                <td>Đang xử lý</td>
-                              </tr>
-                              <tr>
-                                <td>001</td>
-                                <td>01/12/2021</td>
-                                <td>Lược Sử Loài Người,Harry Potter1,Muôn Kiếp nhân Sinh</td>
-                                <td>125000 đ</td>
-                                <td>Đã xác Nhận</td>
-                              </tr>
-                              <tr>
-                                <td>001</td>
-                                <td>01/12/2021</td>
-                                <td>Lược Sử Loài Người,Harry Potter1,Muôn Kiếp nhân Sinh </td>
-                                <td>125000 đ</td>
-                                <td>Thành Công</td>
-                              </tr>
                             </tbody>
                           </table>
                         </div>
@@ -322,19 +301,11 @@
                             Địa Chỉ Của Tôi
                           </div>
                           <!-- address content -->
-                          <form class="account-content-form-address">
+                          <form class="account-content-form-address" onsubmit="return false">
                             <input type="text" name="abc" id="addressCustomer" placeholder="Thêm Địa Chỉ">
-                            <input type="submit" class="info-btn btn"value="Thêm">
+                            <input type="button" class="btn info-btn" value="Thêm" id="btnAddAddress">
                           </form>
                           <ul class="content-address-list">
-                            <li class="content-address-item">
-                              <p class="address">Đường 3/2, Phường Xuân Khánh,Quận Ninh Kiều, Thành Phố Cần Thơ</p>
-                              <button class="btn">sửa</button>
-                            </li>
-                            <li class="content-address-item">
-                              <p class="address">Đường 3/2, Phường Xuân Khánh,Quận Ninh Kiều, Thành Phố Cần Thơ</p>
-                              <button class="btn">sửa</button>
-                            </li>
                           </ul>
                         </div>
                       </div>
