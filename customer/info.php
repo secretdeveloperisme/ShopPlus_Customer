@@ -23,7 +23,7 @@
                 <head>
                   <meta charset="UTF-8">
                   <title>ShopPlus</title>
-                  <link rel="shortcut icon" href="/assets/images/icons/shopplus.svg" type="image/x-icon">
+                  <link rel="shortcut icon" href="/ShopPlus_Customer/assets/images/icons/shopplus.svg" type="image/x-icon">
                   <meta name="author" content="hoang linh plus">
                   <meta name="keywords" content="shopplus, cửa hàng plus, hoang linh plus">
                   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -227,7 +227,7 @@
                       <div class="shop-app-header-path">
                         <ul class="shop-app-header-path-list">
                           <li class="shop-app-header-path-item"><a href="">Trang chủ</a></li>
-                          <li class="shop-app-header-path-item"><a href="">Thông Tin</a></li>
+                          <li class="shop-app-header-path-item"><a href="">{$_GET["action"]}</a></li>
                         </ul>
                       </div>
                     </div>
