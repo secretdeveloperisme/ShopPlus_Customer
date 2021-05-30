@@ -45,6 +45,7 @@
 }
 .shop-app-account-content-item{
   display: none;
+  animation: appear-content .3s linear;
 }
 .account-content-label{
   font-size: 2.5rem;
@@ -79,6 +80,7 @@
 }
 .info-btn {
   border: none;
+  margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -157,4 +159,14 @@
   flex-grow: 1;
 }
 .content-address-item button{
+}
+@keyframes appear-content {
+  from{
+    transform: scale(0);
+    opacity: 0;
+  }
+  to{
+    transform: scale(1);
+    opacity: 1;
+  }
 }
