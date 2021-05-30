@@ -50,21 +50,24 @@ $(function(){
       });
   })
   $btnPurchase.click((event)=>{
-    if(getLocalCustomer() != null){
-      if(parseInt($numberOfPurchase.val()) != 0){
-        insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
-        window.open("/ShopPlus_Customer/checkout/payment/payment.html","_parent");
-      }
-      else {
-        toast({
-          title: "Thêm Thất Bại",
-          message: "Số lượng sản phẩm thêm vào giỏ hàng phải lớn hơn 0!",
-          type: "error",
-          duration: 5000
-        });
-      }
+    if(parseInt($numberOfPurchase.val()) !== 0){
+      insertCartProduct(parseInt($productItem.attr("productId")),parseInt($numberOfPurchase.val()));
     }
-    else
+    else {
+      toast({
+        title: "Thêm Thất Bại",
+        message: "Số lượng sản phẩm thêm vào giỏ hàng phải lớn hơn 0!",
+        type: "error",
+        duration: 5000
+      });
+      return false;
+    }
+    if(getLocalCustomer() != null){
+      window.open("/ShopPlus_Customer/checkout/payment/payment.html","_parent");
+    }
+    else{
       window.open("/ShopPlus_Customer/checkout/shopping_cart/shopping_cart.html","_parent")
+    }
+
   })
 });
