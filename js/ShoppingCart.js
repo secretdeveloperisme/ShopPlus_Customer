@@ -207,8 +207,7 @@ $(function(){
     }
     else{
      updateLocalCustomer(getCustomerFromDB($emailCustomer.val()));
-     customer = getLocalCustomer();
-     updateNavUser(customer);
+      updateNavUser();
       $modal.fadeOut();
     }
   })
@@ -299,7 +298,7 @@ $(function(){
           duration : 5000
         });
       }
-      updateNavUserName(customer);
+      updateNavUser()
       $modal.fadeOut();
     }
     else{

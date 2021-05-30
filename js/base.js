@@ -137,19 +137,28 @@ function updateNavUser(){
   customer = getLocalCustomer();
   updateNavUserName(customer);
   if(!hasCustomer(customer)){
-    $navUser.find(".nav-user-dropdown-content").remove();
+    $navUser.find(".nav-user-dropdown-content").html("");
   }
   else
   {
+    $navUser.find(".nav-user-dropdown-content").html(
+      `
+      <ul class="nav-user-dropdown-content-list">
+        <li class="nav-user-dropdown-content-item" id="myOrder"><a href="">Đơn hàng của tôi</a></li>
+        <li class="nav-user-dropdown-content-item" id="myInfo"><a href="">Thông Tin Của tôi</a></li>
+        <li class="nav-user-dropdown-content-item" id="deleteMyInfo"><a href="">Xóa Thông Tin Của Tôi</a></li>
+      </ul>
+      `
+    );
     let $myOrder = $("#myOrder");
     let $myInfo = $("#myInfo");
     let $deleteMyInfo = $("#deleteMyInfo");
     $myInfo.find("a").attr("href",`/ShopPlus_Customer/customer/info.php?customerID=${customer.id}&action=info`)
     $myOrder.find("a").attr("href",`/ShopPlus_Customer/customer/info.php?customerID=${customer.id}&action=order`)
-   $deleteMyInfo.click(function (event) {
+    $deleteMyInfo.click(function (event) {
       removeLocalCustomer();
       updateNavUser();
-   })
+    })
   }
 }
 function removeAllLocalProduct(){

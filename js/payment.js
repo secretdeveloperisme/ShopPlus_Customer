@@ -182,4 +182,13 @@ $(function(){
   })
   renderCustomerInFo();
   renderProductList();
+  //add event edit information customer
+  let customer = getLocalCustomer();
+  let $btnEditCustomer = $("#btnEditCustomer");
+  $btnEditCustomer.click(function (event) {
+    window.open("/ShopPlus_Customer/customer/info.php?customerID="+customer.id+"&action=info","_parent");
+  })
+  //add link for toast btnMyOrder
+  let $btnMyOrder = $("#btnMyOrder");
+  $btnMyOrder.attr("href",`/ShopPlus_Customer/customer/info.php?action=order&customerID=${customer.id}`)
 });
