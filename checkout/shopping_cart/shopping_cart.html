@@ -25,6 +25,7 @@
   <div id="toast"></div>
   <div class="shop-app">
     <div class="modal" id="modal">
+      <div class="modal-overlay"></div>
       <div class="modal-content">
         <div class="modal-content-btn-close" id="btnCloseModal">
           <i class="fas fa-times"></i>
@@ -50,10 +51,10 @@
             <label for="phoneCustomer"> Số Điện Thoai : </label>
             <input type="text" name="" id="phoneCustomer" placeholder="Sô Điện Thoại" required>
           </div>
-          <div class="input-user-info-container">
-            <label for="addressCustomer"> Địa Chỉ Của Bạn :</label>
-            <input type="text" name="" id="addressCustomer" placeholder="Địa Chỉ Của Bạn" required>
-          </div>
+           <div class="input-user-info-container">
+             <label for="addressCustomer"> Địa Chỉ : </label>
+             <input type="text" name="" id="addressCustomer" placeholder="Địa Chỉ Của Bạn" required>
+           </div>
           <div class="input-user-info-container">
             <label for="companyCustomer"> Công Ty Của Bạn (Nếu Có) :</label>
             <input type="text" name="" id="companyCustomer" placeholder="Công Ty Của Bạn">
@@ -235,9 +236,9 @@
           </div>
           <div class="nav-user-dropdown-content dropdown-content">
             <ul class="nav-user-dropdown-content-list">
-              <li class="nav-user-dropdown-content-item"><a href="/ShopPlus_Customer/customer/info.html">Đơn hàng của tôi</a></li>
-              <li class="nav-user-dropdown-content-item"><a href="#">Thông Tin Của tôi</a></li>
-              <li class="nav-user-dropdown-content-item"><a href="#">Xóa Thông Tin Của Tôi</a></li>
+              <li class="nav-user-dropdown-content-item" id="myOrder"><a href="/ShopPlus_Customer/customer/info.html">Đơn hàng của tôi</a></li>
+              <li class="nav-user-dropdown-content-item" id="myInfo"><a href="#">Thông Tin Của tôi</a></li>
+              <li class="nav-user-dropdown-content-item" id="deleteMyInfo"><a href="#">Xóa Thông Tin Của Tôi</a></li>
             </ul>
           </div>
         </div>

@@ -87,6 +87,23 @@ function insertCustomerIntoDB(customer){
   })
   return resultObject;
 }
+function insertAddressCustomer(customerID,address){
+  let result = "";
+  $.ajax({
+    url : "/ShopPlus_Customer/php/Controller/API/HandleCustomerAddressAPI.php",
+    data : {
+      action : "insertAddress",
+      idCustomer : customerID,
+      addressText : address
+    },
+    async : false,
+    type : "POST",
+    success : (response)=>{
+      result = response;
+    }
+  })
+  return result;
+}
 function hasCustomerFormDB(email){
   let isExist = false;
   $.ajax(
@@ -99,7 +116,7 @@ function hasCustomerFormDB(email){
     async : false,
     type : "GET",
     success : (response)=>{
-      console.log(response)
+      console.log(typeof response,response.length)
       isExist = JSON.parse(response);
     }
   })
@@ -111,7 +128,7 @@ function updateNavUserName(customer){
     $navUserName.text("Guest")
   }
   else{
-    $navUserName.text(customer.name );
+    $navUserName.text(customer.name);
   }
 }
 function updateNavUser(){
@@ -124,9 +141,15 @@ function updateNavUser(){
   }
   else
   {
-    $("#myOrder > a").attr("href","/ShopPlus_Customer/customer/info.php")
-    $("#myInfo > a").attr("href","/ShopPlus_Customer/customer/info.php")
-    $("#deleteMyInfo > a").attr("href","/ShopPlus_Customer/customer//info.php")
+    let $myOrder = $("#myOrder");
+    let $myInfo = $("#myInfo");
+    let $deleteMyInfo = $("#deleteMyInfo");
+    $myInfo.find("a").attr("href",`/ShopPlus_Customer/customer/info.php?customerID=${customer.id}&action=info`)
+    $myOrder.find("a").attr("href",`/ShopPlus_Customer/customer/info.php?customerID=${customer.id}&action=order`)
+   $deleteMyInfo.click(function (event) {
+      removeLocalCustomer();
+      updateNavUser();
+   })
   }
 }
 function removeAllLocalProduct(){

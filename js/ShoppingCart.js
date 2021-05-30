@@ -169,6 +169,7 @@ $(function(){
   // add event order Button
   let $btnOrder = $("#btnOrder");
   $btnOrder.click(function(event){
+    customer = getLocalCustomer()
     if(!hasCustomer(customer)){
       $modal.fadeIn().css("display","flex");
       return false;
@@ -189,6 +190,7 @@ $(function(){
   let $emailCustomer = $("#emailCustomer");
   let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   let $btnEmailButton = $inputUserEmail.find(".input-user-email-btn");
+  let $addressCustomer = $("#addressCustomer")
   $btnEmailButton.click(function(event){
     if(!regexEmail.test($emailCustomer.val())){
       toast({
@@ -206,7 +208,7 @@ $(function(){
     else{
      updateLocalCustomer(getCustomerFromDB($emailCustomer.val()));
      customer = getLocalCustomer();
-     updateNavUser();
+     updateNavUser(customer);
       $modal.fadeOut();
     }
   })
@@ -215,7 +217,6 @@ $(function(){
   let $nameCustomer =$("#nameCustomer");
   let $companyCustomer =$("#companyCustomer");
   let $phoneCustomer= $("#phoneCustomer");
-  let $addressCustomer= $("#addressCustomer");
   let regexPhone =  /^0\d{9,10}$/;
   $btnSubmitInfo.click(()=>{
     if($nameCustomer.val() == ""){
@@ -245,6 +246,15 @@ $(function(){
       })
       return false;
     }
+    if($addressCustomer.val() == ""){
+      toast({
+        title : "Cảnh báo",
+        message :"Địa Chỉ Không Được Để trống",
+        type: "warning",
+        duration : 5000
+      })
+      return false;
+    }
     if(!regexPhone.test($phoneCustomer.val())){
       toast({
         title : "Cảnh báo",
@@ -254,25 +264,16 @@ $(function(){
       });
       return false;
     }
-    if($addressCustomer.val() == ""){
-      toast({
-        title : "Cảnh báo",
-        message :"Địa Chỉ Không Được Để trống",
-        type: "warning",
-        duration : 5000
-      });
-      return false;
-    }
     let customer = {
       name : $nameCustomer.val(),
       phone : $phoneCustomer.val(),
       email : $emailCustomer.val(),
-      address : $addressCustomer.val(),
+      address : "",
       companyName : $companyCustomer.val(),
     }
     let resultInsertObject =  insertCustomerIntoDB(customer);
     console.log(resultInsertObject);
-    if(resultInsertObject.status == "success"){
+    if(resultInsertObject.status === "success"){
       toast({
         title : "Thành công",
         message : resultInsertObject.msg,
@@ -281,7 +282,24 @@ $(function(){
       });
       updateLocalCustomer(getCustomerFromDB(customer.email));
       customer = getLocalCustomer();
-      updateNavUserName();
+      let resultInsertAddress = insertAddressCustomer(customer.id,$addressCustomer.val()).trim()  ;
+      if(resultInsertAddress === "true"){
+        toast({
+          title : "Thành công",
+          message : "Thêm Địa Chỉ Thành Công",
+          type : "success",
+          duration : 5000
+        });
+      }
+      else{
+        toast({
+          title : "Thất Bại",
+          message : "Thêm Địa Chỉ Thất Bại",
+          type : "error",
+          duration : 5000
+        });
+      }
+      updateNavUserName(customer);
       $modal.fadeOut();
     }
     else{
