@@ -74,6 +74,20 @@ $(function(){
         products = JSON.parse(response);
         if(products.length != 0){
           products.forEach(function(value,index){
+            let soldProductAmount = 0;
+            $.ajax({
+              url : "/ShopPlus_Customer/php/Controller/API/HandleProductAPI.php",
+              type : "GET",
+              data : {
+                action : "getSoldProductAmount",
+                id : value.id
+              },
+              async : false,
+              dataType : "text",
+              success : (response)=>{
+                soldProductAmount = JSON.parse(response);
+              }
+            })
             let productItem = `
             <div class="shop-app-product-display-item col-xl-2 col-es-6">
             <a href="ProductDetail/product_detail.php?id=${value.id}">
@@ -89,7 +103,7 @@ $(function(){
                     </div>
                     <div class="product-display-item-description-sell">
                       <h2 class="product-display-item-description-sell__price">${numberWithCommas(value.price)} đ</h2>
-                      <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
+                      <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">${soldProductAmount}</span></h2>
                     </div>
                   </div>
                 </div>

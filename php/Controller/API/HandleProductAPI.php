@@ -8,6 +8,9 @@
     if($_GET["action"] == "getProductViaId" && isset($_GET["id"])&& !empty($_GET["id"])){
       echo json_encode(getProductViaID($_GET["id"])->toArray());
     }
+    if($_GET["action"] == "getSoldProductAmount" && isset($_GET["id"])&& !empty($_GET["id"])){
+      echo json_encode(getSoldProductAmount($_GET["id"]));
+    }
   }
 
 ?>

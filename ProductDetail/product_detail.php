@@ -12,6 +12,7 @@
         else {
           $amountCanAdd = 1;
         }
+        $soldProductAmount = getSoldProductAmount($merchandise->getId());
         echo <<<HTML
         <!DOCTYPE html>
         <html lang="vi">
@@ -258,7 +259,7 @@
                 </h1>
                 <div class="shop-app-product-sell-sold">
                   <h2 class="shop-app-product-sell-sold__favorite">Yêu Thích</h2>
-                  <h2 class="shop-app-product-sell-sold__number">Đã Bán : <span>1</span></h2>
+                  <h2 class="shop-app-product-sell-sold__number">Đã Bán : <span>{$soldProductAmount}</span></h2>
                 </div>
                 <div class="shop-app-product-sell-price">
                   <span class="shop-app-product-sell-price__money">{$merchandise->getPriceWithComma()}</span> đ

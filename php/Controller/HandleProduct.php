@@ -61,4 +61,8 @@
     else
       return "Không có loại hàng";
   }
+  function getSoldProductAmount($id){
+    $result = $GLOBALS["connect"]->query("SELECT get_sold_merchandise($id) as amount");
+    return $result->fetch_assoc()["amount"];
+  }
 ?>
