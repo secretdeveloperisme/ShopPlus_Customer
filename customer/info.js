@@ -126,13 +126,16 @@ $(()=>{
             });
             let status = "";
             switch (value.status.trim()) {
+              case "pending" :
+                status = "Đang chờ"
+                break;
               case "processing" :
-                status = "Đang Xủ Lý"
+                status = "Đang Xử lý"
                 break;
               case "approved" :
                 status = "Đã Duyệt"
                 break;
-              case "shipped" :
+              case "completed" :
                 status = "Đã Giao"
                 break;
             }
