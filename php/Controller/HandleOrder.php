@@ -37,7 +37,7 @@
     }
   }
   function purchaseProducts($customer,$orderDetails){
-    $order = new Order(0,$customer->getId(),0,date("Y-m-d"),"","processing");
+    $order = new Order(0,$customer->getId(),0,date("Y-m-d"),"","pending");
     $isSuccess = true;
     if($orderID = insertOrder($order)){
       if($orderID != 0){

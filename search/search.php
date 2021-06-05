@@ -121,9 +121,9 @@
           </div>
         </div>
         <div class="nav-search">
-          <div class="nav-search-form">
+          <form method="get" action="search.php" class="nav-search-form">
             <div class="nav-search-form-input">
-              <input type="text" class="nav-search-form-input__box" placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Mua, hoặc muốn...."> 
+              <input type="text" class="nav-search-form-input__box" name="querySearch"  placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Mua, hoặc muốn....">
               <div class="nav-search-form-input-autocomplete">
                 <ul class="nav-search-form-input-autocomplete-list">
                   <li class="nav-search-form-input-autocomplete-item">
@@ -169,7 +169,7 @@
                 Tìm Kiếm
               </span>
             </button>
-          </div>
+          </form>
           <div class="nav-search-popular">
             <ul class="nav-search-popular-list">
               <li class="nav-search-popular-item"><a href="#">Iphone 12</a></li>
