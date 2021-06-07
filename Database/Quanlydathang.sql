@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2021 at 05:52 AM
+-- Generation Time: Jun 07, 2021 at 12:15 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -27,12 +27,12 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllOrderDetail` (IN `id_order` INT)  BEGIN
     SELECT SODONDH,MSHH,SOLUONG,GIADATHANG,GIAMGIA
-    FROM CHITIETDATHANG
+    FROM chitietdathang
     WHERE SODONDH = id_order;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getOrderViaCustomer` (IN `id_customer` INT)  BEGIN
-    SELECT SODONDH,MSKH,MSNV,NGAYDH,NGAYGH,TRANGTHAI FROM DATHANG
+    SELECT SODONDH,MSKH,MSNV,NGAYDH,NGAYGH,TRANGTHAI FROM dathang
     WHERE MSKH = id_customer;
 END$$
 
@@ -65,7 +65,7 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `isValidAmountOfProduct` (`id` INT, `amount` INT) RETURNS TINYINT(1) begin
 	declare amountOfProduct INT;
-    set amountOfProduct := (SELECT SOLUONGHANG FROM HANGHOA WHERE MSHH = id);
+    set amountOfProduct := (SELECT SOLUONGHANG FROM hanghoa WHERE MSHH = id);
     if amount > amountOfProduct then
         return 0;
     else 
@@ -75,7 +75,7 @@ end$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `STAFF_LOGIN` (`id` INT) RETURNS TINYINT(1) begin
   declare valid tinyint(1);
-  set valid := (SELECT COUNT(MSNV) FROM NHANVIEN WHERE MSNV = id);
+  set valid := (SELECT COUNT(MSNV) FROM nhanvien WHERE MSNV = id);
   return valid;
 end$$
 
@@ -120,7 +120,11 @@ INSERT INTO `chitietdathang` (`SODONDH`, `MSHH`, `SOLUONG`, `GIADATHANG`, `GIAMG
 (44, 48, 2, 136000, 0),
 (44, 55, 2, 4240000, 0),
 (46, 35, 1, 40000, 0),
-(46, 63, 1, 777, 0);
+(46, 63, 1, 777, 0),
+(47, 41, 1, 427000, 0),
+(47, 46, 1, 5090000, 0),
+(48, 40, 1, 99000, 0),
+(48, 41, 1, 427000, 0);
 
 --
 -- Triggers `chitietdathang`
@@ -128,7 +132,7 @@ INSERT INTO `chitietdathang` (`SODONDH`, `MSHH`, `SOLUONG`, `GIADATHANG`, `GIAMG
 DELIMITER $$
 CREATE TRIGGER `minusAmountProductWhenPurChase` AFTER INSERT ON `chitietdathang` FOR EACH ROW BEGIN
     DECLARE amount INT;
-    UPDATE HANGHOA SET SOLUONGHANG = (SOLUONGHANG - NEW.SOLUONG) 
+    UPDATE hanghoa SET SOLUONGHANG = (SOLUONGHANG - NEW.SOLUONG) 
         WHERE NEW.MSHH = MSHH;
 END
 $$
@@ -166,7 +170,9 @@ INSERT INTO `dathang` (`SODONDH`, `MSKH`, `MSNV`, `NGAYDH`, `NGAYGH`, `TRANGTHAI
 (42, 25, NULL, '2021-06-02', NULL, 'processing'),
 (43, 4, NULL, '2021-06-03', NULL, 'processing'),
 (44, 4, NULL, '2021-06-03', NULL, 'pending'),
-(46, 26, 777, '2021-06-07', '2021-06-22', 'completed');
+(46, 26, 777, '2021-06-07', '2021-06-22', 'completed'),
+(47, 5, NULL, '2021-06-07', NULL, 'pending'),
+(48, 28, NULL, '2021-06-07', NULL, 'pending');
 
 -- --------------------------------------------------------
 
@@ -201,7 +207,8 @@ INSERT INTO `diachikh` (`MADC`, `DIACHI`, `MSKH`) VALUES
 (24, 'kien giang', 7),
 (26, 'bến tre', 25),
 (27, 'alo', 4),
-(28, 'long an', 26);
+(30, 'Kiên Giang', 5),
+(31, 'sdfsdfds', 28);
 
 -- --------------------------------------------------------
 
@@ -235,13 +242,13 @@ INSERT INTO `hanghoa` (`MSHH`, `TENHH`, `LOCATION`, `QUYCACH`, `GIA`, `SOLUONGHA
 (37, 'Kẻ Trộm Sách (Tái Bản)', '/ShopPlus_Customer/assets/images/products/ke-trom-sach.u5387.d20170720.t153804.332048.jpg', 'quyển', 180000, 3, 1, ''),
 (38, 'Cân Bằng Cảm Xúc, Cả Lúc Bão Giông', '/ShopPlus_Customer/assets/images/products/a19424cfe9d113c32732d93cf2d5f59a.jpg', 'quyển', 63800, 0, 1, ''),
 (39, 'CẨM NANG MUA BÁN ĐẤT', '/ShopPlus_Customer/assets/images/products/f797420579b8e0f5c84a1278d23053ec.jpg', 'quyển', 150000, 0, 1, ''),
-(40, 'USB Kingston DT100G3 32GB USB 3.0 - Hàng Chính Hãn', '/ShopPlus_Customer/assets/images/products/34e6ca6587338ccf18f312d7b9b2ea3c.jpg', 'cái', 99000, 1, 2, ''),
-(41, 'Router Wifi Băng Tần Kép AC1200 TP-Link Archer C50', '/ShopPlus_Customer/assets/images/products/archer-c50-v3_s_01.u4064.d20170704.t180940.358348.jpg', 'cái', 427000, 5, 2, ''),
+(40, 'USB Kingston DT100G3 32GB USB 3.0 - Hàng Chính Hãn', '/ShopPlus_Customer/assets/images/products/34e6ca6587338ccf18f312d7b9b2ea3c.jpg', 'cái', 99000, 0, 2, ''),
+(41, 'Router Wifi Băng Tần Kép AC1200 TP-Link Archer C50', '/ShopPlus_Customer/assets/images/products/archer-c50-v3_s_01.u4064.d20170704.t180940.358348.jpg', 'cái', 427000, 3, 2, ''),
 (42, 'USB Kingston DT100G3 - 64GB - USB 3.0 ', '/ShopPlus_Customer/assets/images/products/64_1.jpg', 'cái', 149000, 1, 2, ''),
 (43, 'Ổ Cứng Di Động WD Elements 1TB 2.5 USB 3.0 - WDBUZ', '/ShopPlus_Customer/assets/images/products/wd elements 1tb - 2.5 usb 3.0_1.u579.d20160808.t172730.328870.jpg', 'cái', 1395000, 3, 2, ''),
 (44, 'Bộ Kích Sóng Wifi Repeater 300Mbps Totolink EX200 ', '/ShopPlus_Customer/assets/images/products/30d0c22525743d5a2e850e76dd52fe72.jpg', 'cái', 198000, 9, 2, ''),
 (45, 'Apple Macbook Pro 2020 M1 - 13 Inchs (Apple M1/ 8G', '/ShopPlus_Customer/assets/images/products/33d72e8efc6ef58d5fbe0cb1770c797e.jpg', 'cái', 30899000, 8, 2, ''),
-(46, 'Màn Hình Dell U2419H 24inch FullHD 8ms 60Hz IPS - ', '/ShopPlus_Customer/assets/images/products/c220e39d6100924a66679bfb346b7544.jpg', 'cái', 5090000, 8, 2, ''),
+(46, 'Màn Hình Dell U2419H 24inch FullHD 8ms 60Hz IPS - ', '/ShopPlus_Customer/assets/images/products/c220e39d6100924a66679bfb346b7544.jpg', 'cái', 5090000, 7, 2, ''),
 (47, 'Phần Mềm Diệt Virus BKAV Profressional 12 Tháng - ', '/ShopPlus_Customer/assets/images/products/f20ea1736b20a4ce9138382e51bbf75e.jpg', 'cái', 190000, 9, 2, ''),
 (48, 'Chuột Có Dây Logitech B100 - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/a9c21fbe61ce96d66c06582a49791381.jpg', 'cái', 68000, 3, 2, ''),
 (49, 'Ổ Cứng SSD Kingston A400 (240GB) - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/9df3937c390fcc0b66161f4dbe783757.jpg', 'cái', 815000, 3, 2, ''),
@@ -278,7 +285,6 @@ INSERT INTO `khachhang` (`MSKH`, `HOTENKH`, `TENCONGTY`, `SODIENTHOAI`, `EMAIL`)
 (4, 'Nguyễn Hoàng Linh', 'Công Ty Phần Mềm Hoàng Linh Plus', '0849105289', 'dev777@gmail.com'),
 (5, 'Hoang Linh Nguyen', 'upl', '0123456789', 'linh072217@gmail.com'),
 (7, 'Võ Thị Ngọc Thư', 'thư july', '01234233333', 'vongocthu0719@gmail.com'),
-(8, 'àdsdfsdf', '', '0258795478', 'abc123@gmail.com'),
 (9, 'Nguyễn Hoàng Linh', '', '0123456784', 'linhb1809143@student.ctu.edu.vn'),
 (11, 'Hoang Linh Nguyen', '', '0123456589', 'fsdf@gmail.com'),
 (12, 'MAI HỮU BẰNG', '', '08574258964', 'bangb1803891@student.ctu.edu.vn'),
@@ -295,7 +301,8 @@ INSERT INTO `khachhang` (`MSKH`, `HOTENKH`, `TENCONGTY`, `SODIENTHOAI`, `EMAIL`)
 (23, 'Hoang Linh Nguyen', '', '0123456789', 'linh0782217@gmail.com'),
 (24, 'MAI HỮU BẰNG', 'ddd', '0123456789', 'linhb18e3309143@student.ctu.edu.vn'),
 (25, 'nguyen ngoc dinh', '', '03434567890', 'dinh@gmail.com'),
-(26, 'account', '', '0876543223', 'abc65@gmail.com');
+(26, 'account', '', '0876543223', 'abc65@gmail.com'),
+(28, 'ádfsdfsdf', 'sdfsdfsdfsd', '0258975648', 'hey@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -403,13 +410,13 @@ ALTER TABLE `nhanvien`
 -- AUTO_INCREMENT for table `dathang`
 --
 ALTER TABLE `dathang`
-  MODIFY `SODONDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `SODONDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `diachikh`
 --
 ALTER TABLE `diachikh`
-  MODIFY `MADC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `MADC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `hanghoa`
@@ -421,7 +428,7 @@ ALTER TABLE `hanghoa`
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `MSKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `MSKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `loaihanghoa`
