@@ -226,7 +226,7 @@
                       </div>
                       <div class="shop-app-header-path">
                         <ul class="shop-app-header-path-list">
-                          <li class="shop-app-header-path-item"><a href="">Trang chủ</a></li>
+                          <li class="shop-app-header-path-item"><a href="/ShopPlus_Customer">Trang chủ</a></li>
                           <li class="shop-app-header-path-item"><a href="">{$_GET["action"]}</a></li>
                         </ul>
                       </div>
