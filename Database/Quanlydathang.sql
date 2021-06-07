@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2021 at 09:28 AM
+-- Generation Time: Jun 07, 2021 at 05:52 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -39,6 +39,14 @@ END$$
 --
 -- Functions
 --
+CREATE DEFINER=`root`@`localhost` FUNCTION `calculateMoneyOrder` (`id` INT) RETURNS INT(11) BEGIN
+	DECLARE total INT;
+    set total := (SELECT SUM(chitietdathang.GIADATHANG) from dathang 
+	join chitietdathang ON dathang.SODONDH = chitietdathang.SODONDH
+	where dathang.SODONDH = id);
+    return total;
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `get_sold_merchandise` (`merchandise_id` INT) RETURNS INT(11) BEGIN
 	DECLARE amount int ;
     SET amount := 
@@ -92,13 +100,10 @@ CREATE TABLE `chitietdathang` (
 --
 
 INSERT INTO `chitietdathang` (`SODONDH`, `MSHH`, `SOLUONG`, `GIADATHANG`, `GIAMGIA`) VALUES
-(31, 33, 1, 79400, 0),
-(31, 40, 2, 198000, 0),
 (32, 38, 3, 191400, 0),
 (32, 45, 1, 30899000, 0),
 (32, 53, 1, 8990000, 0),
 (32, 56, 1, 3489000, 0),
-(33, 48, 1, 68000, 0),
 (34, 42, 1, 149000, 0),
 (35, 44, 1, 198000, 0),
 (36, 38, 1, 63800, 0),
@@ -107,7 +112,15 @@ INSERT INTO `chitietdathang` (`SODONDH`, `MSHH`, `SOLUONG`, `GIADATHANG`, `GIAMG
 (39, 32, 1, 186300, 0),
 (39, 38, 2, 127600, 0),
 (40, 35, 1, 40000, 0),
-(40, 39, 1, 150000, 0);
+(40, 39, 1, 150000, 0),
+(41, 43, 2, 2790000, 0),
+(42, 54, 1, 14249100, 0),
+(42, 58, 2, 9580000, 0),
+(43, 31, 3, 288300, 0),
+(44, 48, 2, 136000, 0),
+(44, 55, 2, 4240000, 0),
+(46, 35, 1, 40000, 0),
+(46, 63, 1, 777, 0);
 
 --
 -- Triggers `chitietdathang`
@@ -141,16 +154,19 @@ CREATE TABLE `dathang` (
 --
 
 INSERT INTO `dathang` (`SODONDH`, `MSKH`, `MSNV`, `NGAYDH`, `NGAYGH`, `TRANGTHAI`) VALUES
-(31, 4, NULL, '2021-05-29', NULL, 'processing'),
-(32, 4, NULL, '2021-05-29', NULL, 'processing'),
-(33, 14, NULL, '2021-05-29', NULL, 'processing'),
-(34, 16, NULL, '2021-05-30', NULL, 'processing'),
-(35, 5, NULL, '2021-05-30', NULL, 'processing'),
-(36, 5, NULL, '2021-05-30', NULL, 'processing'),
+(32, 4, 777, '2021-05-29', '2021-06-09', 'cancelled'),
+(34, 16, 777, '2021-05-30', '2021-06-22', 'approved'),
+(35, 5, 777, '2021-05-30', '2021-06-09', 'completed'),
+(36, 5, 777, '2021-05-30', '2021-07-15', 'completed'),
 (37, 4, NULL, '2021-05-30', NULL, 'processing'),
 (38, 7, NULL, '2021-05-30', NULL, 'processing'),
 (39, 25, NULL, '2021-06-01', NULL, 'processing'),
-(40, 25, NULL, '2021-06-02', NULL, 'processing');
+(40, 25, 777, '2021-06-02', '2021-06-04', 'approved'),
+(41, 25, 777, '2021-06-02', '2021-06-24', 'completed'),
+(42, 25, NULL, '2021-06-02', NULL, 'processing'),
+(43, 4, NULL, '2021-06-03', NULL, 'processing'),
+(44, 4, NULL, '2021-06-03', NULL, 'pending'),
+(46, 26, 777, '2021-06-07', '2021-06-22', 'completed');
 
 -- --------------------------------------------------------
 
@@ -171,7 +187,6 @@ CREATE TABLE `diachikh` (
 INSERT INTO `diachikh` (`MADC`, `DIACHI`, `MSKH`) VALUES
 (5, 'Nghệ An bắc ninh', 4),
 (11, 'Long An', 14),
-(12, 'test', 4),
 (13, 'abc', 15),
 (14, 'afdfsdfsdfsdfsdfsdfdsf', 16),
 (15, 'haksdfsdfsdfdsfsdf', 17),
@@ -184,7 +199,9 @@ INSERT INTO `diachikh` (`MADC`, `DIACHI`, `MSKH`) VALUES
 (22, 'dddd', 24),
 (23, 'Long An', 5),
 (24, 'kien giang', 7),
-(26, 'bến tre', 25);
+(26, 'bến tre', 25),
+(27, 'alo', 4),
+(28, 'long an', 26);
 
 -- --------------------------------------------------------
 
@@ -209,34 +226,35 @@ CREATE TABLE `hanghoa` (
 
 INSERT INTO `hanghoa` (`MSHH`, `TENHH`, `LOCATION`, `QUYCACH`, `GIA`, `SOLUONGHANG`, `MALOAIHANG`, `GHICHU`) VALUES
 (30, 'Thay Đổi Cuộc Sống Với Nhân Số Học', '/ShopPlus_Customer/assets/images/products/56b303e000cb42faada663569fc5d7c9.jpg', 'quyển', 156000, 6, 1, ''),
-(31, 'Mình Chỉ Là Người Bình Thường (Sách Tô Màu)', '/ShopPlus_Customer/assets/images/products/604b1691c5c135a711e6ed01f3e5a290.jpg', 'quyển', 96100, 3, 1, ''),
+(31, 'Mình Chỉ Là Người Bình Thường (Sách Tô Màu)', '/ShopPlus_Customer/assets/images/products/604b1691c5c135a711e6ed01f3e5a290.jpg', 'quyển', 96100, 0, 1, ''),
 (32, 'Muôn Kiếp Nhân Sinh 2', '/ShopPlus_Customer/assets/images/products/04ffa4c4673af50ef2e594bf8e4f6fa1.jpg', 'quyển', 186300, 5, 1, ''),
 (33, 'Cây Cam Ngọt Của Tôi', '/ShopPlus_Customer/assets/images/products/2a6154ba08df6ce6161c13f4303fa19e.jpg', 'quyển', 79400, 0, 1, ''),
-(34, 'Kiếp Nào Ta Cũng Tìm Thấy Nhau', '/ShopPlus_Customer/assets/images/products/67db9bf2590d75f978e68f9dcfe0db9a.jpg', 'quyển', 72250, -2, 1, ''),
-(35, 'Từ Điển Tiếng “Em”', '/ShopPlus_Customer/assets/images/products/14338e7ae795f56d66996b611070b173.jpg', 'quyển', 40000, 1, 1, ''),
+(34, 'Kiếp Nào Ta Cũng Tìm Thấy Nhau', '/ShopPlus_Customer/assets/images/products/67db9bf2590d75f978e68f9dcfe0db9a.jpg', 'quyễn', 72250, 4, 1, ''),
+(35, 'Từ Điển Tiếng “Em”', '/ShopPlus_Customer/assets/images/products/14338e7ae795f56d66996b611070b173.jpg', 'quyển', 40000, 0, 1, ''),
 (36, 'Sách Tài Chính Cá Nhân Cho Người Việt Nam - Tặng K', '/ShopPlus_Customer/assets/images/products/2d35f5288ea643e3768c8f3361cafa5a.jpg', 'quyển', 200000, 6, 1, ''),
 (37, 'Kẻ Trộm Sách (Tái Bản)', '/ShopPlus_Customer/assets/images/products/ke-trom-sach.u5387.d20170720.t153804.332048.jpg', 'quyển', 180000, 3, 1, ''),
-(38, 'Cân Bằng Cảm Xúc, Cả Lúc Bão Giông', '/ShopPlus_Customer/assets/images/products/a19424cfe9d113c32732d93cf2d5f59a.jpg', 'quyển', 63800, 2, 1, ''),
+(38, 'Cân Bằng Cảm Xúc, Cả Lúc Bão Giông', '/ShopPlus_Customer/assets/images/products/a19424cfe9d113c32732d93cf2d5f59a.jpg', 'quyển', 63800, 0, 1, ''),
 (39, 'CẨM NANG MUA BÁN ĐẤT', '/ShopPlus_Customer/assets/images/products/f797420579b8e0f5c84a1278d23053ec.jpg', 'quyển', 150000, 0, 1, ''),
 (40, 'USB Kingston DT100G3 32GB USB 3.0 - Hàng Chính Hãn', '/ShopPlus_Customer/assets/images/products/34e6ca6587338ccf18f312d7b9b2ea3c.jpg', 'cái', 99000, 1, 2, ''),
-(41, 'Router Wifi Băng Tần Kép AC1200 TP-Link Archer C50', '/ShopPlus_Customer/assets/images/products/archer-c50-v3_s_01.u4064.d20170704.t180940.358348.jpg', 'cái', 427000, -4, 2, ''),
-(42, 'USB Kingston DT100G3 - 64GB - USB 3.0 - Hàng Chính', '/ShopPlus_Customer/assets/images/products/64_1.jpg', 'cái', 149000, 1, 2, ''),
-(43, 'Ổ Cứng Di Động WD Elements 1TB 2.5 USB 3.0 - WDBUZ', '/ShopPlus_Customer/assets/images/products/wd elements 1tb - 2.5 usb 3.0_1.u579.d20160808.t172730.328870.jpg', 'cái', 1395000, 5, 2, ''),
+(41, 'Router Wifi Băng Tần Kép AC1200 TP-Link Archer C50', '/ShopPlus_Customer/assets/images/products/archer-c50-v3_s_01.u4064.d20170704.t180940.358348.jpg', 'cái', 427000, 5, 2, ''),
+(42, 'USB Kingston DT100G3 - 64GB - USB 3.0 ', '/ShopPlus_Customer/assets/images/products/64_1.jpg', 'cái', 149000, 1, 2, ''),
+(43, 'Ổ Cứng Di Động WD Elements 1TB 2.5 USB 3.0 - WDBUZ', '/ShopPlus_Customer/assets/images/products/wd elements 1tb - 2.5 usb 3.0_1.u579.d20160808.t172730.328870.jpg', 'cái', 1395000, 3, 2, ''),
 (44, 'Bộ Kích Sóng Wifi Repeater 300Mbps Totolink EX200 ', '/ShopPlus_Customer/assets/images/products/30d0c22525743d5a2e850e76dd52fe72.jpg', 'cái', 198000, 9, 2, ''),
 (45, 'Apple Macbook Pro 2020 M1 - 13 Inchs (Apple M1/ 8G', '/ShopPlus_Customer/assets/images/products/33d72e8efc6ef58d5fbe0cb1770c797e.jpg', 'cái', 30899000, 8, 2, ''),
 (46, 'Màn Hình Dell U2419H 24inch FullHD 8ms 60Hz IPS - ', '/ShopPlus_Customer/assets/images/products/c220e39d6100924a66679bfb346b7544.jpg', 'cái', 5090000, 8, 2, ''),
 (47, 'Phần Mềm Diệt Virus BKAV Profressional 12 Tháng - ', '/ShopPlus_Customer/assets/images/products/f20ea1736b20a4ce9138382e51bbf75e.jpg', 'cái', 190000, 9, 2, ''),
-(48, 'Chuột Có Dây Logitech B100 - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/a9c21fbe61ce96d66c06582a49791381.jpg', 'cái', 68000, 5, 2, ''),
+(48, 'Chuột Có Dây Logitech B100 - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/a9c21fbe61ce96d66c06582a49791381.jpg', 'cái', 68000, 3, 2, ''),
 (49, 'Ổ Cứng SSD Kingston A400 (240GB) - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/9df3937c390fcc0b66161f4dbe783757.jpg', 'cái', 815000, 3, 2, ''),
 (50, 'Điện Thoại Samsung Galaxy A51 (6GB/128GB) - Hàng C', '/ShopPlus_Customer/assets/images/products/3d5f9878e277d1244fe6b582e074e777.jpg', 'cái', 5850000, 3, 4, ''),
 (51, 'Máy Tính Bảng Samsung Galaxy Tab S7 Wifi T870 (6GB', '/ShopPlus_Customer/assets/images/products/111e4d1c36ec7094cbfb9ea5e0334992.jpg', 'cái', 14249100, 10, 4, ''),
 (52, 'Điện Thoại Oppo A12 (3GB/32GB) - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/e9dc08e1a4e6eb6439442b2df5150aeb.jpg', 'cái', 2390000, 3, 4, ''),
 (53, 'Điện Thoại Samsung Galaxy A52 (8GB/128GB) - Hàng C', '/ShopPlus_Customer/assets/images/products/10f12e9c3eef374bf72b385f1b70124c.jpg', 'cái', 8990000, 7, 4, ''),
-(54, 'Máy Tính Bảng Samsung Galaxy Tab S7 Wifi T870 (6GB', '/ShopPlus_Customer/assets/images/products/dc0d6dcd10f4a31d5f6dcab75566637e.jpg', 'cái', 14249100, 1, 4, ''),
-(55, 'Điện Thoại Realme C11 (2GB/32GB) - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/b9f3e343440b02c54f95a9034990e0d5.jpg', 'cái', 2120000, 8, 4, ''),
+(54, 'Máy Tính Bảng Samsung Galaxy Tab S7 Wifi T870 (6GB', '/ShopPlus_Customer/assets/images/products/dc0d6dcd10f4a31d5f6dcab75566637e.jpg', 'cái', 14249100, 0, 4, ''),
+(55, 'Điện Thoại Realme C11 (2GB/32GB) - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/b9f3e343440b02c54f95a9034990e0d5.jpg', 'cái', 2120000, 6, 4, ''),
 (56, 'Điện Thoại Vsmart Live 4 (6GB/64GB) - Hàng Chính H', '/ShopPlus_Customer/assets/images/products/3360d9dcb541dd5d2aaa59ae0ad6b1c5.jpg', 'cái', 3489000, 4, 4, ''),
 (57, 'Điện Thoại Nokia 3.4 - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/0ddf107a81ccf15f9e2d27ba67e25d6b.jpg', 'cái', 2590000, 7, 4, ''),
-(58, 'Điện Thoại Samsung Galaxy M31 (6GB/128GB) - Hàng C', '/ShopPlus_Customer/assets/images/products/0df5a90d7bd5d327de2d25d510dd9b65.jpg', 'cái', 4790000, 3, 4, '');
+(58, 'Điện Thoại Samsung Galaxy M31 (6GB/128GB) - Hàng C', '/ShopPlus_Customer/assets/images/products/0df5a90d7bd5d327de2d25d510dd9b65.jpg', 'cái', 4790000, 1, 4, ''),
+(63, 'jennie', '/ShopPlus_Customer/assets/images/products/jeniekim.jpg', 'cái', 777, 7, 18, '');
 
 -- --------------------------------------------------------
 
@@ -276,7 +294,8 @@ INSERT INTO `khachhang` (`MSKH`, `HOTENKH`, `TENCONGTY`, `SODIENTHOAI`, `EMAIL`)
 (22, 'Nguyễn Hoàng Linh', '', '0125758942', 'lin3h072217@gmail.com'),
 (23, 'Hoang Linh Nguyen', '', '0123456789', 'linh0782217@gmail.com'),
 (24, 'MAI HỮU BẰNG', 'ddd', '0123456789', 'linhb18e3309143@student.ctu.edu.vn'),
-(25, 'nguyen ngoc dinh', '', '03434567890', 'dinh@gmail.com');
+(25, 'nguyen ngoc dinh', '', '03434567890', 'dinh@gmail.com'),
+(26, 'account', '', '0876543223', 'abc65@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -300,7 +319,8 @@ INSERT INTO `loaihanghoa` (`MALOAIHANG`, `TENLOAIHANG`) VALUES
 (4, 'Điện Thoại'),
 (5, 'Thực Phẩm'),
 (6, 'Thời Trang'),
-(7, 'Laptop');
+(7, 'Laptop'),
+(18, 'khác');
 
 -- --------------------------------------------------------
 
@@ -383,31 +403,31 @@ ALTER TABLE `nhanvien`
 -- AUTO_INCREMENT for table `dathang`
 --
 ALTER TABLE `dathang`
-  MODIFY `SODONDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `SODONDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `diachikh`
 --
 ALTER TABLE `diachikh`
-  MODIFY `MADC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `MADC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `hanghoa`
 --
 ALTER TABLE `hanghoa`
-  MODIFY `MSHH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `MSHH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `MSKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `MSKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `loaihanghoa`
 --
 ALTER TABLE `loaihanghoa`
-  MODIFY `MALOAIHANG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `MALOAIHANG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `nhanvien`
