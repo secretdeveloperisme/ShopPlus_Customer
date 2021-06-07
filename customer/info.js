@@ -138,6 +138,9 @@ $(()=>{
               case "completed" :
                 status = "Đã Giao"
                 break;
+              case "cancelled" :
+                status = "Đã Hũy"
+                break;
             }
             let tr = `
                 <tr>
