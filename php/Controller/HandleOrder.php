@@ -7,7 +7,7 @@
   $connect = connectDB();
   function insertOrder($order){
     $insertId = 0;
-    $prepare = $GLOBALS["connect"]->prepare("INSERT INTO DATHANG(MSKH,NGAYDH,TRANGTHAI) VALUES (?,?,?)");
+    $prepare = $GLOBALS["connect"]->prepare("INSERT INTO dathang(MSKH,NGAYDH,TRANGTHAI) VALUES (?,?,?)");
     $idCustomer = $order->getIdCustomer();
     $orderDate = $order->getOrderDate();
     $status = $order->getStatus();
@@ -21,7 +21,7 @@
     }
   }
   function insertOrderDetail($orderDetail){
-    $prepare = $GLOBALS["connect"]->prepare("INSERT INTO CHITIETDATHANG(SODONDH,MSHH,SOLUONG,GIADATHANG,GIAMGIA) VALUES (?,?,?,?,?)");
+    $prepare = $GLOBALS["connect"]->prepare("INSERT INTO chitietdathang(SODONDH,MSHH,SOLUONG,GIADATHANG,GIAMGIA) VALUES (?,?,?,?,?)");
     $orderId = $orderDetail->getOrderId();
     $orderMerchandiseId = $orderDetail->getIdMerchandise();
     $product = getProductViaID($orderMerchandiseId);

@@ -22,7 +22,7 @@
     }
   }
   function isExistProduct($id){
-    $result = $GLOBALS["connect"]->query("SELECT MSHH FROM HANGHOA WHERE MSHH = $id");
+    $result = $GLOBALS["connect"]->query("SELECT MSHH FROM hanghoa WHERE MSHH = $id");
     if(($result->num_rows) > 0)
       return true;
     else 
@@ -50,8 +50,8 @@
   function getCategoryWithIdProduct($id)
   {
     $result = $GLOBALS["connect"]->query("
-        SELECT TENLOAIHANG FROM LOAIHANGHOA
-        INNER JOIN HANGHOA ON LOAIHANGHOA.MALOAIHANG = HANGHOA.MALOAIHANG
+        SELECT TENLOAIHANG FROM loaihanghoa
+        INNER JOIN hanghoa ON loaihanghoa.MALOAIHANG = hanghoa.MALOAIHANG
         WHERE MSHH = $id
     ");
     if ($result->num_rows > 0) {
