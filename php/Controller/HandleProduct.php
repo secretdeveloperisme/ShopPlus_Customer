@@ -65,4 +65,49 @@
     $result = $GLOBALS["connect"]->query("SELECT get_sold_merchandise($id) as amount");
     return $result->fetch_assoc()["amount"];
   }
+  function getProductWithSearching($queryString,$categoryID,$orderAsc,$orderDesc,$lowPrice,$highPrice,$page){
+    $queryCategory = $queryOrderAsc = $queryOrderDesc = $queryPrice = $queryPage = "";
+    if(!empty($categoryID)){
+      $queryCategory = "AND loaihanghoa.MALOAIHANG = $categoryID";
+    }
+    if(!empty($orderAsc)){
+      $queryOrderAsc = "ORDER BY hanghoa.GIA ASC";
+    }
+    if(!empty($orderDesc)){
+      $queryOrderDesc = "ORDER BY hanghoa.GIA DESC";
+    }
+    if(!empty($lowPrice)&&!empty($highPrice)){
+      $queryPrice = "AND hanghoa.GIA BETWEEN $lowPrice AND $highPrice ";
+    }
+    if(!empty($page)){
+      $page = ($page - 1)*10;
+      $queryPage= "LIMIT $page,10";
+    }
+    $products = array();
+    $allProductQuery = "
+        SELECT * FROM hanghoa
+        JOIN loaihanghoa ON hanghoa.MALOAIHANG = loaihanghoa.MALOAIHANG
+        WHERE 
+              LOWER(TENHH) REGEXP '$queryString'
+              $queryCategory 
+              $queryPrice
+              $queryOrderAsc
+              $queryOrderDesc
+              $queryPage
+        ";
+    $result = $GLOBALS["connect"]->query($allProductQuery);
+    if($result->num_rows > 0){
+      while ($row = $result->fetch_assoc()){
+        $merchandise = new Merchandise(
+          $row["MSHH"],
+          $row['TENHH'],$row["LOCATION"],
+          $row["QUYCACH"],$row["GIA"],$row["SOLUONGHANG"],
+          $row["MALOAIHANG"],$row["GHICHU"]
+        );
+        array_push($products,$merchandise);
+      }
+      return $products;
+    }
+    return $products;
+  }
 ?>
