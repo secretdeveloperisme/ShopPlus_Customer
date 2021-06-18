@@ -1,3 +1,22 @@
+<?php
+  include_once "../php/Controller/HandleProduct.php";
+  $queryString = $categoryID = $orderAsc = $orderDesc = $lowPrice = $highPrice = $page = "";
+  if(isset($_GET["queryString"]))
+      $queryString = $_GET["queryString"];
+  if(isset($_GET["categoryID"]))
+    $categoryID = $_GET["categoryID"];
+  if(isset($_GET["orderAsc"]))
+    $orderAsc = $_GET["orderAsc"];
+  if(isset($_GET["orderDesc"]))
+    $orderDesc = $_GET["orderDesc"];
+  if(isset($_GET["lowPrice"]))
+    $lowPrice = $_GET["lowPrice"];
+  if(isset($_GET["highPrice"]))
+    $highPrice = $_GET["highPrice"];
+  if(isset($_GET["page"]))
+    $page = $_GET["page"];
+  $searchingProducts = getProductWithSearching($queryString,$categoryID,$orderAsc,$orderDesc,$lowPrice,$highPrice,$page);
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -309,216 +328,35 @@
             </div>
           </div>
           <div class="shop-app-product-display grid-row">
-            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-              <a href="#">
-                <div class="product-display-item-container">
-                  <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                    <div class="product-display-item__favorite">
-                      Yêu thích
-                    </div>
-                    <div class="product-display-item-description">
-                      <div class="product-display-item-description__name">
-                        Sách - 30 chủ đề từ vựng Tiếng Anh (Bộ 2 tập, lẻ tùy chọn)
+            <?php
+              foreach ($searchingProducts as $searchingProduct){
+                $soldProductAmount = getSoldProductAmount($searchingProduct->getId());
+                echo <<<PRODUCT
+                  <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
+                    <a href="#">
+                      <div class="product-display-item-container">
+                        <div class="product-display-container-box-shadow">
+                          <div class="product-display-item__img" style="background-image: url('{$searchingProduct->getLocation()}');"></div>
+                          <div class="product-display-item__favorite">
+                            Yêu thích
+                          </div>
+                          <div class="product-display-item-description">
+                            <div class="product-display-item-description__name">
+                              {$searchingProduct->getName()}
+                            </div>
+                            <div class="product-display-item-description-sell">
+                              <h2 class="product-display-item-description-sell__price">{$searchingProduct->getPriceWithComma()}</h2>
+                              <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">{$soldProductAmount}</span></h2>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="product-display-item-description-sell">
-                        <h2 class="product-display-item-description-sell__price">59,000đ</h2>
-                        <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                      </div>
-                    </div>
+                    </a>
                   </div>
-                </div>
-              </a>
-            </div>
-            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-              <a href="#">
-                <div class="product-display-item-container">
-                  <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                    <div class="product-display-item__favorite">
-                      Yêu thích
-                    </div>
-                    <div class="product-display-item-description">
-                      <div class="product-display-item-description__name">
-                        Sách - 30 chủ đề từ vựng Tiếng Anh (Bộ 2 tập, lẻ tùy chọn)
-                      </div>
-                      <div class="product-display-item-description-sell">
-                        <h2 class="product-display-item-description-sell__price">59,000đ</h2>
-                        <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-              <a href="#">
-                <div class="product-display-item-container">
-                  <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                    <div class="product-display-item__favorite">
-                      Yêu thích
-                    </div>
-                    <div class="product-display-item-description">
-                      <div class="product-display-item-description__name">
-                        Sách - 30 chủ đề từ vựng Tiếng Anh (Bộ 2 tập, lẻ tùy chọn)
-                      </div>
-                      <div class="product-display-item-description-sell">
-                        <h2 class="product-display-item-description-sell__price">59,000đ</h2>
-                        <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-              <a href="#">
-                <div class="product-display-item-container">
-                  <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                    <div class="product-display-item__favorite">
-                      Yêu thích
-                    </div>
-                    <div class="product-display-item-description">
-                      <div class="product-display-item-description__name">
-                        Sách - 30 chủ đề từ vựng Tiếng Anh (Bộ 2 tập, lẻ tùy chọn)
-                      </div>
-                      <div class="product-display-item-description-sell">
-                        <h2 class="product-display-item-description-sell__price">59,000đ</h2>
-                        <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-              <a href="#">
-                <div class="product-display-item-container">
-                  <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                    <div class="product-display-item__favorite">
-                      Yêu thích
-                    </div>
-                    <div class="product-display-item-description">
-                      <div class="product-display-item-description__name">
-                        Sách - 30 chủ đề từ vựng Tiếng Anh (Bộ 2 tập, lẻ tùy chọn)
-                      </div>
-                      <div class="product-display-item-description-sell">
-                        <h2 class="product-display-item-description-sell__price">59,000đ</h2>
-                        <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-              <a href="#">
-                <div class="product-display-item-container">
-                  <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                    <div class="product-display-item__favorite">
-                      Yêu thích
-                    </div>
-                    <div class="product-display-item-description">
-                      <div class="product-display-item-description__name">
-                        Sách - 30 chủ đề từ vựng Tiếng Anh (Bộ 2 tập, lẻ tùy chọn)
-                      </div>
-                      <div class="product-display-item-description-sell">
-                        <h2 class="product-display-item-description-sell__price">59,000đ</h2>
-                        <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-              <a href="#">
-                <div class="product-display-item-container">
-                  <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                    <div class="product-display-item__favorite">
-                      Yêu thích
-                    </div>
-                    <div class="product-display-item-description">
-                      <div class="product-display-item-description__name">
-                        Sách - 30 chủ đề từ vựng Tiếng Anh (Bộ 2 tập, lẻ tùy chọn)
-                      </div>
-                      <div class="product-display-item-description-sell">
-                        <h2 class="product-display-item-description-sell__price">59,000đ</h2>
-                        <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-              <a href="#">
-                <div class="product-display-item-container">
-                  <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                    <div class="product-display-item__favorite">
-                      Yêu thích
-                    </div>
-                    <div class="product-display-item-description">
-                      <div class="product-display-item-description__name">
-                        Sách - 30 chủ đề từ vựng Tiếng Anh (Bộ 2 tập, lẻ tùy chọn)
-                      </div>
-                      <div class="product-display-item-description-sell">
-                        <h2 class="product-display-item-description-sell__price">59,000đ</h2>
-                        <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-              <a href="#">
-                <div class="product-display-item-container">
-                  <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                    <div class="product-display-item__favorite">
-                      Yêu thích
-                    </div>
-                    <div class="product-display-item-description">
-                      <div class="product-display-item-description__name">
-                        Sách - 30 chủ đề từ vựng Tiếng Anh (Bộ 2 tập, lẻ tùy chọn)
-                      </div>
-                      <div class="product-display-item-description-sell">
-                        <h2 class="product-display-item-description-sell__price">59,000đ</h2>
-                        <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-              <a href="#">
-                <div class="product-display-item-container">
-                  <div class="product-display-container-box-shadow">
-                    <div class="product-display-item__img" style="background-image: url(/assets/images/products/1f24a67376c5e98b3c3c08c6300e5c9b_tn.jfif);"></div>
-                    <div class="product-display-item__favorite">
-                      Yêu thích
-                    </div>
-                    <div class="product-display-item-description">
-                      <div class="product-display-item-description__name">
-                        Sách - 30 chủ đề từ vựng Tiếng Anh (Bộ 2 tập, lẻ tùy chọn)
-                      </div>
-                      <div class="product-display-item-description-sell">
-                        <h2 class="product-display-item-description-sell__price">59,000đ</h2>
-                        <h2 class="product-display-item-description-sell__sold">Đã bán <span class="price">2</span></h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
+                PRODUCT;
+
+              }
+            ?>
           </div>
         </div>
       </div>
