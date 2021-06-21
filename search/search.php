@@ -22,7 +22,7 @@
 <head>
   <meta charset="UTF-8">
   <title>ShopPlus</title>
-  <link rel="shortcut icon" href="/assets/images/icons/shopplus.svg" type="image/x-icon">
+  <link rel="shortcut icon" href="../assets/images/icons/shopplus.svg" type="image/x-icon">
   <meta name="author" content="hoang linh plus">
   <meta name="keywords" content="shopplus, cửa hàng plus, hoang linh plus">
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -36,10 +36,13 @@
   <link rel="stylesheet" href="../assets/css/navbar.css">
   <link rel="stylesheet" href="../assets/css/index.css">
   <link rel="stylesheet" href="../assets/css/footer.css">
-  <script src="js/navbar.js"></script>
-  <script src="js/index.js"></script>
+  <script src="../js/base.js"></script>
+  <script src="../js/Controller/handleCart.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/searching.js"></script>
 </head>
 <body>
+  <div id="toast"></div>
   <div class="shop-app">
     <div class="shop-app-header">
       <div class="nav">
@@ -140,9 +143,9 @@
           </div>
         </div>
         <div class="nav-search">
-          <form method="get" action="search.php" class="nav-search-form">
+          <form method="get" action="search.php" class="nav-search-form" autocomplete="off">
             <div class="nav-search-form-input">
-              <input type="text" class="nav-search-form-input__box" name="querySearch"  placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Mua, hoặc muốn....">
+              <input type="text" class="nav-search-form-input__box" name="queryString"  placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Mua, hoặc muốn....">
               <div class="nav-search-form-input-autocomplete">
                 <ul class="nav-search-form-input-autocomplete-list">
                   <li class="nav-search-form-input-autocomplete-item">
@@ -271,12 +274,7 @@
               <i class="fas fa-list"></i>
               <span>Tất Cả Danh Mục</span>
             </h1>
-            <ul class="container-shop-app-filter-category-list">
-              <li class="container-shop-app-filter-category-item active"><a href="#">Điện Thoại</a></li>
-              <li class="container-shop-app-filter-category-item"><a href="#">Thể Thao</a></li>
-              <li class="container-shop-app-filter-category-item"><a href="#">Laptop - Máy Tính</a></li>
-              <li class="container-shop-app-filter-category-item"><a href="#">Thời Trang</a></li>
-              <li class="container-shop-app-filter-category-item"><a href="#">Nhà Sách</a></li>
+            <ul class="container-shop-app-filter-category-list" id="categoryFilter">
             </ul>
           </div>
           <div class="container-shop-app-filter-search">
@@ -321,8 +319,8 @@
                   <span>Sắp Xếp giá Theo</span> <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="shop-app-product-header-sort-price-list dropdown-content">
-                  <div class="shop-app-product-header-sort-price-item"><a href=""><i class="fas fa-arrow-up"></i><span>Giá: Từ Thấp Đến Cao</span></a></div>
-                  <div class="shop-app-product-header-sort-price-item"><a href=""><i class="fas fa-arrow-down"></i><span>Giá: Từ Cao Đến Thấp </span></a></div>
+                  <div class="shop-app-product-header-sort-price-item" id="btnAscPrice"><a><i class="fas fa-arrow-up"></i><span>Giá: Từ Thấp Đến Cao</span></a></div>
+                  <div class="shop-app-product-header-sort-price-item" id="btnDescPrice"><a><i class="fas fa-arrow-down"></i><span>Giá: Từ Cao Đến Thấp </span></a></div>
                 </div>
               </div>
             </div>
@@ -333,7 +331,7 @@
                 $soldProductAmount = getSoldProductAmount($searchingProduct->getId());
                 echo <<<PRODUCT
                   <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
-                    <a href="#">
+                    <a href="/ShopPlus_Customer/ProductDetail/product_detail.php?id={$searchingProduct->getId()}">
                       <div class="product-display-item-container">
                         <div class="product-display-container-box-shadow">
                           <div class="product-display-item__img" style="background-image: url('{$searchingProduct->getLocation()}');"></div>
@@ -396,24 +394,24 @@
         <div class="footer-information-item col-xl-3">
           <h1 class="footer-information-item__label">Phương Thức Thanh Toán</h1>
           <ul class="footer-information-item-list footer-information-item-list--wrap">
-            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/visa.svg" alt=""></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/cash.svg" alt=""></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/internet-banking.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/visa.svg" alt=""></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/cash.svg" alt=""></a></li>
+            <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/internet-banking.svg"
                   alt=""></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/installment.svg" alt=""></a>
+            <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/installment.svg" alt=""></a>
             </li>
           </ul>
         </div>
         <div class="footer-information-item col-xl-3">
           <h1 class="footer-information-item__label">Kết Nối với chúng tôi</h1>
           <ul class="footer-information-item-list footer-information-item-list--wrap">
-            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/fb.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/fb.svg"
                   alt=""><span>Facebook</span></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/zalo-seeklogo.com.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/zalo-seeklogo.com.svg"
                   width="32" height="32" alt=""><span>Zalo</span></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/youtube.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/youtube.svg"
                   alt=""><span>Youtube</span></a></li>
-            <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/github-1.svg"
+            <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/github-1.svg"
                   alt=""><span>Github</span></a></li>
           </ul>
         </div>
