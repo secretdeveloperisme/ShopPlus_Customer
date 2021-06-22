@@ -1,5 +1,6 @@
 <?php
   include_once "../php/Controller/HandleProduct.php";
+  parse_str($_SERVER["QUERY_STRING"],$queryURL);
   $queryString = $categoryID = $orderAsc = $orderDesc = $lowPrice = $highPrice = $page = "";
   if(isset($_GET["queryString"]))
       $queryString = $_GET["queryString"];
@@ -16,6 +17,14 @@
   if(isset($_GET["page"]))
     $page = $_GET["page"];
   $searchingProducts = getProductWithSearching($queryString,$categoryID,$orderAsc,$orderDesc,$lowPrice,$highPrice,$page);
+  $numberOfProducts =  getProductNumbersWithSearching($queryString,$categoryID,$lowPrice,$highPrice);
+  $count = 0;
+  $pages = array();
+  while($numberOfProducts >= 0){
+    $numberOfProducts -=10;
+    $count++;
+    array_push($pages,$count);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -287,11 +296,11 @@
                 Khoảng Giá 
               </h2>
               <div class="container-shop-app-filter-search-price-range">
-                <input type="number" placeholder="đ Từ" class="container-shop-app-filter-search-price-range__from" maxlength="13" min="0" max="9999999">
+                <input type="number" placeholder="đ Từ" class="container-shop-app-filter-search-price-range__from" maxlength="13" min="0" max="9999999" value="<?php echo $lowPrice?>">
                 <div class="container-shop-app-filter-search-price-range__line"></div>
-                <input type="number" placeholder="đ Đến" class="container-shop-app-filter-search-price-range__to" maxlength="13" min="0" max="9999999">
+                <input type="number" placeholder="đ Đến" class="container-shop-app-filter-search-price-range__to" maxlength="13" min="0" max="9999999" value="<?php echo $highPrice?>">
               </div>
-              <button class="container-shop-app-filter-search-price-range__btn btn">
+              <button class="container-shop-app-filter-search-price-range__btn btn" id="btnFilterPrice">
                 Áp Dụng
               </button>
             </div>
@@ -312,7 +321,7 @@
         </div>
         <div class="container-shop-app-display-product grid col-xl-10">
           <div class="shop-app-product-header grid-row">
-            <div class="shop-app-product-header__label "><i class="fas fa-star"></i><span>Tất Cả Sản Phẩm</span></div>
+            <div class="shop-app-product-header__label "><i class="fas fa-star"></i><span>Kết quả tìm kiếm : <span style="color: red"><?php echo $queryString==""?"Tất cả sản phẩm":$queryString; ?></span></span></div>
             <div class="shop-app-product-header-sort">
               <div class="shop-app-product-header-sort-price dropdown">
                 <button class="shop-app-product-header-sort-price__lablel dropdown-btn">
@@ -360,13 +369,29 @@
       </div>
       <div class="pagination">
         <div class="pagination-items">
-          <a href=""><i class="fas fa-chevron-left"></i></a>
-          <a href="" class="active">1</a>
-          <a href="">2</a>
-          <a href="">3</a>
-          <a href="">4</a>
-          <a href="">5</a>
-          <a href=""><i class="fas fa-chevron-right"></i></a>
+          <a href="
+            <?php $queryURL["page"] = (int)$queryURL["page"] -1 ;
+              $leftPageHREF = "./search.php?". http_build_query($queryURL);
+              echo "$leftPageHREF";?>" id="btnLeftPage"><i class="fas fa-chevron-left"></i></a>
+           <?php
+            //$queryURL = parse_str($_SERVER["QUERY_STRING"]);
+            foreach ($pages as $p){
+              if($p == $page)
+                echo "<a class='active'>$p</a>";
+              else{
+                $queryURL["page"] = $p;
+                $pageHREF = "./search.php?". http_build_query($queryURL);
+                echo "<a href='$pageHREF'>$p</a>";
+              }
+
+            }
+           ?>
+          <a href="
+            <?php
+              parse_str($_SERVER["QUERY_STRING"],$queryURL);
+              $queryURL["page"] = (int)$queryURL["page"] + 1 ;
+              $rightPageHREF = "./search.php?". http_build_query($queryURL);
+              echo "$rightPageHREF";?>" id="btnRightPage"><i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
     </div>
