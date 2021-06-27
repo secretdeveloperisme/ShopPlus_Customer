@@ -72,7 +72,7 @@ $(function(){
       dataType: "text",
       success: function (response) {
         products = JSON.parse(response);
-        if(products.length != 0){
+        if(products.length !== 0){
           products.forEach(function(value,index){
             let soldProductAmount = 0;
             $.ajax({
@@ -83,20 +83,36 @@ $(function(){
                 id : value.id
               },
               async : false,
-              dataType : "text",
+              dataType : "json",
               success : (response)=>{
                 soldProductAmount = JSON.parse(response);
               }
             })
+            let isBestSeller = "";
+            $.ajax({
+              url : "/ShopPlus_Customer/php/Controller/API/HandleProductAPI.php",
+              type : "GET",
+              data : {
+                action : "isBestSeller",
+                id : value.id
+              },
+              async: false,
+              dataType : "text",
+              success : (response)=>{
+                console.log(response)
+                isBestSeller = JSON.parse(response)
+              }
+            })
+            let bestSellerHTML = ""
+            if(isBestSeller)
+               bestSellerHTML = `<div class="product-display-item__favorite">Best Seller</div>`
             let productItem = `
             <div class="shop-app-product-display-item col-xl-2 col-es-6">
             <a href="ProductDetail/product_detail.php?id=${value.id}">
               <div class="product-display-item-container">
                 <div class="product-display-container-box-shadow">
                   <div class="product-display-item__img" style="background-image: url('${value.location}');"></div>
-                  <div class="product-display-item__favorite">
-                    Yêu thích
-                  </div>
+                  ${bestSellerHTML}
                   <div class="product-display-item-description">
                     <div class="product-display-item-description__name">
                       ${value.name}
