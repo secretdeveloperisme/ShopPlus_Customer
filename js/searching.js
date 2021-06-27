@@ -2,6 +2,7 @@ $(()=>{
   let queryString = {}
   if(location.search !== "")
     queryString = getQueryStringURLasObject()
+  queryString
   let $btnAscPrice = $("#btnAscPrice")
   let $btnDescPrice = $("#btnDescPrice")
   $btnAscPrice.click((event)=>{
@@ -63,6 +64,22 @@ $(()=>{
     let urlParameter = new URLSearchParams(queryString).toString()
     window.open("./search.php?"+urlParameter,"_top")
   })
+  // handle BestSeller
+  let $cbBestSeller = $("#cbBestSeller")
+  let $btnBestSeller = $("#btnBestSeller")
+  $btnBestSeller.click((event)=>{
+    if($cbBestSeller.prop("checked")){
+      queryString["bestSeller"] = "true";
+      queryString["page"] = "1";
+      let urlParameter = new URLSearchParams(queryString).toString()
+      window.open("./search.php?"+urlParameter,"_top")
+    }
+    else{
+        delete queryString["bestSeller"]
+      let urlParameter = new URLSearchParams(queryString).toString()
+      window.open("./search.php?"+urlParameter,"_top")
+    }
+  })
   //handle page btn left and right
   let $btnLeftPage = $("#btnLeftPage")
   let $btnRightPage = $("#btnRightPage")
@@ -70,4 +87,6 @@ $(()=>{
     $btnLeftPage.remove();
   if($btnRightPage.prev().attr("class") == "active")
     $btnRightPage.remove();
+
+
 })
