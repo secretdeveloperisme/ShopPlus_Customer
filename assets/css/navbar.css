@@ -149,9 +149,9 @@
   height: 100%;
   border-radius:  5px 0px 0px 5px ;
 }
-.nav-search-form-input__box:focus + .nav-search-form-input-autocomplete{
+/* .nav-search-form-input__box:focus + .nav-search-form-input-autocomplete{
   display: block;
-}
+} */
 .nav-search-form-input-autocomplete{
   display: none;
   position: absolute;
