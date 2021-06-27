@@ -1,7 +1,7 @@
 <?php
   include_once "../php/Controller/HandleProduct.php";
   parse_str($_SERVER["QUERY_STRING"],$queryURL);
-  $queryString = $categoryID = $orderAsc = $orderDesc = $lowPrice = $highPrice = $page = "";
+  $queryString = $categoryID = $orderAsc = $orderDesc = $lowPrice = $highPrice =$bestSeller= $page = "";
   if(isset($_GET["queryString"]))
       $queryString = $_GET["queryString"];
   if(isset($_GET["categoryID"]))
@@ -14,13 +14,16 @@
     $lowPrice = $_GET["lowPrice"];
   if(isset($_GET["highPrice"]))
     $highPrice = $_GET["highPrice"];
+  if(isset($_GET["bestSeller"]))
+    $bestSeller = $_GET["bestSeller"];
   if(isset($_GET["page"]))
     $page = $_GET["page"];
-  $searchingProducts = getProductWithSearching($queryString,$categoryID,$orderAsc,$orderDesc,$lowPrice,$highPrice,$page);
-  $numberOfProducts =  getProductNumbersWithSearching($queryString,$categoryID,$lowPrice,$highPrice);
+  $searchingProducts = getProductWithSearching($queryString,$categoryID,$orderAsc,$orderDesc,$lowPrice,$highPrice,$bestSeller,$page);
+  $numberOfProducts =  getProductNumbersWithSearching($queryString,$categoryID,$lowPrice,$highPrice,$bestSeller);
+
   $count = 0;
   $pages = array();
-  while($numberOfProducts >= 0){
+  while($numberOfProducts > 0){
     $numberOfProducts -=10;
     $count++;
     array_push($pages,$count);
@@ -154,11 +157,20 @@
         <div class="nav-search">
           <form method="get" action="search.php" class="nav-search-form" autocomplete="off">
             <div class="nav-search-form-input">
+              <input type="hidden" name="page" value="1">
               <input type="text" class="nav-search-form-input__box" name="queryString"  placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Mua, hoặc muốn....">
               <div class="nav-search-form-input-autocomplete">
                 <ul class="nav-search-form-input-autocomplete-list">
                   <li class="nav-search-form-input-autocomplete-item">
-                    <a href="#">
+                    <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=1&page=1">
+                      <span class="nav-search-form-input-autocomplete-item__icon">
+                        <i class="fas fa-search"></i>
+                      </span>
+                      <span class="nav-search-form-input-autocomplete-item__label">Sách</span>
+                    </a>
+                  </li>
+                  <li class="nav-search-form-input-autocomplete-item">
+                    <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=2&page=1">
                       <span class="nav-search-form-input-autocomplete-item__icon">
                         <i class="fas fa-search"></i>
                       </span>
@@ -166,27 +178,19 @@
                     </a>
                   </li>
                   <li class="nav-search-form-input-autocomplete-item">
-                    <a href="#">
+                    <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=4&page=1">
                       <span class="nav-search-form-input-autocomplete-item__icon">
                         <i class="fas fa-search"></i>
                       </span>
-                      <span class="nav-search-form-input-autocomplete-item__label">Áo Khoác</span>
+                      <span class="nav-search-form-input-autocomplete-item__label">Điện Thoại</span>
                     </a>
                   </li>
                   <li class="nav-search-form-input-autocomplete-item">
-                    <a href="#">
+                    <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=6&page=1">
                       <span class="nav-search-form-input-autocomplete-item__icon">
                         <i class="fas fa-search"></i>
                       </span>
-                      <span class="nav-search-form-input-autocomplete-item__label">Cầu Lông</span>
-                    </a>
-                  </li>
-                  <li class="nav-search-form-input-autocomplete-item">
-                    <a href="#">
-                      <span class="nav-search-form-input-autocomplete-item__icon">
-                        <i class="fas fa-search"></i>
-                      </span>
-                      <span class="nav-search-form-input-autocomplete-item__label">Sách</span>
+                      <span class="nav-search-form-input-autocomplete-item__label">Thời Trang</span>
                     </a>
                   </li>
                 </ul>
@@ -306,13 +310,13 @@
             </div>
             <div class="container-shop-app-filter-search-favorite">
               <h2 class="container-shop-app-filter-search-favorite__label">
-                Yêu Thích 
+                Best Seller
               </h2>
               <div class="container-shop-app-filter-search-favorite-input">
-                <input type="checkbox" name="" id="">
-                <span>Yêu Thích</span>
+                <input type="checkbox" name="" id="cbBestSeller" <?php if(!empty($bestSeller)) echo "checked"?>>
+                <label for="cbBestSeller">Best Seller</label>
               </div>
-              <button class="container-shop-app-filter-search-favorite__btn btn">
+              <button class="container-shop-app-filter-search-favorite__btn btn" id="btnBestSeller">
                 Áp Dụng
               </button>
             </div>
@@ -338,15 +342,19 @@
             <?php
               foreach ($searchingProducts as $searchingProduct){
                 $soldProductAmount = getSoldProductAmount($searchingProduct->getId());
+                $isBestSeller = "";
+                if(isTopTenSeller($searchingProduct->getId())){
+                  $isBestSeller = '
+                    <div class="product-display-item__favorite">Top Seller</div>
+                  ';
+                }
                 echo <<<PRODUCT
                   <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
                     <a href="/ShopPlus_Customer/ProductDetail/product_detail.php?id={$searchingProduct->getId()}">
                       <div class="product-display-item-container">
                         <div class="product-display-container-box-shadow">
                           <div class="product-display-item__img" style="background-image: url('{$searchingProduct->getLocation()}');"></div>
-                          <div class="product-display-item__favorite">
-                            Yêu thích
-                          </div>
+                          $isBestSeller
                           <div class="product-display-item-description">
                             <div class="product-display-item-description__name">
                               {$searchingProduct->getName()}
