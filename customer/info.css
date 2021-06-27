@@ -1,3 +1,4 @@
+
 .shop-app-account{
   display:flex;
   background-color: var(--app-background-color);
@@ -98,6 +99,7 @@
   font-size: 1.5rem;
 } 
 .account-content-order-table td{
+  text-align: center;
   cursor: pointer;
 } 
 .account-content-order-table td{
@@ -159,6 +161,29 @@
   flex-grow: 1;
 }
 .content-address-item button{
+}
+.status{
+  border-radius: 3px;
+  padding: 5px 10px;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  background-origin: content-box !important;
+}
+.status--completed{
+  background: #198754;
+}
+.status--pending{
+  background: #0d6efd;
+}
+.status--processing{
+  background: #198754;
+}
+.status--approved{
+  background: #0dcaf0;
+}
+.status--cancelled{
+  background: #dc3545;
 }
 @keyframes appear-content {
   from{
