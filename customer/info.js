@@ -148,7 +148,7 @@ $(()=>{
                   <td>${value.orderDate}</td>
                   <td>${listProduct.join(",").toString()}</td>
                   <td>${numberWithCommas(totalPrice)}</td>
-                  <td>${status}</td>
+                  <td><span class="status status--${value.status}">${status}</span></td>
                 </tr>
                 `
             $ordersTBody.html((index, old) => {
