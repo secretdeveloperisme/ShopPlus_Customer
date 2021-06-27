@@ -39,6 +39,7 @@
                   <link rel="stylesheet" href="info.css">
                   <link rel="stylesheet" href="../assets/css/footer.css">
                   <script src="/ShopPlus_Customer/js/base.js"></script>
+                  <script src="/ShopPlus_Customer/js/navbar.js"></script>
                   <script src="/ShopPlus_Customer/js/Controller/handleCart.js"></script>
                   <script src="info.js"></script>
                 </head>
@@ -144,44 +145,45 @@
                           </div>
                         </div>
                         <div class="nav-search">
-                          <form name="querySearch" method="get" action="../search/search.php" class="nav-search-form">
+                          <form name="querySearch" method="get" action="../search/search.php" class="nav-search-form" autocomplete="off">
                             <div class="nav-search-form-input">
-                              <input type="text" class="nav-search-form-input__box" name="querySearch"  placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Mua, hoặc muốn...."> 
+                              <input type="hidden" name="page" value="1">
+                              <input type="text" class="nav-search-form-input__box" name="queryString"  placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Mua, hoặc muốn...."> 
                               <div class="nav-search-form-input-autocomplete">
-                                <ul class="nav-search-form-input-autocomplete-list">
-                                  <li class="nav-search-form-input-autocomplete-item">
-                                    <a href="#">
-                                      <span class="nav-search-form-input-autocomplete-item__icon">
-                                        <i class="fas fa-search"></i>
-                                      </span>
-                                      <span class="nav-search-form-input-autocomplete-item__label">Máy Tính</span>
-                                    </a>
-                                  </li>
-                                  <li class="nav-search-form-input-autocomplete-item">
-                                    <a href="#">
-                                      <span class="nav-search-form-input-autocomplete-item__icon">
-                                        <i class="fas fa-search"></i>
-                                      </span>
-                                      <span class="nav-search-form-input-autocomplete-item__label">Áo Khoác</span>
-                                    </a>
-                                  </li>
-                                  <li class="nav-search-form-input-autocomplete-item">
-                                    <a href="#">
-                                      <span class="nav-search-form-input-autocomplete-item__icon">
-                                        <i class="fas fa-search"></i>
-                                      </span>
-                                      <span class="nav-search-form-input-autocomplete-item__label">Cầu Lông</span>
-                                    </a>
-                                  </li>
-                                  <li class="nav-search-form-input-autocomplete-item">
-                                    <a href="#">
-                                      <span class="nav-search-form-input-autocomplete-item__icon">
-                                        <i class="fas fa-search"></i>
-                                      </span>
-                                      <span class="nav-search-form-input-autocomplete-item__label">Sách</span>
-                                    </a>
-                                  </li>
-                                </ul>
+                              <ul class="nav-search-form-input-autocomplete-list">
+                                <li class="nav-search-form-input-autocomplete-item">
+                                  <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=1&page=1">
+                                    <span class="nav-search-form-input-autocomplete-item__icon">
+                                      <i class="fas fa-search"></i>
+                                    </span>
+                                    <span class="nav-search-form-input-autocomplete-item__label">Sách</span>
+                                  </a>
+                                </li>
+                                <li class="nav-search-form-input-autocomplete-item">
+                                  <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=2&page=1">
+                                    <span class="nav-search-form-input-autocomplete-item__icon">
+                                      <i class="fas fa-search"></i>
+                                    </span>
+                                    <span class="nav-search-form-input-autocomplete-item__label">Máy Tính</span>
+                                  </a>
+                                </li>
+                                <li class="nav-search-form-input-autocomplete-item">
+                                  <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=4&page=1">
+                                    <span class="nav-search-form-input-autocomplete-item__icon">
+                                      <i class="fas fa-search"></i>
+                                    </span>
+                                    <span class="nav-search-form-input-autocomplete-item__label">Điện Thoại</span>
+                                  </a>
+                                </li>
+                                <li class="nav-search-form-input-autocomplete-item">
+                                  <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=6&page=1">
+                                    <span class="nav-search-form-input-autocomplete-item__icon">
+                                      <i class="fas fa-search"></i>
+                                    </span>
+                                    <span class="nav-search-form-input-autocomplete-item__label">Thời Trang</span>
+                                  </a>
+                                </li>
+                              </ul>
                               </div>
                             </div>    
                             <button class="nav-search-form-btn">
