@@ -126,11 +126,20 @@
         <div class="nav-search">
           <form method="get" action="search/search.php" class="nav-search-form" autocomplete="off">
             <div  class="nav-search-form-input">
+              <input type="hidden" name="page" value="1">
               <input type="text" class="nav-search-form-input__box" name="queryString"  placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Mua, hoặc muốn....">
               <div class="nav-search-form-input-autocomplete">
                 <ul class="nav-search-form-input-autocomplete-list">
                   <li class="nav-search-form-input-autocomplete-item">
-                    <a href="#">
+                    <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=1&page=1">
+                      <span class="nav-search-form-input-autocomplete-item__icon">
+                        <i class="fas fa-search"></i>
+                      </span>
+                      <span class="nav-search-form-input-autocomplete-item__label">Sách</span>
+                    </a>
+                  </li>
+                  <li class="nav-search-form-input-autocomplete-item">
+                    <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=2&page=1">
                       <span class="nav-search-form-input-autocomplete-item__icon">
                         <i class="fas fa-search"></i>
                       </span>
@@ -138,27 +147,19 @@
                     </a>
                   </li>
                   <li class="nav-search-form-input-autocomplete-item">
-                    <a href="#">
+                    <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=4&page=1">
                       <span class="nav-search-form-input-autocomplete-item__icon">
                         <i class="fas fa-search"></i>
                       </span>
-                      <span class="nav-search-form-input-autocomplete-item__label">Áo Khoác</span>
+                      <span class="nav-search-form-input-autocomplete-item__label">Điện Thoại</span>
                     </a>
                   </li>
                   <li class="nav-search-form-input-autocomplete-item">
-                    <a href="#">
+                    <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=6&page=1">
                       <span class="nav-search-form-input-autocomplete-item__icon">
                         <i class="fas fa-search"></i>
                       </span>
-                      <span class="nav-search-form-input-autocomplete-item__label">Cầu Lông</span>
-                    </a>
-                  </li>
-                  <li class="nav-search-form-input-autocomplete-item">
-                    <a href="#">
-                      <span class="nav-search-form-input-autocomplete-item__icon">
-                        <i class="fas fa-search"></i>
-                      </span>
-                      <span class="nav-search-form-input-autocomplete-item__label">Sách</span>
+                      <span class="nav-search-form-input-autocomplete-item__label">Thời Trang</span>
                     </a>
                   </li>
                 </ul>
