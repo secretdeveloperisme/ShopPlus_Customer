@@ -11,6 +11,9 @@
     if($_GET["action"] == "getSoldProductAmount" && isset($_GET["id"])&& !empty($_GET["id"])){
       echo json_encode(getSoldProductAmount($_GET["id"]));
     }
+    if($_GET["action"] == "isBestSeller" && isset($_GET["id"])&& !empty($_GET["id"])){
+      echo json_encode(isTopTenSeller($_GET["id"]));
+    }
   }
 
 ?>
