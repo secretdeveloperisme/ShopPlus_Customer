@@ -13,6 +13,9 @@
           $amountCanAdd = 1;
         }
         $soldProductAmount = getSoldProductAmount($merchandise->getId());
+        $bestSellerHTML = "";
+        if(isTopTenSeller($merchandise->getId()))
+          $bestSellerHTML =  '<h2 class="shop-app-product-sell-sold__favorite">Best Seller</h2>';
         echo <<<HTML
         <!DOCTYPE html>
         <html lang="vi">
@@ -34,6 +37,7 @@
           <link rel="stylesheet" href="../assets/css/Product-Detail.css">
           <link rel="stylesheet" href="../assets/css/footer.css">
           <script src="../js/base.js"></script>
+          <script src="../js/navbar.js"></script>
           <script src="../js/Controller/handleCart.js" ></script>
           <script src="../js/ProductDetail.js"></script>
         </head>
@@ -139,13 +143,22 @@
                   </div>
                 </div>
                 <div class="nav-search">
-                  <form name="querySearch" method="get" action="../search/search.php" class="nav-search-form">
+                  <form name="querySearch" method="get" action="../search/search.php" class="nav-search-form" autocomplete="off">
                     <div class="nav-search-form-input">
-                      <input type="text" class="nav-search-form-input__box" name="querySearch"  placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Mua, hoặc muốn...."> 
+                      <input type="hidden" name="page" value="1">
+                      <input type="text" class="nav-search-form-input__box" name="queryString"  placeholder="Tìm Kiếm Sản Phẩm Bạn Muốn Mua, hoặc muốn...."> 
                       <div class="nav-search-form-input-autocomplete">
                         <ul class="nav-search-form-input-autocomplete-list">
                           <li class="nav-search-form-input-autocomplete-item">
-                            <a href="#">
+                            <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=1&page=1">
+                              <span class="nav-search-form-input-autocomplete-item__icon">
+                                <i class="fas fa-search"></i>
+                              </span>
+                              <span class="nav-search-form-input-autocomplete-item__label">Sách</span>
+                            </a>
+                          </li>
+                          <li class="nav-search-form-input-autocomplete-item">
+                            <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=2&page=1">
                               <span class="nav-search-form-input-autocomplete-item__icon">
                                 <i class="fas fa-search"></i>
                               </span>
@@ -153,27 +166,19 @@
                             </a>
                           </li>
                           <li class="nav-search-form-input-autocomplete-item">
-                            <a href="#">
+                            <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=4&page=1">
                               <span class="nav-search-form-input-autocomplete-item__icon">
                                 <i class="fas fa-search"></i>
                               </span>
-                              <span class="nav-search-form-input-autocomplete-item__label">Áo Khoác</span>
+                              <span class="nav-search-form-input-autocomplete-item__label">Điện Thoại</span>
                             </a>
                           </li>
                           <li class="nav-search-form-input-autocomplete-item">
-                            <a href="#">
+                            <a href="/ShopPlus_Customer/search/search.php?queryString=&categoryID=6&page=1">
                               <span class="nav-search-form-input-autocomplete-item__icon">
                                 <i class="fas fa-search"></i>
                               </span>
-                              <span class="nav-search-form-input-autocomplete-item__label">Cầu Lông</span>
-                            </a>
-                          </li>
-                          <li class="nav-search-form-input-autocomplete-item">
-                            <a href="#">
-                              <span class="nav-search-form-input-autocomplete-item__icon">
-                                <i class="fas fa-search"></i>
-                              </span>
-                              <span class="nav-search-form-input-autocomplete-item__label">Sách</span>
+                              <span class="nav-search-form-input-autocomplete-item__label">Thời Trang</span>
                             </a>
                           </li>
                         </ul>
@@ -243,7 +248,7 @@
               <div class="shop-app-header-path">
                 <ul class="shop-app-header-path-list">
                   <li class="shop-app-header-path-item"><a href="../index.html">Trang chủ</a></li>
-                  <li class="shop-app-header-path-item"><a href="">$categoryName</a></li>
+                  <li class="shop-app-header-path-item"><a href="../search/search.php?page=1&categoryID={$merchandise->getCategoryId()}">$categoryName</a></li>
                   <li class="shop-app-header-path-item"><a href="">{$merchandise->getName()}</a></li>
                 </ul>
               </div>
@@ -258,7 +263,7 @@
                   {$merchandise->getName()}
                 </h1>
                 <div class="shop-app-product-sell-sold">
-                  <h2 class="shop-app-product-sell-sold__favorite">Yêu Thích</h2>
+                  $bestSellerHTML
                   <h2 class="shop-app-product-sell-sold__number">Đã Bán : <span>{$soldProductAmount}</span></h2>
                 </div>
                 <div class="shop-app-product-sell-price">
@@ -289,6 +294,12 @@
                   <button class="shop-app-product-sell-buttons-buy btn" id="btnPurchase">
                     <span>Mua Ngay</span>
                   </button>
+                </div> 
+                <div class="shop-app-product-description">
+                  <h4 class="shop-app-product-description__label">Mô Tả Sản Phẩm</h4>
+                  <p class="shop-app-product-description__label">
+                      {$merchandise->getNote()}
+                  </p>
                 </div>
               </div>
             </div>
@@ -316,24 +327,22 @@
                 <div class="footer-information-item col-xl-3">
                   <h1 class="footer-information-item__label">Phương Thức Thanh Toán</h1>
                   <ul class="footer-information-item-list footer-information-item-list--wrap">
-                    <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/visa.svg" alt=""></a></li>
-                    <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/cash.svg" alt=""></a></li>
-                    <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/internet-banking.svg"
-                          alt=""></a></li>
-                    <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/installment.svg" alt=""></a>
-                    </li>
+                    <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/visa.svg" alt=""></a></li>
+                    <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/cash.svg" alt=""></a></li>
+                    <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/internet-banking.svg" alt=""></a></li>
+                    <li class="footer-information-item-item"><a href="#"><img src="/ShopPlus_Customer/assets/images/icons/installment.svg" alt=""></a></li>
                   </ul>
                 </div>
                 <div class="footer-information-item col-xl-3">
                   <h1 class="footer-information-item__label">Kết Nối với chúng tôi</h1>
                   <ul class="footer-information-item-list footer-information-item-list--wrap">
-                    <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/fb.svg"
+                    <li class="footer-information-item-item"><a href="https://www.facebook.com/hoanglinhplus"><img src="/ShopPlus_Customer/assets/images/icons/fb.svg"
                           alt=""><span>Facebook</span></a></li>
-                    <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/zalo-seeklogo.com.svg"
+                    <li class="footer-information-item-item"><a href=""><img src="/ShopPlus_Customer/assets/images/icons/zalo-seeklogo.com.svg"
                           width="32" height="32" alt=""><span>Zalo</span></a></li>
-                    <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/youtube.svg"
+                    <li class="footer-information-item-item"><a href="https://youtube.com"><img src="/ShopPlus_Customer/assets/images/icons/youtube.svg"
                           alt=""><span>Youtube</span></a></li>
-                    <li class="footer-information-item-item"><a href="#"><img src="/assets/images/icons/github-1.svg"
+                    <li class="footer-information-item-item"><a href="https://github.com/secretdeveloperisme"><img src="/ShopPlus_Customer/assets/images/icons/github-1.svg"
                           alt=""><span>Github</span></a></li>
                   </ul>
                 </div>
