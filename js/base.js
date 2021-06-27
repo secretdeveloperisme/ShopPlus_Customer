@@ -1,5 +1,5 @@
 $(()=>{
-
+  
 });
 function toast({title,message,type,duration}){
   const main = document.getElementById("toast");
@@ -168,6 +168,7 @@ function removeLocalCustomer(){
   window.localStorage.removeItem("customer");
 }
 function getQueryStringURLasObject(){
-  let  search = location.search.substring(1);
+  let  search = (decodeURI(location.search).substring(1))
+    .replace(/\+/g,' ')
   return JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
 }
