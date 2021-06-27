@@ -174,11 +174,15 @@
   align-items: center;
 }
 .container-shop-app-filter-search-favorite-input input{
-  width: 16px;
-  height: 16px;
+  width: 32px;
+  height: 32px;
 }
-.container-shop-app-filter-search-favorite-input span{
-  font-size: 1.6rem;
+.container-shop-app-filter-search-favorite-input label{
+  font-size: 2rem;
+  font-weight: 700;
+  color: red;
+  cursor: pointer;
+  user-select: none;
 }
 .container-shop-app-filter-search-favorite__btn {
   margin-top: 20px;
