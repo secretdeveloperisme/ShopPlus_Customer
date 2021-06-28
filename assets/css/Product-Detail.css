@@ -130,3 +130,46 @@
 .shop-app-product-sell-buttons-buy{
 
 }
+.shop-app-product-description{
+  padding: 20px 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.shop-app-product-description__label{
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+.shop-app-product-description-content{
+  position: relative;
+}
+.shop-app-product-description-content.disappear{
+  height: 150px;
+  overflow: hidden;
+}
+.description__text{
+  padding :10px 20px;
+  font-size: 1.8rem;
+  background: var(--app-background-color);
+  border-radius: 5px;
+}
+.shop-app-product-description-content.disappear .description__gradient{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
+}
+#btnMore{
+  margin: 0 auto;
+  background-color: white;
+  color: var(--primary-color);
+  border:1px solid var(--primary-color);
+}
+#btnMore:hover{
+  background-color: var(--primary-color);
+  color: white;
+  opacity: 1;
+}

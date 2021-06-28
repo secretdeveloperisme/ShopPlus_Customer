@@ -70,4 +70,21 @@ $(function(){
     }
 
   })
+  // add event for more description button
+  let $btnMore = $("#btnMore")
+  let $descriptionContent = $(".shop-app-product-description-content")
+  if($descriptionContent.find(".description__text").height() <=150){
+    $btnMore.remove()
+    $descriptionContent.removeClass("disappear")
+  }
+  $btnMore.click((event)=>{
+    if($descriptionContent.hasClass("disappear")){
+      $descriptionContent.removeClass("disappear")
+      $btnMore.text("Thu Gọn")
+    }
+    else{
+      $descriptionContent.addClass("disappear")
+      $btnMore.text("Xem Thêm")
+    }
+  })
 });

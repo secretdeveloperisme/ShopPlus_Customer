@@ -295,14 +295,17 @@
                     <span>Mua Ngay</span>
                   </button>
                 </div> 
-                <div class="shop-app-product-description">
-                  <h4 class="shop-app-product-description__label">Mô Tả Sản Phẩm</h4>
-                  <p class="shop-app-product-description__label">
-                      {$merchandise->getNote()}
-                  </p>
-                </div>
               </div>
             </div>
+             <div class="shop-app-product-description col-xl-12">
+                  <h4 class="shop-app-product-description__label">Mô Tả Sản Phẩm</h4>
+                  <div class="shop-app-product-description-content disappear">
+                      <p class="description__text">{$merchandise->getNote()}</p>
+                      <div class="description__gradient"></div>
+                  </div>
+                  <button class="btn" id="btnMore">Xem Thêm</button>
+                  
+             </div>
             <div class="shop-app-footer gird">
               <div class="footer-information grid-row">
                 <div class="footer-information-item col-xl-3">
