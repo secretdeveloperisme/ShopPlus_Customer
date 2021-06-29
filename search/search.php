@@ -340,15 +340,16 @@
           </div>
           <div class="shop-app-product-display grid-row">
             <?php
-              foreach ($searchingProducts as $searchingProduct){
-                $soldProductAmount = getSoldProductAmount($searchingProduct->getId());
-                $isBestSeller = "";
-                if(isTopTenSeller($searchingProduct->getId())){
-                  $isBestSeller = '
+              if(count($searchingProducts) > 0){
+                foreach ($searchingProducts as $searchingProduct){
+                  $soldProductAmount = getSoldProductAmount($searchingProduct->getId());
+                  $isBestSeller = "";
+                  if(isTopTenSeller($searchingProduct->getId())){
+                    $isBestSeller = '
                     <div class="product-display-item__favorite">Top Seller</div>
                   ';
-                }
-                echo <<<PRODUCT
+                  }
+                  echo <<<PRODUCT
                   <div class="shop-app-product-display-item col-xl-2-10 col-es-6">
                     <a href="/ShopPlus_Customer/ProductDetail/product_detail.php?id={$searchingProduct->getId()}">
                       <div class="product-display-item-container">
@@ -369,8 +370,18 @@
                     </a>
                   </div>
                 PRODUCT;
-
+                }
               }
+              else {
+                echo <<<HTML
+                  <div class="no-product">
+                    <i class="far fa-frown"></i>
+                    <span>Rất Tiếc, Không Có Sản Phẩm Phù Hợp Với Bạn</span>
+                  </div>
+                HTML;
+              }
+
+
             ?>
           </div>
         </div>

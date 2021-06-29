@@ -333,3 +333,10 @@
   display: flex;
   justify-content: space-between;
 }
+.no-product{
+  font-size: 3rem;
+  text-align: center;
+  width: 100%;
+  color: rgb(223, 189, 21);;
+  border : 2px solid rgb(223, 189, 21);
+}
