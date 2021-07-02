@@ -1,4 +1,9 @@
 $(()=>{
+  let $modal = $("#modal")
+  let $btnCloseModal = $(".modal-content-btn-close")
+  $btnCloseModal.click(()=>{
+    $modal.fadeOut()
+  })
   //add event navigation layout
   let objectQuery = getQueryStringURLasObject();
   let $sidebarItems= $(".sidebar-item");
@@ -138,7 +143,7 @@ $(()=>{
               case "completed" :
                 status = "Đã Giao"
                 break;
-              case "cancelled" :
+              case "canceled" :
                 status = "Đã Hũy"
                 break;
             }
@@ -157,8 +162,136 @@ $(()=>{
           }
         })
       })
+      // add event for row order
+      let $rowOrder = $ordersTBody.find("tr")
+      let  $modalOrderTableBody= $("#modalOrderTableBody")
+      $.each($rowOrder,(index,element)=>{
+        $(element).click((event)=>{
+          $modal.fadeIn()
+
+          let orderID = $(element).find("td:first").text()
+          $.ajax({
+            url : "/ShopPlus_Customer/php/Controller/API/HandleOrderAPI.php",
+            type : "GET",
+            data : {
+              action : "getOrderViaID",
+              "orderID" : orderID
+            },
+            dataType : "text",
+            success : (responseOrder)=>{
+
+              let order = JSON.parse(responseOrder)
+              $("#modalOrderID").text(order.id)
+              $("#modalOrderDate").text(order.orderDate)
+              $("#modalDeliverDate").text(order.deliverDate)
+              $modalOrderTableBody.html("")
+              $.ajax({
+                url : "/ShopPlus_Customer/php/Controller/API/HandleOrderAPI.php",
+                type : "GET",
+                data : {
+                  action : "getDetailOrdersViaOrderID",
+                  orderID : order.id
+                },
+                async : false,
+                success : (responseOrderDetail)=> {
+                  let orderDetails = JSON.parse(responseOrderDetail);
+                  let totalPrice = 0;
+                  orderDetails.forEach((orderDetail, i) => {
+                    totalPrice += parseInt(orderDetail.orderPrice);
+                    let product = {};
+                    $.ajax({
+                      url: "/ShopPlus_Customer/php/Controller/API/HandleProductAPI.php",
+                      type: "GET",
+                      data: {
+                        action: "getProductViaId",
+                        id: orderDetail.idMerchandise
+                      },
+                      async: false,
+                      dataType: "text",
+                      success: (responseProduct) => {
+                        product = JSON.parse(responseProduct);
+                        let modalOrderRow = ` 
+                         <tr>
+                            <td role="id">${product.id}</td>
+                            <td role="location"><img src="${product.location}" width="32px" height="32px"></td>
+                            <td role="name">${product.name}</td>
+                            <td role="amount">${orderDetail.amount}</td>
+                            <td role="price">${orderDetail.orderPrice}</td>
+                         </tr>`
+                        $modalOrderTableBody.html((i,current)=>{
+                          return current+modalOrderRow;
+                        })
+
+                      }
+                    });
+                  });
+                  let status = "";
+                  switch (order.status.trim()) {
+                    case "pending" :
+                      status = "Đang chờ"
+                      break;
+                    case "processing" :
+                      status = "Đang Xử lý"
+                      break;
+                    case "approved" :
+                      status = "Đã Duyệt"
+                      break;
+                    case "completed" :
+                      status = "Đã Giao"
+                      break;
+                    case "canceled" :
+                      status = "Đã Hũy"
+                      break;
+                  }
+                  $(".btn-cancel-order").remove()
+                  if(order.status.trim() == "pending"){
+                    $("#modalOrderTable").after('<button class="btn btn-cancel-order"  id="btnCancelOrder">Hũy Đơn Hàng</button>')
+                    $("#btnCancelOrder").click((event)=>{
+                      $.ajax({
+                        url : "/ShopPlus_Customer/php/Controller/API/HandleOrderAPI.php",
+                        type : "POST",
+                        data : {
+                          action : "cancelOrder",
+                          "orderID" : orderID
+                        },
+                        dataType : "text",
+                        success : (response)=>{
+                          console.log(response)
+                          let result = JSON.parse(response)
+                          if(result){
+                            toast({
+                              title : "Thành Công",
+                              message : "Hủy Đặt Hàng Hóa Đơn Thành Công",
+                              type : "success",
+                              duration : 5000
+                            })
+                            location.reload()
+                          }
+                          else
+                            toast({
+                              title : "Thất Bại",
+                              message : "Hũy Đặt Hàng Thất Bại",
+                              type : "error",
+                              duration : 5000
+                            })
+
+                        }
+                      })
+                    })
+                  }
+                  $("#modalOrderStatus").attr("class","btn").addClass("status--"+order.status).text(status)
+                  $("#modalOrderTotalPrice").text(numberWithCommas(totalPrice) + "đ")
+                }
+              })
+            }
+          })
+        })
+      })
     }
+
   })
+
+
   //render customer addresses
   let $addressList = $(".content-address-list");
   function renderAddress(){

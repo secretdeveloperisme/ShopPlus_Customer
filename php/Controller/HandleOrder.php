@@ -69,6 +69,16 @@
     }
     return $orders;
   }
+  function getOrderViaID($id){
+    $order = NULL;
+    $result  = $GLOBALS["connect"]->query("SELECT SODONDH, MSKH, MSNV, NGAYDH, NGAYGH, TRANGTHAI FROM dathang WHERE SODONDH = $id");
+    if($result->num_rows > 0){
+      while ($row = $result->fetch_assoc()){
+        $order = new Order($row["SODONDH"],$row["MSKH"],$row["MSNV"],$row["NGAYDH"],$row["NGAYGH"],$row["TRANGTHAI"]);
+      }
+    }
+    return $order;
+  }
   function getDetailOrdersViaOrderID($id){
     $orderDetails = array();
     $prepare  = $GLOBALS["connect"]->prepare("CALL getAllOrderDetail(?)");
@@ -84,4 +94,12 @@
       }
     }
     return $orderDetails;
+  }
+  function cancelOrder($orderID){
+    $prepare  = $GLOBALS["connect"]->prepare("UPDATE dathang SET TRANGTHAI = 'canceled' WHERE SODONDH = ?");
+    $prepare->bind_param("i",$orderID);
+    if($prepare->execute())
+      return true;
+    else
+      return false;
   }

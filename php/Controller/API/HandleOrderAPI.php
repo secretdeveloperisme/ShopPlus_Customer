@@ -18,6 +18,11 @@
         }
       }
     }
+    if ($_POST["action"] == "cancelOrder"){
+      if(isset($_POST["orderID"]) && !empty($_POST["orderID"])) {
+        echo json_encode(cancelOrder($_POST["orderID"]));
+      }
+    }
   }
   if(isset($_GET["action"]) && !empty($_GET["action"])){
     include "../../models/Customer.php";
@@ -25,6 +30,11 @@
     if ($_GET["action"] == "getOrdersViaCustomer"){
       if(isset($_GET["customerID"]) && !empty($_GET["customerID"])) {
         echo json_encode(getOrderViaCustomer($_GET["customerID"]));
+      }
+    }
+    if ($_GET["action"] == "getOrderViaID"){
+      if(isset($_GET["orderID"]) && !empty($_GET["orderID"])) {
+        echo json_encode(getOrderViaID($_GET["orderID"])->toArray());
       }
     }
     if ($_GET["action"] == "getDetailOrdersViaOrderID"){

@@ -4,12 +4,64 @@
   background-color: var(--app-background-color);
   padding: 20px 50px;
 }
+.order-detail{
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+.order-detail__label{
+  color: var(--primary-color);
+  text-align: center;
+  font-size: 3rem;
+}
+.order-detail-status{
+  font-size: 2rem;
+}
+.order-detail-identity{
+  font-size: 2rem;
+}
+.order-detail-date{
+  font-size: 1.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.order-detail-date__order{
+  color: #28a745;
+}
+.order-detail-date__delivery{
+  color: #dc3545;
+}
+.order-detail-table-products{
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+.order-detail-table-products thead{
+  font-size: 1.8rem;
+}
+.order-detail-table-products td,th{
+  border:1px solid black;
+  padding: 5px;
+  font-size: 1.6rem;
+}
+.order-detail-total{
+  text-align: right;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.order-detail-total span{
+  color: red;
+}
+#modalOrderID{
+  font-size: 2rem;
+  color: #dc3545;
+  font-weight: 700;
+}
 .sidebar{
   padding: 5px 10px;
   width: 280px;
 }
 .account-sidebar{
-
 }
 .sidebar__label {
   font-size: 3rem;
@@ -182,7 +234,7 @@
 .status--approved{
   background: #0dcaf0;
 }
-.status--cancelled{
+.status--canceled{
   background: #dc3545;
 }
 @keyframes appear-content {

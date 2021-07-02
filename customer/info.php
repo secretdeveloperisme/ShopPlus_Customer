@@ -45,6 +45,42 @@
                 </head>
                 <body>
                   <div id="toast"></div>
+                  <div class="modal" id="modal">
+                   <div class="modal-content">
+                      <div class="order-detail"> 
+                        <h2 class="order-detail__label">
+                        Chi Tiết Đơn Hàng 
+                        </h2>
+                        <h2 class="order-detail-identity">Mã Số Hóa Đơn : <span id="modalOrderID">25</span></h2>
+                        <h2 class="order-detail-status">Trang Thái :  <span class=" btn" id="modalOrderStatus" >Thành Công</span></h2>
+                        <div class="order-detail-date">
+                            <div  class="order-detail-date__order">
+                              <span>Ngày Mua Hàng: </span>
+                              <span id="modalOrderDate">2000/11/25</span>
+                            </div>
+                            <div class="order-detail-date__delivery">
+                              <span>Ngày Giao Hàng: </span>
+                              <span id="modalDeliverDate">2000/11/25</span>
+                            </div>
+                        </div>
+                        <table class="order-detail-table-products" id="modalOrderTable">
+                          <thead>
+                            <th>MSHH</th>
+                            <th>Hình Ảnh</th>
+                            <th>Tên Hàng Hóa</th>
+                            <th>Số Lượng</th>
+                            <th>Số Tiền</th>
+                          </thead>
+                          <tbody id="modalOrderTableBody">
+                           
+                          </tbody>
+                        </table>
+                        <div class="order-detail-total">Tổng Cộng : <span id="modalOrderTotalPrice"></span></div>
+                      </div>
+                    <div class="modal-content-btn-close"><i class="fas fa-times"></i></div>
+                   </div>
+                   <div class="modal-overlay"></div>
+                   </div>         
                   <div class="shop-app">
                     <div class="shop-app-header">
                       <div class="nav">
