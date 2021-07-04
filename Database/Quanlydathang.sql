@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2021 at 12:15 PM
+-- Generation Time: Jul 04, 2021 at 04:06 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -36,6 +36,28 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `getOrderViaCustomer` (IN `id_custom
     WHERE MSKH = id_customer;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `test` (IN `order_id` INT)  begin 
+	DECLARE finished INT DEFAULT FALSE;
+	DECLARE id int ;
+	DECLARE product_id int ;
+    DECLARE product_amount int;
+    DECLARE  order_details CURSOR FOR 
+	SELECT dathang.SODONDH,chitietdathang.MSHH,chitietdathang.SOLUONG from dathang JOIN chitietdathang on 
+    dathang.SODONDH = chitietdathang.SODONDH 
+    WHERE dathang.SODONDH = order_id;
+    DECLARE CONTINUE HANDLER 
+    FOR NOT FOUND SET finished = TRUE;
+    OPEN order_details;
+    get_order_detail:LOOP
+    	FETCH order_details INTO 					id,product_id,product_amount;
+		IF finished THEN 
+			LEAVE get_order_detail;
+		END IF;
+        SELECT id,product_id,product_amount;
+    END LOOP get_order_detail;
+    CLOSE order_details;
+end$$
+
 --
 -- Functions
 --
@@ -63,6 +85,13 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `get_sold_merchandise` (`merchandise_
     END IF;
 END$$
 
+CREATE DEFINER=`root`@`localhost` FUNCTION `handleRawSearching` (`raw` VARCHAR(100)) RETURNS VARCHAR(100) CHARSET utf8mb4 BEGIN 
+    set raw = REPLACE(raw,' ','');
+    set raw = REPLACE(raw,'Đ','d');
+    set raw = REPLACE(raw,'đ','d');
+    return raw;
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `isValidAmountOfProduct` (`id` INT, `amount` INT) RETURNS TINYINT(1) begin
 	declare amountOfProduct INT;
     set amountOfProduct := (SELECT SOLUONGHANG FROM hanghoa WHERE MSHH = id);
@@ -72,6 +101,20 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `isValidAmountOfProduct` (`id` INT, `
         return 1;
     end if;
 end$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `is_best_seller` (`id` INT) RETURNS TINYINT(1) BEGIN
+	DECLARE valid tinyint(1) DEFAULT 0;
+    set valid = (
+        select 1
+        WHERE 
+        id in (SELECT top_seller.top_10_seller from top_seller)
+    );
+    if valid = 1 then 
+    	return valid;
+    else 
+    	return 0;
+    end if;
+END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `STAFF_LOGIN` (`id` INT) RETURNS TINYINT(1) begin
   declare valid tinyint(1);
@@ -120,11 +163,21 @@ INSERT INTO `chitietdathang` (`SODONDH`, `MSHH`, `SOLUONG`, `GIADATHANG`, `GIAMG
 (44, 48, 2, 136000, 0),
 (44, 55, 2, 4240000, 0),
 (46, 35, 1, 40000, 0),
-(46, 63, 1, 777, 0),
 (47, 41, 1, 427000, 0),
 (47, 46, 1, 5090000, 0),
 (48, 40, 1, 99000, 0),
-(48, 41, 1, 427000, 0);
+(48, 41, 1, 427000, 0),
+(50, 45, 1, 30899000, 0),
+(50, 57, 1, 2590000, 0),
+(51, 44, 1, 198000, 0),
+(51, 52, 1, 2390000, 0),
+(52, 57, 1, 2590000, 0),
+(53, 30, 1, 156000, 0),
+(54, 41, 1, 427000, 0),
+(55, 42, 1, 149000, 0),
+(56, 52, 2, 4780000, 0),
+(57, 36, 2, 400000, 0),
+(57, 48, 1, 68000, 0);
 
 --
 -- Triggers `chitietdathang`
@@ -158,7 +211,7 @@ CREATE TABLE `dathang` (
 --
 
 INSERT INTO `dathang` (`SODONDH`, `MSKH`, `MSNV`, `NGAYDH`, `NGAYGH`, `TRANGTHAI`) VALUES
-(32, 4, 777, '2021-05-29', '2021-06-09', 'cancelled'),
+(32, 4, 777, '2021-05-29', '2021-06-09', 'canceled'),
 (34, 16, 777, '2021-05-30', '2021-06-22', 'approved'),
 (35, 5, 777, '2021-05-30', '2021-06-09', 'completed'),
 (36, 5, 777, '2021-05-30', '2021-07-15', 'completed'),
@@ -169,10 +222,53 @@ INSERT INTO `dathang` (`SODONDH`, `MSKH`, `MSNV`, `NGAYDH`, `NGAYGH`, `TRANGTHAI
 (41, 25, 777, '2021-06-02', '2021-06-24', 'completed'),
 (42, 25, NULL, '2021-06-02', NULL, 'processing'),
 (43, 4, NULL, '2021-06-03', NULL, 'processing'),
-(44, 4, NULL, '2021-06-03', NULL, 'pending'),
+(44, 4, NULL, '2021-06-03', NULL, 'canceled'),
 (46, 26, 777, '2021-06-07', '2021-06-22', 'completed'),
 (47, 5, NULL, '2021-06-07', NULL, 'pending'),
-(48, 28, NULL, '2021-06-07', NULL, 'pending');
+(48, 28, NULL, '2021-06-07', NULL, 'pending'),
+(50, 30, NULL, '2021-06-07', NULL, 'pending'),
+(51, 30, NULL, '2021-06-08', NULL, 'pending'),
+(52, 5, NULL, '2021-06-24', NULL, 'pending'),
+(53, 4, NULL, '2021-07-01', NULL, 'canceled'),
+(54, 4, NULL, '2021-07-02', NULL, 'canceled'),
+(55, 31, NULL, '2021-07-02', NULL, 'canceled'),
+(56, 31, NULL, '2021-07-04', NULL, 'completed'),
+(57, 31, NULL, '2021-07-04', NULL, 'canceled');
+
+--
+-- Triggers `dathang`
+--
+DELIMITER $$
+CREATE TRIGGER `changeStatusOrder` AFTER UPDATE ON `dathang` FOR EACH ROW BEGIN 
+	DECLARE finished INT DEFAULT FALSE;
+	DECLARE id int ;
+	DECLARE product_id int ;
+    DECLARE product_amount int;
+    DECLARE  order_details CURSOR FOR 
+	SELECT dathang.SODONDH,chitietdathang.MSHH,chitietdathang.SOLUONG from dathang JOIN chitietdathang on 
+    dathang.SODONDH = chitietdathang.SODONDH 
+    WHERE dathang.SODONDH = NEW.SODONDH;
+    DECLARE CONTINUE HANDLER 
+    FOR NOT FOUND SET finished = TRUE;
+    OPEN order_details;
+    get_order_detail:LOOP
+    	FETCH order_details INTO id,product_id,product_amount;
+		IF finished THEN 
+			LEAVE get_order_detail;
+		END IF;
+       IF new.TRANGTHAI = 'canceled'
+		THEN 
+        	UPDATE hanghoa SET hanghoa.SOLUONGHANG = hanghoa.SOLUONGHANG + product_amount WHERE hanghoa.MSHH = product_id;
+       END IF;
+       IF NEW.TRANGTHAI != 'canceled' AND OLD.TRANGTHAI = 'canceled'
+		THEN 
+        	UPDATE hanghoa SET hanghoa.SOLUONGHANG = hanghoa.SOLUONGHANG - product_amount WHERE hanghoa.MSHH = product_id;
+       END IF;
+    END LOOP get_order_detail;
+    CLOSE order_details;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -204,11 +300,11 @@ INSERT INTO `diachikh` (`MADC`, `DIACHI`, `MSKH`) VALUES
 (21, 'cần thơ', 23),
 (22, 'dddd', 24),
 (23, 'Long An', 5),
-(24, 'kien giang', 7),
 (26, 'bến tre', 25),
 (27, 'alo', 4),
 (30, 'Kiên Giang', 5),
-(31, 'sdfsdfds', 28);
+(33, '324234', 30),
+(34, 'LA', 31);
 
 -- --------------------------------------------------------
 
@@ -218,13 +314,13 @@ INSERT INTO `diachikh` (`MADC`, `DIACHI`, `MSKH`) VALUES
 
 CREATE TABLE `hanghoa` (
   `MSHH` int(11) NOT NULL,
-  `TENHH` varchar(50) NOT NULL,
+  `TENHH` varchar(100) NOT NULL,
   `LOCATION` varchar(200) NOT NULL,
   `QUYCACH` varchar(50) NOT NULL,
   `GIA` int(11) NOT NULL,
   `SOLUONGHANG` int(11) NOT NULL,
   `MALOAIHANG` int(11) NOT NULL,
-  `GHICHU` varchar(200) DEFAULT NULL
+  `GHICHU` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -232,36 +328,35 @@ CREATE TABLE `hanghoa` (
 --
 
 INSERT INTO `hanghoa` (`MSHH`, `TENHH`, `LOCATION`, `QUYCACH`, `GIA`, `SOLUONGHANG`, `MALOAIHANG`, `GHICHU`) VALUES
-(30, 'Thay Đổi Cuộc Sống Với Nhân Số Học', '/ShopPlus_Customer/assets/images/products/56b303e000cb42faada663569fc5d7c9.jpg', 'quyển', 156000, 6, 1, ''),
+(30, 'Thay Đổi Cuộc Sống Với Nhân Số Học', '/ShopPlus_Customer/assets/images/products/56b303e000cb42faada663569fc5d7c9.jpg', 'quyển', 156000, 5, 1, ''),
 (31, 'Mình Chỉ Là Người Bình Thường (Sách Tô Màu)', '/ShopPlus_Customer/assets/images/products/604b1691c5c135a711e6ed01f3e5a290.jpg', 'quyển', 96100, 0, 1, ''),
-(32, 'Muôn Kiếp Nhân Sinh 2', '/ShopPlus_Customer/assets/images/products/04ffa4c4673af50ef2e594bf8e4f6fa1.jpg', 'quyển', 186300, 5, 1, ''),
-(33, 'Cây Cam Ngọt Của Tôi', '/ShopPlus_Customer/assets/images/products/2a6154ba08df6ce6161c13f4303fa19e.jpg', 'quyển', 79400, 0, 1, ''),
-(34, 'Kiếp Nào Ta Cũng Tìm Thấy Nhau', '/ShopPlus_Customer/assets/images/products/67db9bf2590d75f978e68f9dcfe0db9a.jpg', 'quyễn', 72250, 4, 1, ''),
+(32, 'Muôn Kiếp Nhân Sinh 2', '/ShopPlus_Customer/assets/images/products/04ffa4c4673af50ef2e594bf8e4f6fa1.jpg', 'quyển', 186300, 5, 1, NULL),
+(33, 'Cây Cam Ngọt Của Tôi', '/ShopPlus_Customer/assets/images/products/2a6154ba08df6ce6161c13f4303fa19e.jpg', 'quyển', 79400, 0, 1, '“Vị chua chát của cái nghèo hòa trộn với vị ngọt ngào khi khám phá ra những điều khiến cuộc đời này đáng số một tác phẩm kinh điển của Brazil.”  - Booklist  “Một cách nhìn cuộc sống gần như hoàn chỉnh từ con mắt trẻ thơ… có sức mạnh sưởi ấm và làm tan nát cõi lòng, dù người đọc ở lứa tuổi nào.”  - The National  Hãy làm quen với Zezé, cậu bé tinh nghịch siêu hạng đồng thời cũng đáng yêu bậc nhất, với ước mơ lớn lên trở thành nhà thơ cổ thắt nơ bướm. Chẳng phải ai cũng công nhận khoản “đáng yêu” kia đâu nhé. Bởi vì, ở cái xóm ngoại ô nghèo ấy, nỗi khắc khổ bủa vây đã che mờ mắt người ta trước trái tim thiện lương cùng trí tưởng tượng tuyệt vời của cậu bé con năm tuổi.  Có hề gì đâu bao nhiêu là hắt hủi, đánh mắng, vì Zezé đã có một người bạn đặc biệt để trút nỗi lòng: cây cam ngọt nơi vườn sau. Và cả một người bạn nữa, bằng xương bằng thịt, một ngày kia xuất hiện, cho cậu bé nhạy cảm khôn sớm biết thế nào là trìu mến, thế nào là nỗi đau, và mãi mãi thay đổi cuộc đời cậu. Mở đầu bằng những thanh âm trong sáng và kết thúc lắng lại trong những nốt trầm hoài niệm, Cây cam ngọt của tôi khiến ta nhận ra vẻ đẹp thực sự của cuộc sống đến từ những điều giản dị như bông hoa trắng của cái cây sau nhà, và rằng cuộc đời thật khốn khổ nếu thiếu đi lòng yêu thương và niềm trắc ẩn. Cuốn sách kinh điển này bởi thế không ngừng khiến trái tim người đọc khắp thế giới thổn thức, kể từ khi ra mắt lần đầu năm 1968 tại Brazil.  Tác giả:  JOSÉ MAURO DE VASCONCELOS (1920-1984) là nhà văn người Brazil. Sinh ra trong một gia đình nghèo ở ngoại ô Rio de Janeiro, lớn lên ông phải làm đủ nghề để kiếm sống. Nhưng với tài kể chuyện thiên bẩm, trí nhớ phi thường, trí tưởng tượng tuyệt vời cùng vốn sống phong phú, José cảm thấy trong mình thôi thúc phải trở thành nhà văn nên đã bắt đầu sáng tác năm 22 tuổi. Tác phẩm nổi tiếng nhất của ông là tiểu thuyết mang màu sắc tự truyện Cây cam ngọt của tôi. Cuốn sách được đưa vào chương trình tiểu học của Brazil, được bán bản quyền cho hai mươi quốc gia và chuyển thể thành phim điện ảnh. Ngoài ra, José còn rất thành công trong vai trò diễn viên điện ảnh và biên kịch.  Giá sản phẩm trên Tiki đã bao gồm thuế theo luật hiện hành. Tuy nhiên tuỳ vào từng loại sản phẩm hoặc phương thức, địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển, phụ phí hàng cồng kềnh, .....'),
+(34, 'Kiếp Nào Ta Cũng Tìm Thấy Nhau', '/ShopPlus_Customer/assets/images/products/67db9bf2590d75f978e68f9dcfe0db9a.jpg', 'quyễn', 72250, 3, 1, ''),
 (35, 'Từ Điển Tiếng “Em”', '/ShopPlus_Customer/assets/images/products/14338e7ae795f56d66996b611070b173.jpg', 'quyển', 40000, 0, 1, ''),
 (36, 'Sách Tài Chính Cá Nhân Cho Người Việt Nam - Tặng K', '/ShopPlus_Customer/assets/images/products/2d35f5288ea643e3768c8f3361cafa5a.jpg', 'quyển', 200000, 6, 1, ''),
 (37, 'Kẻ Trộm Sách (Tái Bản)', '/ShopPlus_Customer/assets/images/products/ke-trom-sach.u5387.d20170720.t153804.332048.jpg', 'quyển', 180000, 3, 1, ''),
 (38, 'Cân Bằng Cảm Xúc, Cả Lúc Bão Giông', '/ShopPlus_Customer/assets/images/products/a19424cfe9d113c32732d93cf2d5f59a.jpg', 'quyển', 63800, 0, 1, ''),
 (39, 'CẨM NANG MUA BÁN ĐẤT', '/ShopPlus_Customer/assets/images/products/f797420579b8e0f5c84a1278d23053ec.jpg', 'quyển', 150000, 0, 1, ''),
 (40, 'USB Kingston DT100G3 32GB USB 3.0 - Hàng Chính Hãn', '/ShopPlus_Customer/assets/images/products/34e6ca6587338ccf18f312d7b9b2ea3c.jpg', 'cái', 99000, 0, 2, ''),
-(41, 'Router Wifi Băng Tần Kép AC1200 TP-Link Archer C50', '/ShopPlus_Customer/assets/images/products/archer-c50-v3_s_01.u4064.d20170704.t180940.358348.jpg', 'cái', 427000, 3, 2, ''),
-(42, 'USB Kingston DT100G3 - 64GB - USB 3.0 ', '/ShopPlus_Customer/assets/images/products/64_1.jpg', 'cái', 149000, 1, 2, ''),
+(41, 'Router Wifi Băng Tần Kép AC1200 TP-Link Archer C50', '/ShopPlus_Customer/assets/images/products/archer-c50-v3_s_01.u4064.d20170704.t180940.358348.jpg', 'cái', 427000, 2, 2, ''),
+(42, 'USB Kingston DT100G3 - 64GB - USB 3.0 ', '/ShopPlus_Customer/assets/images/products/64_1.jpg', 'cái', 149000, 0, 2, ''),
 (43, 'Ổ Cứng Di Động WD Elements 1TB 2.5 USB 3.0 - WDBUZ', '/ShopPlus_Customer/assets/images/products/wd elements 1tb - 2.5 usb 3.0_1.u579.d20160808.t172730.328870.jpg', 'cái', 1395000, 3, 2, ''),
-(44, 'Bộ Kích Sóng Wifi Repeater 300Mbps Totolink EX200 ', '/ShopPlus_Customer/assets/images/products/30d0c22525743d5a2e850e76dd52fe72.jpg', 'cái', 198000, 9, 2, ''),
-(45, 'Apple Macbook Pro 2020 M1 - 13 Inchs (Apple M1/ 8G', '/ShopPlus_Customer/assets/images/products/33d72e8efc6ef58d5fbe0cb1770c797e.jpg', 'cái', 30899000, 8, 2, ''),
+(44, 'Bộ Kích Sóng Wifi Repeater 300Mbps Totolink EX200 ', '/ShopPlus_Customer/assets/images/products/30d0c22525743d5a2e850e76dd52fe72.jpg', 'cái', 198000, 8, 2, ''),
+(45, 'Apple Macbook Pro 2020 M1 - 13 Inchs (Apple M1/ 8G', '/ShopPlus_Customer/assets/images/products/33d72e8efc6ef58d5fbe0cb1770c797e.jpg', 'cái', 30899000, 7, 2, ''),
 (46, 'Màn Hình Dell U2419H 24inch FullHD 8ms 60Hz IPS - ', '/ShopPlus_Customer/assets/images/products/c220e39d6100924a66679bfb346b7544.jpg', 'cái', 5090000, 7, 2, ''),
 (47, 'Phần Mềm Diệt Virus BKAV Profressional 12 Tháng - ', '/ShopPlus_Customer/assets/images/products/f20ea1736b20a4ce9138382e51bbf75e.jpg', 'cái', 190000, 9, 2, ''),
 (48, 'Chuột Có Dây Logitech B100 - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/a9c21fbe61ce96d66c06582a49791381.jpg', 'cái', 68000, 3, 2, ''),
 (49, 'Ổ Cứng SSD Kingston A400 (240GB) - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/9df3937c390fcc0b66161f4dbe783757.jpg', 'cái', 815000, 3, 2, ''),
 (50, 'Điện Thoại Samsung Galaxy A51 (6GB/128GB) - Hàng C', '/ShopPlus_Customer/assets/images/products/3d5f9878e277d1244fe6b582e074e777.jpg', 'cái', 5850000, 3, 4, ''),
 (51, 'Máy Tính Bảng Samsung Galaxy Tab S7 Wifi T870 (6GB', '/ShopPlus_Customer/assets/images/products/111e4d1c36ec7094cbfb9ea5e0334992.jpg', 'cái', 14249100, 10, 4, ''),
-(52, 'Điện Thoại Oppo A12 (3GB/32GB) - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/e9dc08e1a4e6eb6439442b2df5150aeb.jpg', 'cái', 2390000, 3, 4, ''),
+(52, 'Điện Thoại Oppo A12 (3GB/32GB) - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/e9dc08e1a4e6eb6439442b2df5150aeb.jpg', 'cái', 2390000, 0, 4, ''),
 (53, 'Điện Thoại Samsung Galaxy A52 (8GB/128GB) - Hàng C', '/ShopPlus_Customer/assets/images/products/10f12e9c3eef374bf72b385f1b70124c.jpg', 'cái', 8990000, 7, 4, ''),
 (54, 'Máy Tính Bảng Samsung Galaxy Tab S7 Wifi T870 (6GB', '/ShopPlus_Customer/assets/images/products/dc0d6dcd10f4a31d5f6dcab75566637e.jpg', 'cái', 14249100, 0, 4, ''),
 (55, 'Điện Thoại Realme C11 (2GB/32GB) - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/b9f3e343440b02c54f95a9034990e0d5.jpg', 'cái', 2120000, 6, 4, ''),
 (56, 'Điện Thoại Vsmart Live 4 (6GB/64GB) - Hàng Chính H', '/ShopPlus_Customer/assets/images/products/3360d9dcb541dd5d2aaa59ae0ad6b1c5.jpg', 'cái', 3489000, 4, 4, ''),
-(57, 'Điện Thoại Nokia 3.4 - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/0ddf107a81ccf15f9e2d27ba67e25d6b.jpg', 'cái', 2590000, 7, 4, ''),
-(58, 'Điện Thoại Samsung Galaxy M31 (6GB/128GB) - Hàng C', '/ShopPlus_Customer/assets/images/products/0df5a90d7bd5d327de2d25d510dd9b65.jpg', 'cái', 4790000, 1, 4, ''),
-(63, 'jennie', '/ShopPlus_Customer/assets/images/products/jeniekim.jpg', 'cái', 777, 7, 18, '');
+(57, 'Điện Thoại Nokia 3.4 - Hàng Chính Hãng', '/ShopPlus_Customer/assets/images/products/0ddf107a81ccf15f9e2d27ba67e25d6b.jpg', 'cái', 2590000, 5, 4, ''),
+(58, 'Điện Thoại Samsung Galaxy M31 (6GB/128GB) - Hàng C', '/ShopPlus_Customer/assets/images/products/0df5a90d7bd5d327de2d25d510dd9b65.jpg', 'cái', 4790000, 1, 4, '');
 
 -- --------------------------------------------------------
 
@@ -285,7 +380,6 @@ INSERT INTO `khachhang` (`MSKH`, `HOTENKH`, `TENCONGTY`, `SODIENTHOAI`, `EMAIL`)
 (4, 'Nguyễn Hoàng Linh', 'Công Ty Phần Mềm Hoàng Linh Plus', '0849105289', 'dev777@gmail.com'),
 (5, 'Hoang Linh Nguyen', 'upl', '0123456789', 'linh072217@gmail.com'),
 (7, 'Võ Thị Ngọc Thư', 'thư july', '01234233333', 'vongocthu0719@gmail.com'),
-(9, 'Nguyễn Hoàng Linh', '', '0123456784', 'linhb1809143@student.ctu.edu.vn'),
 (11, 'Hoang Linh Nguyen', '', '0123456589', 'fsdf@gmail.com'),
 (12, 'MAI HỮU BẰNG', '', '08574258964', 'bangb1803891@student.ctu.edu.vn'),
 (13, 'quốc huy', '', '0192938347', 'quochuy@gmail.com'),
@@ -302,7 +396,10 @@ INSERT INTO `khachhang` (`MSKH`, `HOTENKH`, `TENCONGTY`, `SODIENTHOAI`, `EMAIL`)
 (24, 'MAI HỮU BẰNG', 'ddd', '0123456789', 'linhb18e3309143@student.ctu.edu.vn'),
 (25, 'nguyen ngoc dinh', '', '03434567890', 'dinh@gmail.com'),
 (26, 'account', '', '0876543223', 'abc65@gmail.com'),
-(28, 'ádfsdfsdf', 'sdfsdfsdfsd', '0258975648', 'hey@gmail.com');
+(28, 'ádfsdfsdf', 'sdfsdfsdfsd', '0258975648', 'hey@gmail.com'),
+(29, 'sasdfsdfsd', 'sdfsdfsdfsdf', '0125879457', 'now@gmail.com'),
+(30, '324', '324234', '0324235897', 'oweir@gmail.com'),
+(31, 'lin gmail ', 'khong co', '02587494258', 'linh@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -349,6 +446,25 @@ CREATE TABLE `nhanvien` (
 
 INSERT INTO `nhanvien` (`MSNV`, `HOTENNV`, `CHUCVU`, `DIACHI`, `SODIENTHOAI`) VALUES
 (777, 'Nguyễn Hoàng Linh', 'Quản Lý ', 'Kiên Giang', '0123456789');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `top_seller`
+-- (See below for the actual view)
+--
+CREATE TABLE `top_seller` (
+`top_10_seller` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `top_seller`
+--
+DROP TABLE IF EXISTS `top_seller`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `top_seller`  AS SELECT `chitietdathang`.`MSHH` AS `top_10_seller` FROM `chitietdathang` GROUP BY `chitietdathang`.`MSHH` ORDER BY sum(`chitietdathang`.`SOLUONG`) DESC LIMIT 0, 10 ;
 
 --
 -- Indexes for dumped tables
@@ -410,31 +526,31 @@ ALTER TABLE `nhanvien`
 -- AUTO_INCREMENT for table `dathang`
 --
 ALTER TABLE `dathang`
-  MODIFY `SODONDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `SODONDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `diachikh`
 --
 ALTER TABLE `diachikh`
-  MODIFY `MADC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `MADC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `hanghoa`
 --
 ALTER TABLE `hanghoa`
-  MODIFY `MSHH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `MSHH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `MSKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `MSKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `loaihanghoa`
 --
 ALTER TABLE `loaihanghoa`
-  MODIFY `MALOAIHANG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `MALOAIHANG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `nhanvien`
