@@ -49,14 +49,14 @@ $(function(){
       `
       <li class="shop-app-cart-product-item" index="product${index}">
             <div class="shop-app-cart-product-item-image">
-              <a href="#">
+              <a href="/ShopPlus_Customer/ProductDetail/product_detail.php?id=${value.id}">
                 <div class="shop-app-cart-product-item__image" style="background-image: url('${value.location}');">
                 </div>
               </a>
             </div>
             <div class="shop-app-cart-product-item-content">
               <div class="cart-item-content-desc">
-                <a href="#" class="cart-item-content-desc__name">
+                <a href="/ShopPlus_Customer/ProductDetail/product_detail.php?id=${value.id}" class="cart-item-content-desc__name">
                   ${value.name}
                 </a>
                 <div class="cart-item-content-desc__price">
