@@ -6,13 +6,14 @@
   $connect = connectDB();
   function getCustomerViaEmail($email){
     $result = $GLOBALS["connect"]->query(
-      "SELECT MSKH,HOTENKH,TENCONGTY,SODIENTHOAI,EMAIL FROM khachhang WHERE EMAIL= '$email'");
+      "SELECT MSKH,HOTENKH,TENCONGTY,SODIENTHOAI,EMAIL,MATKHAU FROM khachhang WHERE EMAIL= '$email'");
     if($result->num_rows > 0){
       $row = $result->fetch_assoc();
       return new Customer(
         $row["MSKH"],
         $row['HOTENKH'],$row["TENCONGTY"],
-        $row["SODIENTHOAI"],$row["EMAIL"]
+        $row["SODIENTHOAI"],$row["EMAIL"],
+        $row["MATKHAU"]
       );
     }
     else
@@ -20,25 +21,28 @@
   }
   function getCustomerViaID($id){
     $result = $GLOBALS["connect"]->query(
-      "SELECT MSKH,HOTENKH,TENCONGTY,SODIENTHOAI,EMAIL FROM khachhang WHERE MSKH = $id");
+      "SELECT MSKH,HOTENKH,TENCONGTY,SODIENTHOAI,EMAIL,MATKHAU FROM khachhang WHERE MSKH = $id");
     if($result->num_rows > 0){
       $row = $result->fetch_assoc();
       return new Customer(
         $row["MSKH"],
         $row['HOTENKH'],$row["TENCONGTY"],
-        $row["SODIENTHOAI"],$row["EMAIL"]
+        $row["SODIENTHOAI"],$row["EMAIL"],
+        $row["MATKHAU"]
       );
     }
     else
       return false;
   }
-  function isExistCustomer($email){
-    $result = $GLOBALS["connect"]->query(
-      "SELECT * FROM khachhang WHERE EMAIL = '$email'"
-    );
-    if($result->num_rows > 0){
+  function isExistCustomer($email,$password){
+    $prepare = $GLOBALS["connect"]->prepare("SELECT is_valid_login_customer(?,?) AS VALID");
+    $prepare->bind_param("ss",$email,$password);
+    $prepare->execute();
+    $result = $prepare->get_result();
+    $row = $result->fetch_assoc();
+    $valid = $row["VALID"];
+    if($valid == 1)
       return true;
-    }
     else
       return false;
   }
@@ -53,12 +57,13 @@
       return true;
     }
   function insertCustomer($customer){
-    $prepare = $GLOBALS["connect"]->prepare("INSERT INTO khachhang(HOTENKH,TENCONGTY,SODIENTHOAI,EMAIL)VALUES(?,?,?,?)");
+    $prepare = $GLOBALS["connect"]->prepare("INSERT INTO khachhang(HOTENKH,TENCONGTY,SODIENTHOAI,EMAIL,MATKHAU)VALUES(?,?,?,?,?)");
     $name = $customer->getName();
     $companyName = $customer->getCompanyName();
     $phone = $customer->getPhone();
     $email = $customer->getEmail();
-    $prepare->bind_param("ssss",$name,$companyName,$phone,$email);
+    $password = $customer->getPassword();
+    $prepare->bind_param("sssss",$name,$companyName,$phone,$email,$password);
     if($prepare->execute()){
       $prepare->close();
       $GLOBALS["connect"]->close();
@@ -72,14 +77,15 @@
   }
 function updateCustomer($customer){
   $prepare = $GLOBALS["connect"]->prepare(
-    "UPDATE khachhang SET HOTENKH = ?,TENCONGTY = ?,SODIENTHOAI = ?,EMAIL = ? WHERE MSKH = ?"
+    "UPDATE khachhang SET HOTENKH = ?,TENCONGTY = ?,SODIENTHOAI = ?,EMAIL = ?,MATKHAU = ? WHERE MSKH = ?"
   );
   $name = $customer->getName();
   $companyName = $customer->getCompanyName();
   $phone = $customer->getPhone();
   $email = $customer->getEmail();
   $id = $customer->getId();
-  $prepare->bind_param("ssssi",$name,$companyName,$phone,$email,$id);
+  $password = $customer->GetPassword();
+  $prepare->bind_param("sssssi",$name,$companyName,$phone,$email,$password,$id);
   if($prepare->execute()){
     $prepare->close();
     $GLOBALS["connect"]->close();

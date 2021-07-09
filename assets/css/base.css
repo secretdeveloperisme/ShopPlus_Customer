@@ -46,7 +46,7 @@ ul{
 a{
   text-decoration: none;
 }
-input[type="text"],button{
+input[type="text"],[type="password"],button{
   border: none;
   outline: none;
 }

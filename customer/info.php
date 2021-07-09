@@ -309,6 +309,10 @@
                               <input type="text" name="" id="emailCustomer" value="{$customer->getEmail()}">
                             </div>
                             <div class="account-content-info-control">
+                              <label for="passwordCustomer"> Mật Khẩu Của Bạn:  </label>
+                              <input type="text" name="" id="passwordCustomer" placeholder="Mật Khẩu Của Bạn" value="{$customer->getPassword()}">
+                            </div>
+                            <div class="account-content-info-control">
                               <label for="">Tên Công Ty</label>
                               <input type="text" id="companyCustomer" value="{$customer->getCompanyName()}">
                             </div>

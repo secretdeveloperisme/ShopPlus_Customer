@@ -188,7 +188,9 @@ $(function(){
   //add event login or sign up account customer
   let $inputUserEmail =  $(".input-user-email");
   let $emailCustomer = $("#emailCustomer");
-  let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  let $passwordCustomer = $("#passwordCustomer");
+  const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,16})/;
   let $btnEmailButton = $inputUserEmail.find(".input-user-email-btn");
   let $addressCustomer = $("#addressCustomer")
   $btnEmailButton.click(function(event){
@@ -201,17 +203,28 @@ $(function(){
       })
       return false;
     }
-    if(!hasCustomerFormDB($emailCustomer.val())){
+    if(!regexPassword.test($passwordCustomer.val())){
+      toast({
+        title : "Cảnh báo",
+        message :"Mật Khẩu phải có ít nhất 8 kí tự, chữ in hoa, in thường, số, và kí tự đặc biệt",
+        type: "warning",
+        duration : 5000
+      })
+      return false;
+    }
+    if(!hasCustomerFormDB($emailCustomer.val(),$passwordCustomer.val())){
       $inputUserEmail.css("display","none");
-      $inputUserEmail.next().css("display","flex")
+      $inputUserEmail.next().css("display","flex");
+      $rePasswodCustomer.val($passwordCustomer.val());
     }
     else{
-     updateLocalCustomer(getCustomerFromDB($emailCustomer.val()));
+      updateLocalCustomer(getCustomerFromDB($emailCustomer.val()));
       updateNavUser();
       $modal.fadeOut();
     }
   })
   //add event input customer information
+  let $rePasswodCustomer = $("#rePasswordCustomer");
   let $btnSubmitInfo = $(".input-user-info__btn-submit");
   let $nameCustomer =$("#nameCustomer");
   let $companyCustomer =$("#companyCustomer");
@@ -231,6 +244,15 @@ $(function(){
       toast({
         title : "Cảnh báo",
         message :"Email Không Được Để trống",
+        type: "warning",
+        duration : 5000
+      })
+      return false;
+    }
+    if(!regexPassword.test($rePasswodCustomer.val())){
+      toast({
+        title : "Cảnh báo",
+        message :"Mật Khẩu phải có ít nhất 8 kí tự, chữ in hoa, in thường, số, và kí tự đặc biệt",
         type: "warning",
         duration : 5000
       })
@@ -267,6 +289,7 @@ $(function(){
       name : $nameCustomer.val(),
       phone : $phoneCustomer.val(),
       email : $emailCustomer.val(),
+      password : $rePasswodCustomer.val(),
       address : "",
       companyName : $companyCustomer.val(),
     }

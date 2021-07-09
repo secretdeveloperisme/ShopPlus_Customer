@@ -23,8 +23,10 @@ $(()=>{
   let $phoneCustomer = $("#phoneCustomer");
   let $companyName = $("#companyCustomer");
   let $emailCustomer = $("#emailCustomer");
+  let $passwordCustomer = $("#passwordCustomer");
   let regexPhone =  /^0\d{9,10}$/;
   let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,16})/;
   $btnUpdateInfo.click((event)=>{
     if(!regexPhone.test($phoneCustomer.val())){
       toast({
@@ -44,6 +46,15 @@ $(()=>{
       })
       return  false;
     }
+    if(!regexPassword.test($passwordCustomer.val())){
+      toast({
+        title : "Cảnh báo",
+        message :"Mật Khẩu phải có ít nhất 8 kí tự, chữ in hoa, in thường, số, và kí tự đặc biệt",
+        type: "warning",
+        duration : 5000
+      })
+      return  false;
+    }
     if($nameCustomer.val() === ""){
      toast({
         title : "Thất Bại",
@@ -59,6 +70,7 @@ $(()=>{
       id : objectQuery.customerID,
       phone : $phoneCustomer.val(),
       email : $emailCustomer.val(),
+      password : $passwordCustomer.val(),
       companyName : $companyName.val()
     }
     $.ajax({
@@ -66,6 +78,7 @@ $(()=>{
       type : "POST",
       data : sendData,
       success : (response)=>{
+        console.log(response)
         let responseObject = JSON.parse(response)
         if(responseObject.status === "success") {
           toast({
@@ -216,7 +229,7 @@ $(()=>{
                             <td role="location"><img src="${product.location}" width="32px" height="32px"></td>
                             <td role="name">${product.name}</td>
                             <td role="amount">${orderDetail.amount}</td>
-                            <td role="price">${orderDetail.orderPrice}</td>
+                            <td role="price">${numberWithCommas(orderDetail.orderPrice)}</td>
                          </tr>`
                         $modalOrderTableBody.html((i,current)=>{
                           return current+modalOrderRow;

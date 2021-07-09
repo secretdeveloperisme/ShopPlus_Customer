@@ -5,17 +5,20 @@
     if ($_GET["action"] == "getCustomerViaEmail" && isset($_GET["email"]) && !empty($_GET["email"])) {
       echo json_encode(getCustomerViaEmail($_GET["email"])->toArray());
     }
-    if ($_GET["action"] == "isExistCustomer" && isset($_GET["email"]) && !empty($_GET["email"])) {
-      echo json_encode(isExistCustomer($_GET["email"]));
-    }
   }
   if(isset($_POST["action"])&& !empty($_POST["action"])){
     include("../../Controller/HandleCustomer.php");
+    if ($_POST["action"] == "isExistCustomer" ) {
+      if(isset($_POST["email"]) && !empty($_POST["email"])){
+        if(isset($_POST["password"]) && !empty($_POST["password"]))
+          echo json_encode(isExistCustomer($_POST["email"],$_POST["password"]));
+      }
+    }
     if($_POST["action"] == "insertCustomer"){
-      if(!empty($_POST["name"]) && !(empty($_POST["phone"]))&& !empty($_POST["email"]) && isset($_POST["companyName"])){
+      if(!empty($_POST["name"]) && !(empty($_POST["phone"]))&& !empty($_POST["email"]) &&!empty($_POST["password"]) && isset($_POST["companyName"])){
 
           if(insertCustomer(
-            new Customer("0",$_POST["name"],$_POST["companyName"],$_POST["phone"],$_POST["email"])
+            new Customer("0",$_POST["name"],$_POST["companyName"],$_POST["phone"],$_POST["email"],$_POST["password"])
           )){
             echo json_encode(array("status"=>"success","msg"=>"bạn đã thên tài khoản thành công"));
           }
@@ -25,10 +28,10 @@
     }
     if($_POST["action"]=="updateCustomer"){
       if(isset($_POST["id"])&&!empty($_POST["id"])){
-        if(!(empty($_POST["name"])) && !(empty($_POST["phone"]))&&!(empty($_POST["email"]))&&!(empty($_POST["companyName"]))) {
+        if(!(empty($_POST["name"]))&& !(empty($_POST["phone"]))&&!(empty($_POST["email"]))&&isset($_POST["companyName"])&&!empty($_POST["password"]) ) {
           if (!isExistEmailAnotherAccount($_POST["email"], $_POST["id"])) {
             if (updateCustomer(
-              new Customer($_POST["id"], $_POST["name"], $_POST["companyName"], $_POST["phone"], $_POST["email"])
+              new Customer($_POST["id"], $_POST["name"], $_POST["companyName"], $_POST["phone"], $_POST["email"],$_POST["password"])
             )) {
               echo json_encode(array("status" => "success", "msg" => "bạn đã chỉnh sửa tài khoản thành công"));
             } else

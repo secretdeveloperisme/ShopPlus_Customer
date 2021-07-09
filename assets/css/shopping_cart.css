@@ -13,10 +13,10 @@
   border-radius: 10px;
 }
 .input-user-email__label{
-  font-size: 2 rem;
+  font-size: 2rem;
 }
-.input-user-email .input-user-info-container {
-  margin-bottom: 50px;
+.input-user-email .input-user-info-container:last-of-type {
+  margin-bottom: 30px;
 }
 .input-user-info{
   background-color: var(--primary-color);
@@ -54,7 +54,6 @@
   color: red;
 }
 .input-user-info-container input{
-  font-size: 2rem;
   line-height: 2rem;
   font-weight: 700;
   flex-grow: 1;

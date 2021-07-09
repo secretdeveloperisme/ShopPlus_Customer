@@ -77,11 +77,13 @@ function insertCustomerIntoDB(customer){
       name : customer.name,
       companyName :customer.companyName,
       phone : customer.phone,
-      email : customer.email
+      email : customer.email,
+      password: customer.password
     },
     async : false,
     type : "POST",
     success : (response)=>{
+      console.log(response)
       resultObject = JSON.parse(response);
     }
   })
@@ -104,19 +106,20 @@ function insertAddressCustomer(customerID,address){
   })
   return result;
 }
-function hasCustomerFormDB(email){
+function hasCustomerFormDB(email,password){
   let isExist = false;
   $.ajax(
   {
     url : "/ShopPlus_Customer/php/Controller/API/HandleCustomerAPI.php",
     data : {
       "action" : "isExistCustomer",
-      "email": email
+      "email": email,
+      "password" : password
     },
     async : false,
-    type : "GET",
+    type : "POST",
     success : (response)=>{
-      console.log(typeof response,response.length)
+      console.log(typeof response,response.length,response)
       isExist = JSON.parse(response);
     }
   })
