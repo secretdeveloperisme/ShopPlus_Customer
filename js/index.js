@@ -1,4 +1,5 @@
 $(function(){
+  $("body").css("overflow","hidden")
   //render slideshow
   let $slideshow = $(".container-shop-app-ad__slideshow");
   let $slides = $(".container-shop-app__slides");
@@ -133,6 +134,8 @@ $(function(){
               }
             )
           })
+          $("body").css("overflow","visible")
+          $(".loader-container").remove()
         }
       },
       error : function(xhr,textStatus,errorThrow){
@@ -143,5 +146,4 @@ $(function(){
   }
   updateProduct();
   ///handle cart user
-  updateNavUser();
 });

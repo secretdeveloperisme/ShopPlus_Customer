@@ -1,4 +1,6 @@
 $(()=>{
+  $("body").css("overflow","visible")
+  $(".loader-container").remove()
   let queryString = {}
   if(location.search !== "")
     queryString = getQueryStringURLasObject()

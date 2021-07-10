@@ -280,6 +280,34 @@ input[type=number] {
 .modal-content-btn-close:hover{
   cursor: pointer;
 }
+.loader-container{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 10px solid white;
+  border-top: 10px solid var(--primary-color);
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
 /* >=1200 px */
 @media only screen and (min-width : 1200px) {
   .col-xl-1 {width: 8.33%;}

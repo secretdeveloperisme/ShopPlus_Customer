@@ -54,6 +54,9 @@
   <script src="../js/searching.js"></script>
 </head>
 <body>
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
   <div id="toast"></div>
   <div class="shop-app">
     <div class="shop-app-header">
