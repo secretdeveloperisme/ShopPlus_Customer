@@ -1,4 +1,28 @@
 $(()=>{
+  $.ajax({
+    url : "/ShopPlus_Customer/php/Controller/API/HandleSessionAPI.php",
+    type : "POST",
+    data : {
+      action : "getSession"
+    },
+    dataType : "text",
+    success : (response)=>{
+      let result = JSON.parse(response);
+      if(result.status === "error"){
+        document.write("You are not authorized!")
+        return false;
+      }
+      else{
+        let customerSession = JSON.parse(result.content);
+        if(customerSession.id !== objectQuery.customerID){
+          document.write("You are not authorized!")
+          return false;
+        }
+      }
+
+
+    }
+  })
   let $modal = $("#modal")
   let $btnCloseModal = $(".modal-content-btn-close")
   $btnCloseModal.click(()=>{

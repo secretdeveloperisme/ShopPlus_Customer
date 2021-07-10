@@ -144,6 +144,20 @@ function updateNavUser(){
   }
   else
   {
+    $.ajax({
+      url : "/ShopPlus_Customer/php/Controller/API/HandleSessionAPI.php",
+      type : "POST",
+      data : {
+        action : "setSession",
+        content : JSON.stringify(customer)
+      },
+      dataType : "text",
+      success : (response)=>{
+        if(response != ""){
+          console.log(JSON.parse(response))
+        }
+      }
+    })
     $navUser.find(".nav-user-dropdown-content").html(
       `
       <ul class="nav-user-dropdown-content-list">
