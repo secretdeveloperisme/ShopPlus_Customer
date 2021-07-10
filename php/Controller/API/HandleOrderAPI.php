@@ -5,7 +5,7 @@
     if ($_POST["action"] == "order"){
       if(isset($_POST["customer"]) && !empty($_POST["customer"])){
         $rawCustomer = json_decode($_POST["customer"]);
-        $customer = new Customer( $rawCustomer->id,"","","","");
+        $customer = new Customer( $rawCustomer->id,"","","","","");
         if(isset($_POST["products"]) && !empty($_POST["products"])){
           $rawProducts = json_decode($_POST["products"]);
           $orderDetails = array();
