@@ -10,9 +10,11 @@
 .footer-information-item{
 }
 .footer-information-item__label{
+  text-align: center;
   
 }
 .footer-information-item-list{
+  justify-content: center;
   
 }
 .footer-information-item-list--wrap{

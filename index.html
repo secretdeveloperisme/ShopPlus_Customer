@@ -13,10 +13,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/grid.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/navbar.css">
   <link rel="stylesheet" href="assets/css/index.css">
   <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
   <script src="js/base.js"></script>
   <script src="js/navbar.js"></script>
   <script src="js/Controller/handleCart.js"></script>
@@ -28,18 +30,23 @@
   </div>
   <div id="toast"></div>
   <div class="shop-app">
-    <div class="shop-app-header">
+    <div class="shop-app-header sticky">
       <div class="nav">
-        <div class="nav-home">
+        <label for="cbxSearchMobile" class="nav-search-mobile nav-item ">
+          <i class="fas fa-search"></i>
+        </label>
+        <input type="checkbox" id="cbx-nav-bar" hidden>
+        <input type="checkbox" id="cbxSearchMobile" hidden>
+        <div class="nav-home nav-item">
           <a href="#" class="nav-home-link">
             <span class="nav-home-link__logo">
               <i class="fab fa-shopify"></i>
             </span>
-            <h1 class="nav-home-link__name">ShopPlus</h1>
+            <h1 class="nav-home-link__name hide-on-tablet">ShopPlus</h1>
           </a>
          
         </div>
-        <div class="nav-category dropdown">
+        <div class="nav-category nav-item dropdown hide-on-mobile-and-tablet">
           <button class="dropdown-btn nav-category-btn">
             <span class="nav-category-btn-logo">
               <i class="fas fa-list"></i>
@@ -126,7 +133,7 @@
               </ul>
           </div>
         </div>
-        <div class="nav-search">
+        <div class="nav-search nav-item">
           <form method="get" action="search/search.php" class="nav-search-form" autocomplete="off">
             <div  class="nav-search-form-input">
               <input type="hidden" name="page" value="1">
@@ -172,12 +179,12 @@
               <span class="nav-search-form-btn__logo">
                 <i class="fas fa-search"></i>
               </span>
-              <span class="nav-search-form-btn__name">
+              <span class="nav-search-form-btn__name hide-on-mobile-and-tablet">
                 Tìm Kiếm
               </span>
             </button>
           </form>
-          <div class="nav-search-popular">
+          <div class="nav-search-popular hide-on-mobile-and-tablet">
             <ul class="nav-search-popular-list">
               <li class="nav-search-popular-item"><a href="#">Iphone 12</a></li>
               <li class="nav-search-popular-item"><a href="">Máy Tính</a></li>
@@ -186,12 +193,12 @@
             </ul>
           </div>
         </div>
-        <div class="nav-user dropdown">
+        <div class="nav-user nav-item dropdown hide-on-mobile">
           <div class="nav-user-btn">
             <div class="nav-user-icon">
               <i class="far fa-user"></i>
             </div>
-            <div class="nav-user-info">
+            <div class="nav-user-info hide-on-mobile-and-tablet">
               <h3 class="nav-user-info__account">Tài khoản</h3>
               <h3 class="nav-user-info__username">Hoàng Linh</h3>
             </div>
@@ -207,7 +214,7 @@
             </ul>
           </div>
         </div>
-        <div class="nav-cart dropdown">
+        <div class="nav-cart nav-item dropdown">
           <div class="nav-cart-dropdown-btn dropdown-btn">
             <div class="nav-cart-wrapper">
               <div class="nav-cart-icon">
@@ -217,7 +224,7 @@
                 0
               </div>
             </div>
-            <div class="nav-cart-label">
+            <div class="nav-cart-label hide-on-mobile-and-tablet">
               <h3>Giỏ Hàng</h3>
             </div>
           </div>
@@ -228,11 +235,47 @@
             <a href="checkout/shopping_cart/shopping_cart.html" class="nav-cart-dropdown-content-btn">Xem Giỏ Hàng</a>
           </div>
         </div>
+        <div class="nav-mobile">
+          <div class="nav-mobile-home">
+            <a href="#" class="nav-mobile-home-link">
+              <span class="nav-mobile-home-link__logo">
+                <i class="fab fa-shopify"></i>
+              </span>
+              <h1 class="nav-mobile-home-link__name">ShopPlus</h1>
+            </a>
+          </div>
+          <div class="nav-mobile-categories nav-mobile-item">
+            <h2 class="nav-mobile-categories__label nav-mobile-item__label">
+              Danh Mục Sản Phẩm
+            </h2>
+            <ul class="nav-mobile-categories__list" id="categoriesList">
+            </ul>
+          </div>
+          <div class="nav-mobile-user nav-mobile-item hide-on-tablet">
+            <h2 class="nav-mobile-item__label">
+              Tài khoản
+            </h2>
+            <ul class="nav-mobile-user__list">
+              <li class="nav-mobile-user__item"><a href="">Đơn hàng của tôi</a></li>
+              <li class="nav-mobile-user__item"><a href="">Thông tin của tôi</a></li>
+              <li class="nav-mobile-user__item"><a href="">xóa thông tin của tôi</a></li>
+            </ul>
+          </div>
+        </div>
+        <label class="nav-btn-bars" for="cbx-nav-bar">
+          <div class="bars-icon">
+             <div class="bar-1"></div>
+             <div class="bar-2"></div>
+             <div class="bar-3"></div>
+          </div>
+        </label>
+        <label class="nav-overlay" for="cbx-nav-bar"></label>
+
       </div>
     </div>
-    <div class="shop-app-container gird">
-      <div class="container-shop-app-ad grid-row">
-        <div class="container-shop-app-ad__slideshow col-xl-8">
+    <div class="shop-app-container grid wide">
+      <div class="container-shop-app-ad row ">
+        <div class="container-shop-app-ad__slideshow col l-8">
           <div class="container-shop-app__slides">
             <img src="assets/images/ad/slide1.jpg" alt="">
             <img src="assets/images/ad/slide2.jpg" alt="">
@@ -251,23 +294,23 @@
             <span class="slideshow-pagination__item"><i class="far fa-circle"></i></span>
           </div>
         </div>
-        <div class="container-shop-app-ad-topic col-xl-4">
+        <div class="container-shop-app-ad-topic hide-on-mobile-and-tablet col l-4">
           <a href="#"><img src="assets/images/ad/sale.gif" alt=""></a>
         </div>
       </div>
-      <div class="container-shop-app-wrap-product-and-filter grid-row">
+      <div class="container-shop-app-wrap-product-and-filter">
         <div class="container-shop-app-display-product grid col-xl-12">
-          <div class="shop-app-product-header grid-row">
+          <div class="shop-app-product-header grid">
             <div class="shop-app-product-header__label "><i class="fas fa-star"></i><span>Tất Cả Sản Phẩm</span></div>
           </div>
-          <div class="shop-app-product-display grid-row">
+          <div class="shop-app-product-display row">
           </div>
         </div>
       </div>
     </div>
-    <div class="shop-app-footer gird">
-      <div class="footer-information grid-row">
-        <div class="footer-information-item col-xl-3">
+    <div class="shop-app-footer grid wide">
+      <div class="footer-information row">
+        <div class="footer-information-item col l-3 m-6 c-12">
           <h1 class="footer-information-item__label">Hổ Trợ Khách Hàng</h1>
           <ul class="footer-information-item-list">
             <li class="footer-information-item-item"><strong>Hotline chăm sóc khách hàng:</strong> 1900-xxxx
@@ -278,7 +321,7 @@
             <li class="footer-information-item-item">Báo lỗi bảo mật: security@tiki.vn</li>
           </ul>
         </div>
-        <div class="footer-information-item col-xl-3">
+        <div class="footer-information-item col l-3 m-6 c-12">
           <h1 class="footer-information-item__label">Về Shop Plus</h1>
           <ul class="footer-information-item-list">
             <li class="footer-information-item-item">Giới thiệu về shop</li>
@@ -286,7 +329,7 @@
             <li class="footer-information-item-item"><strong>Ngày Thành Lập : </strong>dd/MM/YYYY</li>
           </ul>
         </div>
-        <div class="footer-information-item col-xl-3">
+        <div class="footer-information-item col l-3 m-6 c-12">
           <h1 class="footer-information-item__label">Phương Thức Thanh Toán</h1>
           <ul class="footer-information-item-list footer-information-item-list--wrap">
             <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/visa.svg" alt=""></a></li>
@@ -297,7 +340,7 @@
             </li>
           </ul>
         </div>
-        <div class="footer-information-item col-xl-3">
+        <div class="footer-information-item col l-3 m-6 c-12">
           <h1 class="footer-information-item__label">Kết Nối với chúng tôi</h1>
           <ul class="footer-information-item-list footer-information-item-list--wrap">
             <li class="footer-information-item-item"><a href="#"><img src="assets/images/icons/fb.svg"

@@ -1,6 +1,7 @@
 .shop-app-container{
-  width: 100%;
-  padding: 20px 20px;
+  /* width: 100%; */
+  /* margin-top: calc(var(--header-height)) !important; */
+  padding: 20px 0px;
   background-color: var(--app-background-color);
 }
 /* slideshow advertisement */
@@ -9,12 +10,15 @@
   position: relative;
   height: 300px;
   margin-bottom: 15px;
+  margin-left: 0;
+  padding: 0 5px;
+  margin-right: 0;
 }
 .container-shop-app-ad__slideshow{
   position: relative;
   overflow: hidden;
-  margin: 0 12px;
   border-radius: 12px;
+  padding: 0;
 }
 .container-shop-app__slides{
   display: flex;
@@ -25,6 +29,7 @@
   display: block;
   min-width: 100%;
   height: auto;
+  /* object-fit: cover; */
 }
 .slideshow-btn{
   position: absolute;
@@ -41,16 +46,18 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 .slideshow-btn--next{
-  top: 150px;
+  top:50%;
+  transform: translateY(-50%);
   right: 0;
 }
 .slideshow-btn--previous{
-  top: 150px;
+  top:50%;
+  transform: translateY(-50%);
   left: 0;
 }
 .slideshow-pagination{
   position: absolute;
-  top: 270px;
+  bottom: 1%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -69,7 +76,7 @@
 .container-shop-app-ad-topic{
   border-radius: 12px;
   overflow: hidden;
-  margin: 0 12px;
+  /* margin: 0 12px; */
 }
 .container-shop-app-ad-topic a{
   display: block;
@@ -87,7 +94,6 @@
 }
 .container-shop-app-wrap-product-and-filter{
   display: flex;
-  padding: 0 20px;
 }
 .container-shop-app-filter{
   display: flex;
@@ -263,6 +269,8 @@
 }
 .shop-app-product-display{
   margin-top: 10px;
+  margin-left: 0;
+  margin-right: 0;
   flex-wrap: wrap;
 }
 .shop-app-product-display-item{

@@ -6,6 +6,7 @@
   --pale-gray: hsl(0, 0%, 55%); 
   --pale-black-transparent:rgba(0,0,0,0.5);
   --dropdown-content-color: #ccf6ff;
+  --header-height: 75px
 }
 
 .primary-color{
@@ -29,10 +30,12 @@ body::-webkit-scrollbar{
 html{
   font-size: 62.5%;
   box-sizing: border-box;
-  font-family: 'Roboto' sans-serif;
+  font-family: 'Roboto';
 }
 *{
   box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 body{
   margin : 0;
@@ -72,10 +75,6 @@ input[type=number] {
 .btn:hover{
   cursor: pointer;
   filter: opacity(0.8);
-}
-.gird{
-  width: 1200px;
-  max-width: 100%;
 }
 .grid-row{
   width: 100%;
