@@ -100,7 +100,6 @@ $(function(){
               async: false,
               dataType : "text",
               success : (response)=>{
-                console.log(response)
                 isBestSeller = JSON.parse(response)
               }
             })
@@ -108,7 +107,7 @@ $(function(){
             if(isBestSeller)
                bestSellerHTML = `<div class="product-display-item__favorite">Best Seller</div>`
             let productItem = `
-            <div class="shop-app-product-display-item col-xl-2 col-es-6">
+            <div class="shop-app-product-display-item col l-2 m-4 c-6">
             <a href="ProductDetail/product_detail.php?id=${value.id}">
               <div class="product-display-item-container">
                 <div class="product-display-container-box-shadow">

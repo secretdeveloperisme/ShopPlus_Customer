@@ -22,7 +22,11 @@ function updateCartList(){
                 <a href="/ShopPlus_Customer/ProductDetail/product_detail.php?id= ${product.id}">
                   <div class="nav-cart-dropdown-content-item__img" style="background-image: url('${product.location}');"></div>
                   <div class="nav-cart-dropdown-content-item__name">${product.name}</div>
-                  <div class="nav-cart-dropdown-content-item__price">${numberWithCommas(product.price)} đ</div>
+                  <div class="nav-cart-dropdown-content-item-desc">
+                    <div class="nav-cart-dropdown-content-item__price">${numberWithCommas(product.price)} đ</div>
+                    <div class="nav-cart-dropdown-content-item__times">&times</div>
+                    <div class="nav-cart-dropdown-content-item__amount">${value.number}</div>
+                  </div>
                 </a>
               </li>
         `;
